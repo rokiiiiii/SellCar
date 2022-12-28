@@ -11,13 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{19A881DD-6AD2-478B-AF28-29A5C38B358C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellCar.Domain", "SellCar.Domain\SellCar.Domain.csproj", "{4C80508F-9CA2-44E4-9439-924CA8652722}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SellCar.Domain", "SellCar.Domain\SellCar.Domain.csproj", "{4C80508F-9CA2-44E4-9439-924CA8652722}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellCar.Application", "Car.Application\SellCar.Application.csproj", "{96734E94-B05E-4FDA-BAEF-E43A31B3B150}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SellCar.Application", "Car.Application\SellCar.Application.csproj", "{96734E94-B05E-4FDA-BAEF-E43A31B3B150}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellCar.Persistance", "SellCar.Persistance\SellCar.Persistance.csproj", "{4FE4067B-BB26-4970-862E-B558AFE256D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SellCar.Persistance", "SellCar.Persistance\SellCar.Persistance.csproj", "{4FE4067B-BB26-4970-862E-B558AFE256D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellCar.WebAPI", "SellCar.WebAPI\SellCar.WebAPI.csproj", "{BEA0A5EA-B79A-4B39-A103-79390897A117}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SellCar.WebAPI", "SellCar.WebAPI\SellCar.WebAPI.csproj", "{BEA0A5EA-B79A-4B39-A103-79390897A117}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
