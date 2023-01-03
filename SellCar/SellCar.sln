@@ -3,21 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D8F8A4FB-D857-4B79-85E0-B3E3AA645BED}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infastucture", "Infastucture", "{CA230D34-940E-4724-9A50-1C118CE2F880}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{BA07E20D-D4F3-424D-8CF2-3C311F84C9DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{19A881DD-6AD2-478B-AF28-29A5C38B358C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellCar.Domain", "SellCar.Domain\SellCar.Domain.csproj", "{4C80508F-9CA2-44E4-9439-924CA8652722}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellCar.Application", "Car.Application\SellCar.Application.csproj", "{96734E94-B05E-4FDA-BAEF-E43A31B3B150}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellCar.Persistance", "SellCar.Persistance\SellCar.Persistance.csproj", "{4FE4067B-BB26-4970-862E-B558AFE256D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SellsCar", "SellsCar\SellsCar.csproj", "{8E0A0B45-D88B-4D78-A089-800E832807F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellsCar", "SellsCar\SellsCar.csproj", "{8E0A0B45-D88B-4D78-A089-800E832807F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,18 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4C80508F-9CA2-44E4-9439-924CA8652722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C80508F-9CA2-44E4-9439-924CA8652722}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C80508F-9CA2-44E4-9439-924CA8652722}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C80508F-9CA2-44E4-9439-924CA8652722}.Release|Any CPU.Build.0 = Release|Any CPU
-		{96734E94-B05E-4FDA-BAEF-E43A31B3B150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96734E94-B05E-4FDA-BAEF-E43A31B3B150}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96734E94-B05E-4FDA-BAEF-E43A31B3B150}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96734E94-B05E-4FDA-BAEF-E43A31B3B150}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FE4067B-BB26-4970-862E-B558AFE256D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FE4067B-BB26-4970-862E-B558AFE256D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FE4067B-BB26-4970-862E-B558AFE256D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FE4067B-BB26-4970-862E-B558AFE256D9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E0A0B45-D88B-4D78-A089-800E832807F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E0A0B45-D88B-4D78-A089-800E832807F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E0A0B45-D88B-4D78-A089-800E832807F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,9 +24,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4C80508F-9CA2-44E4-9439-924CA8652722} = {D8F8A4FB-D857-4B79-85E0-B3E3AA645BED}
-		{96734E94-B05E-4FDA-BAEF-E43A31B3B150} = {D8F8A4FB-D857-4B79-85E0-B3E3AA645BED}
-		{4FE4067B-BB26-4970-862E-B558AFE256D9} = {CA230D34-940E-4724-9A50-1C118CE2F880}
 		{8E0A0B45-D88B-4D78-A089-800E832807F7} = {BA07E20D-D4F3-424D-8CF2-3C311F84C9DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
