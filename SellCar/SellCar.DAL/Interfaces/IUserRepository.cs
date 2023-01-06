@@ -9,6 +9,6 @@ namespace SellCar.DAL.Interfaces
 {
     public interface IUserRepository : IBaseRepository<User>
     {
-        User GetByName(string name);
+        Task<User> GetByName(string name);
     }
 }

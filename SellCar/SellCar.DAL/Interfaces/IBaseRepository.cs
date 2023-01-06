@@ -8,11 +8,11 @@ namespace SellCar.DAL.Interfaces
 {
     public interface IBaseRepository<T>
     {
-        bool Create(T entity);
+        Task<bool> Create(T entity);
 
-        T Get(int id);
+        Task<T> Get(int id);
 
-        IEnumerable<T> Select();
-        bool Delete(T entity);  
+        Task<List<T>> Select();
+        Task<bool> Delete(T entity);
     }
 }

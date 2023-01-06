@@ -20,29 +20,32 @@ namespace SellCar.DAL.Repositories
             _db = db;
         }
 
-        public bool Create(User entity)
+        public async Task<bool> Create(User entity)
         {
-            throw new NotImplementedException();
+            await _db.AddAsync(entity);
+            return true;
+            
         }
 
-        public bool Delete(User entity)
+        public async Task<bool> Delete(User entity)
         {
-            throw new NotImplementedException();
+            _db.Remove(entity);
+           return true;
         }
 
-        public User Get(int id)
+        public async Task<User> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _db.User.FirstOrDefaultAsync(x=> x.id == id);
         }
 
-        public User GetByName(string name)
+        public async Task<User> GetByName(string name)
         {
-            throw new NotImplementedException();
+            return await _db.User.FirstOrDefaultAsync(x => x.Name == name);
         }
 
-        public IEnumerable<User> Select()
+        public async Task<List<User>> Select()
         {
-            throw new NotImplementedException();
+            return await _db.User.ToListAsync();
         }
     }
 }

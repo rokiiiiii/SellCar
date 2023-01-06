@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SellCar.DAL.Interfaces;
+using SellCar.Domain.Models;
 
 namespace SellsCar.Web.Controllers
 {
@@ -13,25 +14,22 @@ namespace SellsCar.Web.Controllers
             _userRepository = userRepository;
         }
 
-        // GET: HomeController1
-        public ActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> GetUser()
         {
             return View();
         }
 
-        // GET: HomeController1/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: HomeController1/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: HomeController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -46,13 +44,11 @@ namespace SellsCar.Web.Controllers
             }
         }
 
-        // GET: HomeController1/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -67,13 +63,11 @@ namespace SellsCar.Web.Controllers
             }
         }
 
-        // GET: HomeController1/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: HomeController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
