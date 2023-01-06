@@ -2,21 +2,23 @@
 using Microsoft.AspNetCore.Mvc;
 using SellCar.DAL.Interfaces;
 using SellCar.Domain.Models;
+using SellCar.Service.Intrefaces;
 
 namespace SellsCar.Web.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserRepository _userRepository;
+      private readonly IUserService _userService;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUser()
         {
+            var response = await _userService.GetUsers();
             return View();
         }
 

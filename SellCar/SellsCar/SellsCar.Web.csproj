@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Service\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
@@ -28,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SellCar.DAL\SellCar.DAL.csproj" />
     <ProjectReference Include="..\SellCar.Domain\SellCar.Domain.csproj" />
+    <ProjectReference Include="..\SellCar.Service\SellCar.Service.csproj" />
   </ItemGroup>
 
 </Project>

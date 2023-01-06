@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SellCar.Service.Intrefaces
 {
-    public class IUserService
+    public interface IUserService
     {
         public Task<IBaseResponse<IEnumerable<User>>> GetUsers();
        
