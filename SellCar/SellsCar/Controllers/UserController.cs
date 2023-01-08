@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SellCar.DAL.Interfaces;
 using SellCar.Domain.Models;
+using SellCar.Domain.ViewModels.User;
 using SellCar.Service.Intrefaces;
 
 namespace SellsCar.Web.Controllers
@@ -16,72 +18,71 @@ namespace SellsCar.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUser()
+        public async Task<IActionResult> GetUsers()
         {
             var response = await _userService.GetUsers();
-            return View();
-        }
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            if(response.StatusCode== SellCar.Domain.Enum.StatusCode.OK)
             {
-                return RedirectToAction(nameof(Index));
+                return View(response.Data);
             }
-            catch
+            return RedirectToAction("Error");
+        }
+        [HttpGet]
+        public  async Task<IActionResult> GetUser(int id)
+        {
+            var response = await _userService.GetUser(id);
+            if (response.StatusCode == SellCar.Domain.Enum.StatusCode.OK)
             {
-                return View();
+                return View(response.Data);
             }
+            return RedirectToAction("Error");
         }
 
-        public ActionResult Edit(int id)
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            var response = await _userService.DeleteUser(id);
+            if (response.StatusCode == SellCar.Domain.Enum.StatusCode.OK)
+            {
+                return RedirectToAction("GetUsers");
+            }
+            return RedirectToAction("Error");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [HttpGet]
+        public async Task<IActionResult> Save(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if(id==0)
             {
                 return View();
+
             }
+            var response = await _userService.GetUser(id);
+            if(response.StatusCode==SellCar.Domain.Enum.StatusCode.OK)
+            {
+                return View(response.Data);
+            }
+            return RedirectToAction("Error");
         }
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Save(UserViewModel model)
         {
-            try
+            if (ModelState.IsValid) 
             {
-                return RedirectToAction(nameof(Index));
+                if(model.id==0)
+                {
+                    await _userService.CreateUser(model);
+                }
+                else
+                {
+                    await _userService.Edit(model.id, model);
+                }
+                
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("GetUsers");
+
         }
+
+
     }
 }

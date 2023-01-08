@@ -1,15 +1,9 @@
 ﻿@using SellCar.Domain.Models;
 @model List<User>
-    
 
 @{
+    ViewBag.Title = "Title";
+    Layout = "_Layout";
 }
 
-@foreach(var User in Model)
-{
-    <p>@User.Name</p>
-    <p>@User.Email</p>
-    <p>@User.PhoneNumber</p>
-    <p>@User.DateRegistration</p>
-    <p>@User.Password</p>
-}
+ 

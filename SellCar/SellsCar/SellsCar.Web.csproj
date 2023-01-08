@@ -27,4 +27,9 @@
     <ProjectReference Include="..\SellCar.Service\SellCar.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Ads\" />
+    <Folder Include="Views\Car\" />
+  </ItemGroup>
+
 </Project>

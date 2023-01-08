@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SellCar.DAL.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository :IBaseRepository<User>
     {
         private readonly DbContextSellCar _db;
 
@@ -20,32 +20,30 @@ namespace SellCar.DAL.Repositories
             _db = db;
         }
 
-        public async Task<bool> Create(User entity)
+        public IQueryable<User> GetAll()
         {
-            await _db.AddAsync(entity);
-            return true;
-            
+            return _db.User;
         }
 
-        public async Task<bool> Delete(User entity)
+        public async Task Delete(User entity)
         {
-            _db.Remove(entity);
-           return true;
+            _db.User.Remove(entity);
+            await _db.SaveChangesAsync();
         }
 
-        public async Task<User> Get(int id)
+        public async Task Create(User entity)
         {
-            return await _db.User.FirstOrDefaultAsync(x=> x.id == id);
+            await _db.User.AddAsync(entity);
+            await _db.SaveChangesAsync();
         }
 
-        public async Task<User> GetByName(string name)
+        public async Task<User> Update(User entity)
         {
-            return await _db.User.FirstOrDefaultAsync(x => x.Name == name);
-        }
+            _db.User.Update(entity);
+            await _db.SaveChangesAsync();
 
-        public async Task<List<User>> Select()
-        {
-            return await _db.User.ToListAsync();
-        }
+            return entity;
+        
+    }
     }
 }

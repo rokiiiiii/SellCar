@@ -1,0 +1,8 @@
+﻿.navbar .dropdown-menu div[class*="col"] {
+    margin-bottom: 1rem;
+}
+
+.navbar .dropdown-menu {
+    border: none;
+    background-color: black !important;
+}

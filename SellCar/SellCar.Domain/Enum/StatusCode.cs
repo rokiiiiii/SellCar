@@ -8,6 +8,8 @@ namespace SellCar.Domain.Enum
 {
     public enum StatusCode
     {
+        UserNotFound=0,
+        CarNotFound=1,
         OK=200,
         InternalServerError=500
     }

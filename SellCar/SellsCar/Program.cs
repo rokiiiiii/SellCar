@@ -15,6 +15,9 @@ builder.Services.AddDbContext<DbContextSellCar>(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped<ICarService, CarService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
