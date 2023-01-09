@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SellsCar.Models;
+using SellCar.DAL.Interfaces;
+using SellCar.Models;
 using System.Diagnostics;
 
-namespace SellsCar.Controllers
+namespace SellCar.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
 
         public HomeController(ILogger<HomeController> logger)
         {
