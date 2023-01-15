@@ -16,3 +16,11 @@
     text-align: right;
     padding: 10px;
 }
+
+.card-image {
+    filter: grayscale(1);
+    transition: 1s;
+}
+.card-image:hover {
+    filter: grayscale(0);
+}

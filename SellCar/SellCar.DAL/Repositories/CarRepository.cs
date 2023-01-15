@@ -9,9 +9,11 @@ namespace SellCar.DAL.Repositories
     {
         private readonly DbContextSellCar _db;
 
+
         public CarRepository(DbContextSellCar db)
         {
             _db = db;
+            _db.Dispose();
         }
 
         public async Task Create(Car entity)

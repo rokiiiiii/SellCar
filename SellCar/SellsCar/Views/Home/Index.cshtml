@@ -1,8 +1,162 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div style="padding: 10px;"></div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="card col-md-12">
+        <div class="card-body">
+            <h5 class="card-title text-center">Welcome to the SellCar website</h5>
+            <p class="card-text">
+                Welcome to the site for the sale of cars Here you can sell your car
+            </p>
+            
+        </div>
+    </div>
+
+    <div style="padding: 10px;"></div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://images.wallpaperscraft.ru/image/single/mashina_noch_dozhd_143166_1280x720.jpg" class="card-img-top card-image" />
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Mercedes</h5>
+                        <p class="card-text">Mercedes-Benz — trademark and company of the same name - a manufacturer of premium cars, trucks, buses and other vehicles</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a asp-controller="Car" asp-action="GetCars" class="card-link">List of cars</a>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://images.wallpaperscraft.ru/image/single/bmw_fary_avtomobil_124112_1280x720.jpg" class="card-img-top card-image" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">BMW</h5>
+                    <p class="card-text">
+                        BMW AG — German manufacturer of cars, motorcycles, engines and bicycles
+                    </p>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-controller="Car" asp-action="GetCars" class="card-link">List of cars</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://images.wallpaperscraft.ru/image/single/audi_avtomobil_vid_speredi_130942_1280x720.jpg" class="card-img-top card-image" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">Audi</h5>
+                    <p class="card-text">Audi — is a German automotive company within the Volkswagen Group, specializing in the production of cars under the Audi brand.</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-controller="Car" asp-action="GetCars" class="card-link">List of cars</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 10px;"></div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Main types of bodies</h5>
+            <p class="card-text">
+                The type of body structure is easily determined by the appearance of the car. Each class has distinctive features,
+                which are easy to spot even with little experience. In addition, the way the luggage compartment is implemented also plays a role in the classification,
+                which can be combined with the passenger compartment or separated from it
+            </p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+
+    <div style="padding: 10px;"></div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Passenger cars with the following body types are in the greatest demand</h5>
+        </div>
+        <ul class="list-group list-group-flush" id="ulListId">
+            <li class="list-group-item">Sedan - the most common option</li>
+            <li class="list-group-item">Station wagon - a family car with great features</li>
+            <li class="list-group-item">Hatchback - a shortened version of the station wagon</li>
+            <li class="list-group-item">Liftback - a combination of station wagon and sedan</li>
+            <li class="list-group-item">Coupe - a car for connoisseurs of personal space</li>
+            <li class="list-group-item">Limousine - ostentatious luxury</li>
+            <li class="list-group-item">Convertible always attracts the eye</li>
+            <li class="list-group-item">SUV - increased strength and reliability</li>
+        </ul>
+        <div class="card-body">
+            <button class="btn btn-danger" id="btnHideId">Hide</button>
+            <button class="btn btn-primary" id="btnShowId">Show</button>
+        </div>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            You are not logged in
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>You must be logged in to view content.</p>
+            </blockquote>
+        </div>
+    </div>
+
+    <div style="padding: 10px;"></div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="~/img/Bmw_I8.jpg" class="card-img-top" alt="BMW i8">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Not available</h5>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">BMW i8</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="~/img/Mustang.jpg" class="card-img-top" alt="Mustang">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Not available</h5>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Mustang</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="~/img/Bmw.jpg" class="card-img-top" alt="BMW">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Not available</h5>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">BMW</small>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section pageScripts
+    {
+    <script>
+
+        $('#btnHideId').click(function () {
+            $('#ulListId').hide(2000);
+        });
+
+        $('#btnShowId').click(function () {
+            $('#ulListId').show(2000);
+        });
+    </script>
+}
