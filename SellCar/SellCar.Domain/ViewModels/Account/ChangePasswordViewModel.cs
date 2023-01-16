@@ -4,6 +4,7 @@ namespace SellCar.Domain.ViewModels.Account
 {
     public class ChangePasswordViewModel
     {
+        [Required(ErrorMessage = "Enter login")]
         public string UserName { get; set; }
         
         [Required(ErrorMessage = "Enter password")]

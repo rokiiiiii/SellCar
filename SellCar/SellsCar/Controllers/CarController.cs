@@ -14,7 +14,6 @@ namespace SellsCar.Web.Controllers
         {
             _carService = carService;
         }
-
         [HttpGet]
         public IActionResult GetCars()
         {
@@ -23,7 +22,7 @@ namespace SellsCar.Web.Controllers
             {
                 return View(response.Data);
             }
-            return View("Error", $"{response.Description}");
+            return View();
         }
 
         [Authorize(Roles = "Admin")]
@@ -57,7 +56,9 @@ namespace SellsCar.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(CarViewModel model)
         {
-            ModelState.Remove("DateCreate");
+
+            ModelState.Remove("Id");
+            ModelState.Remove("YearCreate");
             if (ModelState.IsValid)
             {
 
@@ -79,11 +80,11 @@ namespace SellsCar.Web.Controllers
             {
                 return Json(response.Data);
             }
-            return PartialView("GetCar", response.Data);
+            return PartialView();
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetCar(string term, int page = 1, int pageSize = 5)
+        public async Task<IActionResult> GetCar(string term)
         {
             var response = await _carService.GetCar(term);
             return Json(response.Data);

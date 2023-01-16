@@ -84,7 +84,7 @@ namespace SellCar.Controllers
             }
             var modelError = ModelState.Values.SelectMany(v => v.Errors);
             
-            return StatusCode(StatusCodes.Status500InternalServerError, new { modelError.FirstOrDefault().ErrorMessage });
+            return StatusCode(StatusCodes.Status500InternalServerError, new {modelError.FirstOrDefault().ErrorMessage });
         }
     }
 }

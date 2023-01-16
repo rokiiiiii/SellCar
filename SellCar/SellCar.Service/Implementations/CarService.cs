@@ -208,7 +208,6 @@ namespace SellCar.Service.Implementations
                     Data = car,
                     StatusCode = StatusCode.OK,
                 };
-                // TypeCar
             }
             catch (Exception ex)
             {

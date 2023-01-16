@@ -1,0 +1,139 @@
+﻿@using SellCar.Domain.ViewModels.Car
+@model List<SellCar.Domain.Models.Car>
+
+@{
+    ViewBag.Title = "Car list";
+    Layout = "_Layout";
+}
+
+@{
+    var cardStyle = "col-md-12";
+    if (Model != null)
+    {
+        switch (Model.Count)
+        {
+            case 2:
+                cardStyle = "col-md-6";
+                break;
+            case 3:
+                cardStyle = "col-md-4";
+                break;
+        }
+    }
+}
+
+<style>
+    .card-buttons-group {
+        text-align: right;
+        padding: 10px;
+    }
+</style>
+
+<div class="card col-md-12" style="margin: 10px;">
+    <div class="card-buttons-group">
+        <button class='btn btn-primary' id='compareBtnId'>Comparison</button>
+        @if (User.IsInRole("Admin"))
+        {
+            <button class='btn btn-success' id='addCarId'>Add</button>   
+        }
+    </div>
+</div>
+
+<div style="padding: 10px;"></div>
+@if (Model == null)
+{
+    <div class="card col-md-12">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="https://images.wallpaperscraft.ru/image/single/bmw_fary_podsvetka_137326_1280x720.jpg" 
+                     class="img-fluid rounded-start rounded">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Car list is empty</h5>
+                    <p class="card-text">
+                        the list is empty
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 10px;"></div>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var car in Model)
+        {
+            <div class="row row-cols-1 @cardStyle text-center">
+                <div class="col" style="padding: 10px;">
+                    <div class="card">
+                        <img src="https://s3.eu-central-2.wasabisys.com/shikauto-autocatalog/2e022074f932965dd181b31301e91d57/1195/1662217656XFduPY.jpg"
+                        class="card-img-top card-image">
+                        <div class="card-body">
+                            <h5 class="card-title">Brand: @car.Brand</h5>
+                            <p class="card-text">Model: @car.Model</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Year Create: @car.YearCreate</li>
+                           
+                        </ul>
+                        <div class="card-body">
+                            <button class="btn btn-primary" onclick="openModal({ url: '/Car/GetCar', data: '@car.Id' })"
+                                    data-toggle="ajax-modal" data-target="Modal">Open</button>
+                            
+                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>   
+}
+
+@section pageScripts {
+
+    <script src="~/js/modal.js"></script>
+    <script>
+       let modal = $('#modalWhButtons'); 
+       
+       $('#compareBtnId').on('click', function (){
+           $.ajax({
+               type: 'GET',
+               url : '@Url.Action("Compare")',
+               success: function (response) {
+                   $('.modal-dialog').addClass("modal-lg");
+                   modal.find(".modal-body").html(response);
+                   modal.modal('show')
+               }
+           });
+       });
+        
+       $(".btn-close").click(function(){
+            modal.modal('hide');
+       });
+       
+      
+       
+    </script>
+}

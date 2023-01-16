@@ -53,12 +53,14 @@ namespace SellCar.Service.Implementations
                     Password = HashPasswordHelper.HashPassowrd(model.Password),
                 };
 
+                await _userRepository.Create(user);
+
                 var profile = new Profile()
                 {
                     UserId = user.Id,
                 };
 
-                await _userRepository.Create(user);
+               
                 await _proFileRepository.Create(profile);
                 var result = Authenticate(user);
 

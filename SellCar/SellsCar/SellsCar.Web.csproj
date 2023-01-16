@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.AspNet.Authentication.Cookies" Version="1.0.0-rc1-final" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
@@ -28,6 +29,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Owin.Security.Cookies" Version="4.2.2" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.2.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
   </ItemGroup>
@@ -40,7 +42,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Ads\" />
-    <Folder Include="Views\Car\" />
   </ItemGroup>
 
 </Project>
