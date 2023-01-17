@@ -1,185 +1,165 @@
-﻿using SellCar.DAL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using SellCar.DAL.Interfaces;
 using SellCar.Domain.Enum;
+using SellCar.Domain.Extensions;
+using SellCar.Domain.Helpers;
 using SellCar.Domain.Models;
 using SellCar.Domain.Response;
 using SellCar.Domain.ViewModels.User;
 using SellCar.Service.Intrefaces;
+using System.Data;
 
 namespace SellCar.Service.Implementations
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly ILogger<UserService> _logger;
+        private readonly IBaseRepository<Profile> _proFileRepository;
+        private readonly IBaseRepository<User> _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(ILogger<UserService> logger, IBaseRepository<User> userRepository,
+            IBaseRepository<Profile> proFileRepository)
         {
+            _logger = logger;
             _userRepository = userRepository;
+            _proFileRepository = proFileRepository;
         }
-
-        public async Task<IBaseResponse<User>> GetUser(int id)
+        public async Task<IBaseResponse<User>> Create(UserViewModel model)
         {
-            var baseResponse = new BaseResponse<User>();
             try
             {
-                var user = await _userRepository.Get(id);
-                if (user == null)
+                var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Name == model.Name);
+                if (user != null)
                 {
-                    baseResponse.Description = "User not found";
-                    baseResponse.StatusCode = StatusCode.UserNotFound;
-                    return baseResponse;
+                    return new BaseResponse<User>()
+                    {
+                        Description = "There is already a user with this login",
+                        StatusCode = StatusCode.UserAlreadyExists
+                    };
                 }
-                baseResponse.Data = user;
-                return baseResponse;
-            }
-            catch (Exception ex)
-            {
+                user = new User()
+                {
+                    Name = model.Name,
+                    Role = Enum.Parse<Role>(model.Role),
+                    Password = HashPasswordHelper.HashPassowrd(model.Password),
+                };
+
+                await _userRepository.Create(user);
+
+                var profile = new Profile()
+                {                   
+                    UserId = user.Id,
+                };
+
+                await _proFileRepository.Create(profile);
+
                 return new BaseResponse<User>()
                 {
-                    Description = $"[GetUser] : {ex.Message}",
-                    StatusCode = StatusCode.InternalServerError
+                    Data = user,
+                    Description = "User added",
+                    StatusCode = StatusCode.OK
                 };
-
-            }
-        }
-        public async Task<IBaseResponse<UserViewModel>> CreateUser(UserViewModel userViewModel)
-        {
-            var baseResponse = new BaseResponse<UserViewModel>();
-            try
-            {
-                var user = new User
-                {
-                    Name = userViewModel.Name,
-                    Password = userViewModel.Password,
-                    Email = userViewModel.Email,
-                    PhoneNumber = userViewModel.PhoneNumber,
-                    DateRegistration = DateTime.Now
-                };
-                await _userRepository.Create(user);
-                return baseResponse;
             }
             catch (Exception ex)
             {
-                return new BaseResponse<UserViewModel>()
+                _logger.LogError(ex, $"[UserService.Create] error: {ex.Message}");
+                return new BaseResponse<User>()
                 {
-                    Description = $"[CreateUser] : {ex.Message}",
-                    StatusCode = StatusCode.InternalServerError
+                    StatusCode = StatusCode.InternalServerError,
+                    Description = $"Internal error: {ex.Message}"
                 };
-
             }
         }
 
-        public async Task<IBaseResponse<bool>> DeleteUser(int id)
+        public BaseResponse<Dictionary<int, string>> GetRoles()
         {
-            var baseResponse = new BaseResponse<bool>();
             try
             {
-                var user = await _userRepository.Get(id);
+                var roles = ((Role[])Enum.GetValues(typeof(Role)))
+                    .ToDictionary(k => (int)k, t => t.GetDisplayName());
+
+                return new BaseResponse<Dictionary<int, string>>()
+                {
+                    Data = roles,
+                    StatusCode = StatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<Dictionary<int, string>>()
+                {
+                    Description = ex.Message,
+                    StatusCode = StatusCode.InternalServerError
+                };
+            }
+        }
+
+        public async Task<BaseResponse<IEnumerable<UserViewModel>>> GetUsers()
+        {
+            try
+            {
+                var users = await _userRepository.GetAll()
+                    .Select(x => new UserViewModel()
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Role = x.Role.GetDisplayName()
+                    })
+                    .ToListAsync();
+
+                _logger.LogInformation($"[UserService.GetUsers] items received {users.Count}");
+                return new BaseResponse<IEnumerable<UserViewModel>>()
+                {
+                    Data = users,
+                    StatusCode = StatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"[UserSerivce.GetUsers] error: {ex.Message}");
+                return new BaseResponse<IEnumerable<UserViewModel>>()
+                {
+                    StatusCode = StatusCode.InternalServerError,
+                    Description = $"Internal error: {ex.Message}"
+                };
+            }
+        }
+
+        public async Task<IBaseResponse<bool>> DeleteUser(long id)
+        {
+            try
+            {
+                var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
                 if (user == null)
                 {
-                    baseResponse.Description = "User not found";
-                    baseResponse.StatusCode = StatusCode.UserNotFound;
-                    baseResponse.Data = false;
-                    return baseResponse;
+                    return new BaseResponse<bool>
+                    {
+                        StatusCode = StatusCode.UserNotFound,
+                        Data = false
+                    };
                 }
                 await _userRepository.Delete(user);
-                return baseResponse;
+                _logger.LogInformation($"[UserService.DeleteUser] user deleted");
+
+                return new BaseResponse<bool>
+                {
+                    StatusCode = StatusCode.OK,
+                    Data = true
+                };
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, $"[UserSerivce.DeleteUser] error: {ex.Message}");
                 return new BaseResponse<bool>()
                 {
-                    Description = $"[DeleteUser] : {ex.Message}",
-                    StatusCode = StatusCode.InternalServerError
-                };
-
-            }
-        }
-        public async Task<IBaseResponse<User>> GetByName(string name)
-        {
-            var baseResponse = new BaseResponse<User>();
-            try
-            {
-                var user = await _userRepository.GetByName(name);
-                if (user == null)
-                {
-                    baseResponse.Description = "User not found";
-                    baseResponse.StatusCode = StatusCode.UserNotFound;
-                    return baseResponse;
-                }
-                baseResponse.Data = user;
-                return baseResponse;
-            }
-            catch (Exception ex)
-            {
-                return new BaseResponse<User>()
-                {
-                    Description = $"[GetByName] : {ex.Message}",
-                    StatusCode = StatusCode.InternalServerError
-                };
-
-            }
-        }
-        public async Task<IBaseResponse<IEnumerable<User>>> GetUsers()
-        {
-            var baseResponse = new BaseResponse<IEnumerable<User>>();
-            try
-            {
-                var users = await _userRepository.Select();
-                if (users.Count == 0)
-                {
-                    baseResponse.Description = "found 0 users";
-                    baseResponse.StatusCode = StatusCode.OK;
-                    return baseResponse;
-                }
-
-                baseResponse.Data = users;
-                baseResponse.StatusCode = StatusCode.OK;
-                return baseResponse;
-            }
-            catch (Exception ex)
-            {
-                return new BaseResponse<IEnumerable<User>>()
-                {
-                    Description = $"[GetUsers] : {ex.Message}",
-                    StatusCode = StatusCode.InternalServerError
-                };
-            };
-
-        }
-
-        public async Task<IBaseResponse<User>> Edit(int id, UserViewModel model)
-        {
-            var baseResponse = new BaseResponse<User>();
-            try
-            {
-                var user = await _userRepository.Get(id);
-                if (user == null)
-                {
-                    baseResponse.StatusCode = StatusCode.UserNotFound;
-                    baseResponse.Description = "UserNotFound";
-                    return baseResponse;
-                }
-
-                user.Name = model.Name;
-                user.Email = model.Email;
-                user.Password = model.Password;
-                user.PhoneNumber = model.PhoneNumber;
-                user.DateRegistration = model.DateRegistration;
-
-                await _userRepository.Update(user);
-                return baseResponse;
-            }
-            catch (Exception ex)
-            {
-                return new BaseResponse<User>()
-                {
-                    Description = $"[Edit] : {ex.Message}",
-                    StatusCode = StatusCode.InternalServerError
+                    StatusCode = StatusCode.InternalServerError,
+                    Description = $"Internal error: {ex.Message}"
                 };
             }
+
+
         }
-
-
     }
 }
 

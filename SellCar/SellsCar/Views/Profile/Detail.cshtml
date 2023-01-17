@@ -1,0 +1,124 @@
+﻿@model SellCar.Domain.ViewModels.Profile.ProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "_Layout";
+}
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form id="profileFormId">
+                    <input asp-for="Id" hidden="hidden" />
+                    <h5 class="card-title">Profile data</h5>
+                   
+                    <div class="card-buttons-group">
+                        <button class='btn btn-primary' id='saveProfileId'>Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form id="accountFormId">
+                    <h5 class="card-title">Account details</h5>
+                    <div class="mb-3">
+                        <label class="form-label text-black-50">Login</label>
+                        <input type="text" class="form-control" asp-for="UserName">
+                        <div class="form-text">Login length must be from 3 to 20 characters.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-black-50">New password</label>
+                        <input asp-for="NewPassword" class="form-control textbox-dg font-weight-bold text-center" type="password">
+                    </div>
+                    <div class="card-buttons-group">
+                        <button class='btn btn-primary' id='saveAccountId'>Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card text-center">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("Index", "Home")">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("GetCars", "Car")">Cars</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section pageScripts
+    {
+    <script>
+
+        $('#saveProfileId').on('click', function (e) {
+            e.preventDefault();
+            const data = $('#profileFormId').serialize()
+            $.ajax({
+                url: '@Url.Action("Save", "Profile")',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Information',
+                        text: response.description,
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                },
+                error: function (data) {
+                    Swal.fire({
+                        title: 'Information',
+                        text: 'Validation error',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            });
+        });
+
+        $('#saveAccountId').on('click', function (e) {
+            e.preventDefault();
+            const data = $('#accountFormId').serialize()
+            $.ajax({
+                url: '@Url.Action("ChangePassword", "Account")',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Information',
+                        text: response.description,
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                },
+                error: function (response) {
+                    Swal.fire({
+                        title: 'Information',
+                        text: response.responseJSON.errorMessage,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            });
+        });
+    </script>
+}

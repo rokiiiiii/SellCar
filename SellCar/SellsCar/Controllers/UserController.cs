@@ -2,85 +2,67 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SellCar.DAL.Interfaces;
+using SellCar.Domain.Extensions;
 using SellCar.Domain.Models;
 using SellCar.Domain.ViewModels.User;
 using SellCar.Service.Intrefaces;
+using System.Linq;
 
 namespace SellsCar.Web.Controllers
 {
     public class UserController : Controller
     {
-      private readonly IUserService _userService;
+        private readonly IUserService _userService;
 
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
-        [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
             var response = await _userService.GetUsers();
-            if(response.StatusCode== SellCar.Domain.Enum.StatusCode.OK)
-            {
-                return View(response.Data);
-            }
-            return RedirectToAction("Error");
-        }
-        [HttpGet]
-        public  async Task<IActionResult> GetUser(int id)
-        {
-            var response = await _userService.GetUser(id);
             if (response.StatusCode == SellCar.Domain.Enum.StatusCode.OK)
             {
                 return View(response.Data);
             }
-            return RedirectToAction("Error");
+            return RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteUser(long id)
         {
             var response = await _userService.DeleteUser(id);
             if (response.StatusCode == SellCar.Domain.Enum.StatusCode.OK)
             {
                 return RedirectToAction("GetUsers");
             }
-            return RedirectToAction("Error");
+            return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Save(int id)
-        {
-            if(id==0)
-            {
-                return View();
+        public IActionResult Save() => PartialView();
 
-            }
-            var response = await _userService.GetUser(id);
-            if(response.StatusCode==SellCar.Domain.Enum.StatusCode.OK)
-            {
-                return View(response.Data);
-            }
-            return RedirectToAction("Error");
-        }
         [HttpPost]
         public async Task<IActionResult> Save(UserViewModel model)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                if(model.id==0)
+                var response = await _userService.Create(model);
+                if (response.StatusCode == SellCar.Domain.Enum.StatusCode.OK)
                 {
-                    await _userService.CreateUser(model);
+                    return Json(new { description = response.Description });
                 }
-                else
-                {
-                    await _userService.Edit(model.id, model);
-                }
-                
+                return BadRequest(new { errorMessage = response.Description });
             }
-            return RedirectToAction("GetUsers");
+            var errorMessage = ModelState.Values
+                .SelectMany(v => v.Errors.Select(x => x.ErrorMessage)).ToList().Join();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage });
+        }
 
+        [HttpPost]
+        public JsonResult GetRoles()
+        {
+            var types = _userService.GetRoles();
+            return Json(types.Data);
         }
 
 

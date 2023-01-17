@@ -11,6 +11,7 @@ namespace SellCar.Domain.Models
         public string Model { get; set; }
         public DateTime YearCreate { get; set; }
         public TypeCar TypeCar { get; set; }
-        public int HoursPower { get; set; } 
+        public int HoursPower { get; set; }
+        
     }
 }

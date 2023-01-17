@@ -1,4 +1,4 @@
-﻿using Azure.Core;
+﻿
 using SellCar.Domain.Enum;
 using System;
 using System.Collections.Generic;
@@ -7,10 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SellCar.Domain.Response
-{   
-    public class BaseResponse<T>:IBaseResponse<T>
+{
+    public class BaseResponse<T> : IBaseResponse<T>
     {
-
         public string Description { get; set; }
 
         public StatusCode StatusCode { get; set; }
@@ -20,6 +19,7 @@ namespace SellCar.Domain.Response
 
     public interface IBaseResponse<T>
     {
+        string Description { get; }
         StatusCode StatusCode { get; }
         T Data { get; }
     }

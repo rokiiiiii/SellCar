@@ -13,13 +13,13 @@ namespace SellCar.Service.Intrefaces
     public interface IUserService
     {
 
-        public Task<IBaseResponse<UserViewModel>> CreateUser(UserViewModel userViewModel);
-        public Task<IBaseResponse<User>> Edit(int id,UserViewModel model);
-        public  Task<IBaseResponse<bool>> DeleteUser(int id);
-        public Task<IBaseResponse<User>> GetByName(string name);
-        public Task<IBaseResponse<IEnumerable<User>>> GetUsers();
-        public Task<IBaseResponse<User>> GetUser(int id);
+        Task<IBaseResponse<User>> Create(UserViewModel model);
 
+        BaseResponse<Dictionary<int, string>> GetRoles();
+
+        Task<BaseResponse<IEnumerable<UserViewModel>>> GetUsers();
+
+        Task<IBaseResponse<bool>> DeleteUser(long id);
 
     }
 }

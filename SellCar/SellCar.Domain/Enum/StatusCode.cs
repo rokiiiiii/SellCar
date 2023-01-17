@@ -8,9 +8,10 @@ namespace SellCar.Domain.Enum
 {
     public enum StatusCode
     {
-        UserNotFound=0,
-        CarNotFound=1,
-        OK=200,
-        InternalServerError=500
+        UserNotFound = 0,
+        UserAlreadyExists = 1,
+        CarNotFound = 10,
+        OK = 200,
+        InternalServerError = 500
     }
 }
