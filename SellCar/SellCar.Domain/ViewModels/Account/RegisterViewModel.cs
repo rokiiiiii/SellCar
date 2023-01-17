@@ -8,7 +8,7 @@ namespace SellCar.Domain.ViewModels.Account
         [MaxLength(20, ErrorMessage = "The name must be less than 20 characters long")]
         [MinLength(2, ErrorMessage = "The name must be longer than 2 characters")]
         public string Name { get; set; }
-        
+
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Enter password")]
         [MinLength(5, ErrorMessage = "Password must be greater than or equal to 5 characters")]

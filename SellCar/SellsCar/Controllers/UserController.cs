@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using SellCar.DAL.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
 using SellCar.Domain.Extensions;
-using SellCar.Domain.Models;
 using SellCar.Domain.ViewModels.User;
 using SellCar.Service.Intrefaces;
-using System.Linq;
 
 namespace SellsCar.Web.Controllers
 {

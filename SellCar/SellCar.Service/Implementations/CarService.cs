@@ -1,23 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SellCar.DAL.Interfaces;
-using SellCar.DAL.Repositories;
 using SellCar.Domain.Enum;
 using SellCar.Domain.Extensions;
 using SellCar.Domain.Models;
 using SellCar.Domain.Response;
 using SellCar.Domain.ViewModels.Car;
-using SellCar.Domain.ViewModels.User;
 using SellCar.Service.Intrefaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SellCar.Service.Implementations
 {
-    public class CarService:ICarService
+    public class CarService : ICarService
     {
         private readonly IBaseRepository<Car> _carRepository;
 
@@ -102,7 +94,7 @@ namespace SellCar.Service.Implementations
                         TypeCar = x.TypeCar.GetDisplayName(),
                         HoursPower = x.HoursPower,
                     })
-                    .Where(x => EF.Functions.Like(x.Brand,$"%{term}%"))
+                    .Where(x => EF.Functions.Like(x.Brand, $"%{term}%"))
                     .ToDictionaryAsync(x => x.Id, t => t.Brand);
 
                 baseResponse.Data = cars;
@@ -129,7 +121,7 @@ namespace SellCar.Service.Implementations
                     YearCreate = DateTime.Now,
                     HoursPower = model.HoursPower,
                     TypeCar = (TypeCar)Convert.ToInt32(model.TypeCar),
-                
+
                 };
                 await _carRepository.Create(car);
 

@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SellCar.DAL.Interfaces;
+﻿using SellCar.DAL.Interfaces;
 using SellCar.Domain.Models;
 using SellsCar.DAL;
 
 namespace SellCar.DAL.Repositories
 {
-    public class CarRepository :IBaseRepository<Car>
+    public class CarRepository : IBaseRepository<Car>
     {
         private readonly DbContextSellCar _db;
 

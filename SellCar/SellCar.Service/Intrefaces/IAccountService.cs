@@ -1,7 +1,6 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using SellCar.Domain.Response;
 using SellCar.Domain.ViewModels.Account;
-using SellCar.Domain.Response;
+using System.Security.Claims;
 
 namespace SellCar.Service.Interfaces
 {

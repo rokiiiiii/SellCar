@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SellCar.Domain.Enum;
 using SellCar.Domain.Helpers;
 using SellCar.Domain.Models;
@@ -15,7 +11,7 @@ namespace SellsCar.DAL
         public DbContextSellCar(DbContextOptions<DbContextSellCar> options)
             : base(options)
         {
-           
+
         }
         public DbSet<Car> Car { get; set; }
 
@@ -71,12 +67,12 @@ namespace SellsCar.DAL
                 builder.ToTable("Profiles").HasKey(x => x.Id);
 
                 builder.Property(x => x.Id).ValueGeneratedOnAdd();
-               
+
 
                 builder.HasData(new Profile()
                 {
                     Id = 1,
-                    UserId=1
+                    UserId = 1
                 });
             });
 

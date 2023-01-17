@@ -1,21 +1,13 @@
-﻿    using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SellCar.DAL.Interfaces;
-using SellCar.DAL.Repositories;
 using SellCar.Domain.Enum;
-using SellCar.Domain.Extensions;
+using SellCar.Domain.Helpers;
 using SellCar.Domain.Models;
 using SellCar.Domain.Response;
-using SellCar.Domain.ViewModels.Car;
-using SellCar.Domain.ViewModels.User;
-using SellCar.Service.Intrefaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using SellCar.Service.Interfaces;
 using SellCar.Domain.ViewModels.Account;
-using SellCar.Domain.Helpers;
+using SellCar.Service.Interfaces;
+using System.Security.Claims;
 
 namespace SellCar.Service.Implementations
 {
@@ -24,7 +16,7 @@ namespace SellCar.Service.Implementations
         private readonly IBaseRepository<Profile> _proFileRepository;
         private readonly IBaseRepository<User> _userRepository;
         private readonly ILogger<AccountService> _logger;
-        
+
         public AccountService(IBaseRepository<User> userRepository,
             ILogger<AccountService> logger, IBaseRepository<Profile> proFileRepository)
         {
@@ -60,7 +52,7 @@ namespace SellCar.Service.Implementations
                     UserId = user.Id,
                 };
 
-               
+
                 await _proFileRepository.Create(profile);
                 var result = Authenticate(user);
 
