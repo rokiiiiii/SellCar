@@ -37,7 +37,7 @@ namespace SellCar.Service.Implementations
         {
             try
             {
-                var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Name == model.Name);
+                var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Name == model.Email);
                 if (user != null)
                 {
                     return new BaseResponse<ClaimsIdentity>()
@@ -48,7 +48,7 @@ namespace SellCar.Service.Implementations
 
                 user = new User()
                 {
-                    Name = model.Name,
+                    Name = model.Email,
                     Role = Role.User,
                     Password = HashPasswordHelper.HashPassowrd(model.Password),
                 };
@@ -86,7 +86,7 @@ namespace SellCar.Service.Implementations
         {
             try
             {
-                var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Name == model.Name);
+                var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Name == model.Email);
                 if (user == null)
                 {
                     return new BaseResponse<ClaimsIdentity>()

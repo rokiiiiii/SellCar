@@ -1,0 +1,75 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <a class="navbar-brand" href="/"><h5 class="my-0 d-inline">SELLCAR</h5><i class="ml-2 fas fa-car-side"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/cars"><h6 class="my-0">Vehicles</h6></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <form class="form-inline">
+                    <input name="q" class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" style="width:275px">
+                    <button class="btn btn-success my-2 my-0" type="submit">Search</button>
+                </form>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="btn btn-success mr-1" href="/user/createilan">Post a Free Ad</a>
+            </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (User.IsInRole("admin"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mr-2 fas fa-user fa-fw"></i>@User.Identity.Name</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="/admin">Admin Panel</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/account/logout">
+                                <i class="fas fa-sign-out-alt mr-1"></i>
+                                Sign out
+                            </a>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mr-2 fas fa-user fa-fw"></i>@User.Identity.Name</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="/user/profile">My membership</a>
+                            <a class="dropdown-item" href="/user/ilanlarim">My Ads</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/account/logout">
+                                <i class="fas fa-sign-out-alt mr-1"></i>
+                                Sign out
+                            </a>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/login">
+                        <i class="fas fa-sign-in-alt mr-1"></i>
+                       Sign out
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/register">
+                        <i class="fas fa-user-plus mx-1"></i>
+                        Sign up
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</nav>
+

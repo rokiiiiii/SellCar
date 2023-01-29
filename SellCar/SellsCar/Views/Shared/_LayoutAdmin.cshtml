@@ -6,17 +6,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-          
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="~/css/style.css">
-
-    <title>SellCar</title>
 </head>
 <body>
-    @await Html.PartialAsync("_navbar")
-    @RenderBody()
+    @await Html.PartialAsync("_navbarAdmin")
+    <div class="container-fluid my-2">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="list-group list-group-flush sticky-top shadow">
+                    <a href="/admin" class="list-group-item list-group-item-action bg-dark text-white">
+                        Home page
+                    </a>
+                    <a href="/admin/user/list" class="list-group-item list-group-item-action"><i class="fas fa-angle-double-right mx-1"></i>Users</a>
+                    <a href="/admin/ilan/list" class="list-group-item list-group-item-action"><i class="fas fa-angle-double-right mx-1"></i>Ads</a>
+                    <a href="/admin/role/list" class="list-group-item list-group-item-action"><i class="fas fa-angle-double-right mx-1"></i>Roles</a>
+                    <a href="/admin/marka/list" class="list-group-item list-group-item-action"><i class="fas fa-angle-double-right mx-1"></i>Brands</a>
+                    <a href="/admin/il/list" class="list-group-item list-group-item-action"><i class="fas fa-angle-double-right mx-1"></i>Provinces</a>
+                </div>
+            </div>
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -30,6 +46,7 @@
                 language: {
                     url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/English.json",
                 },
+
             });
         });
     </script>
