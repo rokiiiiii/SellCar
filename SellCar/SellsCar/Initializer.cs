@@ -14,12 +14,12 @@ namespace SellsCar.Web
             services.AddScoped<IBaseRepository<Car>, CarRepository>();
             services.AddScoped<IBaseRepository<User>, UserRepository>();
             services.AddScoped<IBaseRepository<Profile>, ProfileRepository>();
-           
+
         }
 
         public static void InitializeServices(this IServiceCollection services)
         {
-            services.AddScoped<ICarService, CarService>();     
+            services.AddScoped<ICarService, CarService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IAccountService, AccountService>();

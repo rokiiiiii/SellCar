@@ -1,11 +1,6 @@
 ﻿using SellCar.DAL.Interfaces;
 using SellCar.Domain.Models;
 using SellsCar.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SellCar.DAL.Repositories
 {

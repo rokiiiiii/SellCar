@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SellCar.DAL.Interfaces;
 using SellCar.Models;
 using System.Diagnostics;
 

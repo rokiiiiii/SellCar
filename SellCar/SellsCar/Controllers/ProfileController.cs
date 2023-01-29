@@ -4,7 +4,7 @@ using SellCar.Service.Intrefaces;
 
 namespace SellsCar.Web.Controllers
 {
-    public class ProfileController:Controller
+    public class ProfileController : Controller
     {
         private readonly IProfileService _profileService;
 

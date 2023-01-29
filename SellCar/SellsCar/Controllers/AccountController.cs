@@ -1,22 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using SellCar.Domain.ViewModels.Account;
 using SellCar.Service.Interfaces;
+using System.Security.Claims;
 
 namespace SellCar.Controllers
-{   
+{
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
-        
+
         public AccountController(IAccountService accountService)
         {
             _accountService = accountService;
@@ -83,8 +77,8 @@ namespace SellCar.Controllers
                 }
             }
             var modelError = ModelState.Values.SelectMany(v => v.Errors);
-            
-            return StatusCode(StatusCodes.Status500InternalServerError, new {modelError.FirstOrDefault().ErrorMessage });
+
+            return StatusCode(StatusCodes.Status500InternalServerError, new { modelError.FirstOrDefault().ErrorMessage });
         }
     }
 }

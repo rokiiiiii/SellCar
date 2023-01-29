@@ -1,6 +1,5 @@
 ﻿using SellCar.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
 
 namespace SellCar.Domain.Models
 {
@@ -21,5 +20,5 @@ namespace SellCar.Domain.Models
 
     }
 
-  
+
 }

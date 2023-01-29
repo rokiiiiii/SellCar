@@ -13,6 +13,7 @@ namespace SellCar.Domain.ViewModels.Account
         [Required(ErrorMessage = "Enter your password.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
         [Required(ErrorMessage = "Re-enter your password.")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords do not match.")]

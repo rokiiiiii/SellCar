@@ -1,17 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SellCar.DAL.Interfaces;
+﻿using SellCar.DAL.Interfaces;
 using SellCar.Domain.Models;
 using SellsCar.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SellCar.DAL.Repositories
 {
-    public class UserRepository :IBaseRepository<User>
+    public class UserRepository : IBaseRepository<User>
     {
         private readonly DbContextSellCar _db;
 
@@ -43,7 +36,7 @@ namespace SellCar.DAL.Repositories
             await _db.SaveChangesAsync();
 
             return entity;
-        
-    }
+
+        }
     }
 }

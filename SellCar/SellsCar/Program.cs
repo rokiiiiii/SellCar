@@ -1,19 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using SellCar.Domain.Models;
-using SellCar.DAL;
-using SellCar.DAL.Interfaces;
-using SellCar.DAL.Repositories;
-using SellsCar.DAL;
-using SellCar.Service.Intrefaces;
-using SellCar.Service.Implementations;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using SellsCar.Web;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using NLog.Web;
+using SellsCar.DAL;
+using SellsCar.Web;
 
 
 var builder = WebApplication.CreateBuilder(args);

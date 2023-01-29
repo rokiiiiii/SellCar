@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SellCar.Domain.Enum
 {
     public enum TypeCar
     {
         [Display(Name = "Saloon")]
-        Saloon=0,
+        Saloon = 0,
         [Display(Name = "Hatchback")]
         Hatchback = 1,
         [Display(Name = "Estate")]

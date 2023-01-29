@@ -6,12 +6,6 @@ using SellCar.Domain.Models;
 using SellCar.Domain.Response;
 using SellCar.Domain.ViewModels.Profile;
 using SellCar.Service.Intrefaces;
-using System;
-using System.Collections.Generic;
-
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SellCar.Service.Implementations
 {
@@ -35,7 +29,7 @@ namespace SellCar.Service.Implementations
                     .Select(x => new ProfileViewModel()
                     {
                         Id = x.Id,
-                       
+
                         UserName = x.User.Name
                     })
                     .FirstOrDefaultAsync(x => x.UserName == userName);
@@ -64,7 +58,7 @@ namespace SellCar.Service.Implementations
                 var profile = await _profileRepository.GetAll()
                     .FirstOrDefaultAsync(x => x.Id == model.Id);
 
-               
+
 
                 await _profileRepository.Update(profile);
 

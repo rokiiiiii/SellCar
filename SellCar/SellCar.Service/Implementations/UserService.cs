@@ -48,7 +48,7 @@ namespace SellCar.Service.Implementations
                 await _userRepository.Create(user);
 
                 var profile = new Profile()
-                {                   
+                {
                     UserId = user.Id,
                 };
 
