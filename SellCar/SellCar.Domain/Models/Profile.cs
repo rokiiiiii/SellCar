@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SellCar.Domain.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace SellCar.Domain.Models
 {

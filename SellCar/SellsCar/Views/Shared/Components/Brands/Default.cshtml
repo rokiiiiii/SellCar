@@ -4,7 +4,7 @@
     <div class="list-group list-group-flush overflow-auto ">
         @foreach (var car in Model)
         {
-            <a href="/cars/@car.Brand" class="list-group-item list-group-item-action bg-light">@car.Model<span class="text-muted"> (@car.TypeCar)</span></a>
+            <a href="/cars/@car.Name" class="list-group-item list-group-item-action bg-light">@car.Name<span class="text-muted"> (@car.Ads.Count)</span></a>
         }
     </div>
 </div>
