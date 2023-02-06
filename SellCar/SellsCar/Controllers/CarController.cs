@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SellCar.DAL.Interfaces;
-using SellCar.Domain.Extensions;
 using SellCar.Domain.Identity;
-using SellCar.Domain.Models;
 using SellCar.Domain.ViewModels.Ad;
-using SellCar.Domain.ViewModels.Cars;
 using SellCar.Domain.ViewModels.Users;
 using SellCar.Service.Intrefaces;
 

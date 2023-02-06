@@ -1,5 +1,5 @@
 ﻿
-
+@model SellCar.Domain.ViewModels.Ad.AdsListViewModel
 <div class="container-fluid my-2">
     <div class="row ">
         @if (TempData["message"] != null)
@@ -10,7 +10,7 @@
             </div>
         }
         <div class="col-lg-3 mb-2 ">
-            @*@await Component.InvokeAsync("Markalar")*@
+            @await Component.InvokeAsync("Car")
         </div>
         <div class="col-lg-9 ">
             @await Html.PartialAsync("_ads")
@@ -20,12 +20,12 @@
 <div class="container">
     <h4 class="text-center my-4">Recommended for you</h4>
     <div class="row" id="car">
-      @*  @foreach (var ilan in Model.ilanlar)
+        @foreach (var ads in Model.Ads)
         {
             <div class="col-lg-3 col-md-4 col-sm-6 d-flex align-items-stretch">
-                @await Html.PartialAsync("_recommendedCar", ilan)
+                @await Html.PartialAsync("_recommendedCar", ads)
             </div>
-        }*@
+        }
     </div>
     <h4 class="text-center my-4">Popular Car Brands</h4>
     <div class="row">

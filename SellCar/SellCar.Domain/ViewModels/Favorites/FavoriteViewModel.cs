@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SellCar.Domain.ViewModels.Favorites
+﻿namespace SellCar.Domain.ViewModels.Favorites
 {
     public class FavoriteViewModel
     {
-       
-            public List<FavItemModel> Favs { get; set; }
 
-      
+        public List<FavItemModel> Favs { get; set; }
+
+
         public class FavItemModel
         {
             public int AdsId { get; set; }

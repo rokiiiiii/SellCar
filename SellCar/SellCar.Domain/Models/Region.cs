@@ -6,7 +6,7 @@ namespace SellCar.Domain.Models
     {
         [Key]
         public int RegionId { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public List<Ads> Ads { get; set; }
     }
 }

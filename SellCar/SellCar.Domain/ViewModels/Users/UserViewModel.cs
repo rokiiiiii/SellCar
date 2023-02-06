@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SellCar.Domain.ViewModels.Users
+﻿namespace SellCar.Domain.ViewModels.Users
 {
     public class UserViewModel
     {

@@ -109,7 +109,7 @@ namespace SellCar.DAL.Repositories
             {
                 return context.Ads
                     .Where(i => i.HomePage == true)
-                    .Include(i => i.Brand)
+                    .Include(i => i.Car)
                     .Include(i => i.PostingPictures)
                     .ToList();
             }
@@ -121,7 +121,7 @@ namespace SellCar.DAL.Repositories
                 return context.Ads
                     .Include(i => i.PostingPictures)
                     .Include(i => i.Brand)
-                     .Include(i => i.Region)
+                    .Include(i => i.Region)
                     .FirstOrDefault(i => i.RegionId == id);
             }
         }

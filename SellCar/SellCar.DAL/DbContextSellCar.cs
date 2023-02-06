@@ -27,5 +27,10 @@ namespace SellsCar.DAL
         {
             optionsBuilder.UseSqlite("Data Source=Db");
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+
     }
 }

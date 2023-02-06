@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SellCar.Domain.Identity
 {
-    public class UserDbContext : IdentityDbContext<User>
+    public class ApplicationContext : IdentityDbContext<User>
     {
-        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
 
         }

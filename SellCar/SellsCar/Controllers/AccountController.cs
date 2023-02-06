@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SellCar.Domain.Identity;
 using SellCar.Domain.ViewModels.Account;
@@ -87,10 +87,11 @@ namespace SellCar.Controllers
             var username = await _userManager.FindByNameAsync(model.UserName);
             if (mail == null && username == null)
             {
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "User");
+                    await _userManager.AddToRoleAsync(user, "USER");
                     return RedirectToAction("Login", "Account");
                 }
                 else

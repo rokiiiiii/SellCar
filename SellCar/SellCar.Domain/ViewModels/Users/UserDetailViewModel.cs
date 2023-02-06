@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SellCar.Domain.ViewModels.Users
+﻿namespace SellCar.Domain.ViewModels.Users
 {
     public class UserDetailViewModel
     {

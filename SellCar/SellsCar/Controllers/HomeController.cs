@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SellCar.Domain.ViewModels.Ad;
-using SellCar.Models;
 using SellCar.Service.Intrefaces;
-using System.Diagnostics;
 
 namespace SellCar.Controllers
 {

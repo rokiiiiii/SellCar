@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace SellCar.Domain.Identity
 {
@@ -15,7 +16,7 @@ namespace SellCar.Domain.Identity
             if (await userManager.FindByNameAsync(username) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(role));
-                await roleManager.CreateAsync(new IdentityRole("user"));
+                await roleManager.CreateAsync(new IdentityRole("User"));
 
                 var admin = new User()
                 {
@@ -37,7 +38,7 @@ namespace SellCar.Domain.Identity
                 var userResult = await userManager.CreateAsync(user, password);
                 if (userResult.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "user");
+                    await userManager.AddToRoleAsync(user, "User");
                 }
 
                 var adminResult = await userManager.CreateAsync(admin, password);

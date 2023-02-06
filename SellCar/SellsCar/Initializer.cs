@@ -1,9 +1,7 @@
 ﻿using SellCar.DAL.Interfaces;
 using SellCar.DAL.Repositories;
-using SellCar.Domain.Models;
 using SellCar.Service.Implementations;
 using SellCar.Service.Intrefaces;
-using System.Configuration;
 
 namespace SellsCar.Web
 {
