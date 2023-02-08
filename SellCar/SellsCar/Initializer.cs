@@ -1,8 +1,6 @@
 ﻿using SellCar.DAL.Interfaces;
 using SellCar.DAL.Repositories;
-using SellCar.Domain.Models;
 using SellCar.Service.Implementations;
-using SellCar.Service.Interfaces;
 using SellCar.Service.Intrefaces;
 
 namespace SellsCar.Web
@@ -11,18 +9,20 @@ namespace SellsCar.Web
     {
         public static void InitializeRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IBaseRepository<Car>, CarRepository>();
-            services.AddScoped<IBaseRepository<User>, UserRepository>();
-            services.AddScoped<IBaseRepository<Profile>, ProfileRepository>();
-           
+            services.AddScoped<IAdsRepository, AdsRepository>();
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<IPictureRepository, PictureRepository>();
+            services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+            services.AddScoped<IRegionRepository, RegionRepository>();
         }
 
         public static void InitializeServices(this IServiceCollection services)
         {
-            services.AddScoped<ICarService, CarService>();     
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IProfileService, ProfileService>();
-            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IAdsService, AdsService>();
+            services.AddScoped<IPictureService, PictureService>();
+            services.AddScoped<IFavoriteService, FavoriteService>();
+            services.AddScoped<IRegionService, RegionService>();
 
         }
     }

@@ -1,90 +1,128 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SellCar.Domain.Identity;
 using SellCar.Domain.ViewModels.Account;
-using SellCar.Service.Interfaces;
-
 namespace SellCar.Controllers
-{   
+{
     public class AccountController : Controller
     {
-        private readonly IAccountService _accountService;
-        
-        public AccountController(IAccountService accountService)
+        private UserManager<User> _userManager;
+        private SignInManager<User> _signInManager;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _accountService = accountService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        [HttpGet]
-        public IActionResult Register() => View();
-
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public IActionResult Login(string? returnUrl = null)
         {
-            if (ModelState.IsValid)
+            return View(new LoginViewModel()
             {
-                var response = await _accountService.Register(model);
-                if (response.StatusCode == Domain.Enum.StatusCode.OK)
-                {
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(response.Data));
-
-                    return RedirectToAction("Index", "Home");
-                }
-                ModelState.AddModelError("", response.Description);
-            }
-            return View(model);
+                ReturnUrl = returnUrl,
+            });
         }
 
-        [HttpGet]
-        public IActionResult Login() => View();
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var response = await _accountService.Login(model);
-                if (response.StatusCode == Domain.Enum.StatusCode.OK)
-                {
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(response.Data));
+                return View(model);
+            }
 
-                    return RedirectToAction("Index", "Home");
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "No account has been created with this username before.");
+                return View(model);
+            }
+
+            //if (!await _userManager.IsEmailConfirmedAsync(user))
+            //{
+            //    ModelState.AddModelError("", "Please confirm your membership with the link sent to your email account.");
+            //    return View(model);
+            //}
+
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+            var isAdmin = _userManager.IsInRoleAsync(user, "admin");
+            if (result.Succeeded)
+            {
+                if (isAdmin.Result)
+                {
+                    return Redirect("/admin");
                 }
-                ModelState.AddModelError("", response.Description);
+                TempData["message"] = "Signed In.";
+                return Redirect(model.ReturnUrl ?? "~/");
+            }
+
+            ModelState.AddModelError("", "Incorrect username or password entered");
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = new User()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                UserName = model.UserName,
+                Email = model.Email,
+                Address = model.Address,
+                PhoneNumber = model.PhoneNumber,
+                MembershipDate = DateTime.Now
+            };
+            var mail = await _userManager.FindByEmailAsync(model.Email);
+            var username = await _userManager.FindByNameAsync(model.UserName);
+            if (mail == null && username == null)
+            {
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "User");
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("Password", error.Description);
+                    }
+                }
+
+            }
+            if (mail != null)
+            {
+                ModelState.AddModelError("Email", "This e-mail was previously used to register on the site.");
+            }
+            if (username != null)
+            {
+                ModelState.AddModelError("UserName", "There is another person with this username.");
             }
             return View(model);
         }
-
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            await _signInManager.SignOutAsync();
+            TempData["message"] = "Checked Out.";
+            return Redirect("~/");
         }
-
-        [HttpPost]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        public IActionResult AccessDenied()
         {
-            if (ModelState.IsValid)
-            {
-                var response = await _accountService.ChangePassword(model);
-                if (response.StatusCode == Domain.Enum.StatusCode.OK)
-                {
-                    return Json(new { description = response.Description });
-                }
-            }
-            var modelError = ModelState.Values.SelectMany(v => v.Errors);
-            
-            return StatusCode(StatusCodes.Status500InternalServerError, new {modelError.FirstOrDefault().ErrorMessage });
+            return View();
         }
     }
 }

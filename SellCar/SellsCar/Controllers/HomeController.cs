@@ -1,34 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SellCar.DAL.Interfaces;
-using SellCar.Models;
-using System.Diagnostics;
+using SellCar.Domain.ViewModels.Ad;
+using SellCar.Service.Intrefaces;
 
 namespace SellCar.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-
-        public HomeController(ILogger<HomeController> logger)
+        private IAdsService _adsService;
+        public HomeController(IAdsService adsService)
         {
-            _logger = logger;
+            _adsService = adsService;
         }
-
         public IActionResult Index()
         {
-            return View();
+            var model = new AdsListViewModel()
+            {
+                Ads = _adsService.GetHomePosts()
+            };
+            return View(model);
         }
-
-        public IActionResult Privacy()
+        public IActionResult Search(string q)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var model = new AdsListViewModel()
+            {
+                Ads = _adsService.GetSearchResult(q)
+            };
+            return View(model);
         }
     }
 }
