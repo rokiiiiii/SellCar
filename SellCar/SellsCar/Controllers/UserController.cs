@@ -273,7 +273,7 @@ namespace SellsCar.Web.Controllers
             }
             TempData["message"] = $"The tool with the title {entity.title} and the ad number {entity.AdsId} is online.";
             TempData["alert-type"] = "alert-warning";
-            return Redirect("/user/MyAds");
+            return Redirect("/user/Ads");
         }
         public IActionResult AdsDelete(int? id)
         {
@@ -284,7 +284,7 @@ namespace SellsCar.Web.Controllers
             }
             TempData["message"] = $"The tool {entity.AdsId} with the title {entity.title} has been taken down.";
             TempData["alert-type"] = "alert-danger";
-            return Redirect("/user/MyAds");
+            return Redirect("/user/Ads");
         }
         public IActionResult AdsPicDelete(string id)
         {

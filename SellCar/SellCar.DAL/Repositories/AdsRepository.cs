@@ -120,9 +120,9 @@ namespace SellCar.DAL.Repositories
             {
                 return context.Ads
                     .Include(i => i.PostingPictures)
-                    .Include(i => i.Brand)
+                    .Include(i => i.Car)
                     .Include(i => i.Region)
-                    .FirstOrDefault(i => i.RegionId == id);
+                    .FirstOrDefault(i => i.AdsId == id);
             }
         }
         public List<Ads> GetPost(string url)
@@ -130,7 +130,7 @@ namespace SellCar.DAL.Repositories
             using (var context = new DbContextSellCar())
             {
                 var ads = context.Ads
-                       .Include(i => i.Brand)
+                       .Include(i => i.Car)
                        .Include(i => i.PostingPictures)
                         .Include(i => i.Region)
                        .ToList().AsQueryable();
@@ -138,7 +138,7 @@ namespace SellCar.DAL.Repositories
                 if (!string.IsNullOrEmpty(url))
                 {
                     ads = ads
-                        .Include(i => i.Brand)
+                        .Include(i => i.Car)
                         .Include(i => i.PostingPictures)
                         .Where(i => i.Car.Url == url);
                 }

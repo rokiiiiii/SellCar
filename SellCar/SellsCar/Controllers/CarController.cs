@@ -62,7 +62,7 @@ namespace SellsCar.Web.Controllers
 
             return View(model);
         }
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             var ads = _adsService.GetAdDetail((int)id);
             var user = await _user.FindByIdAsync(ads.UserId);

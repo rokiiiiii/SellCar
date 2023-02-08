@@ -1,8 +1,9 @@
 ﻿body {
-    background-color: #F7F7F9;
+    background-color: rgb(28, 30, 31);
+    color: rgb(209, 205, 199);
 }
 
-.markalar .list-group {
+.Car .list-group {
     height: 330px;
 }
 

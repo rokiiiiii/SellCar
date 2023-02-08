@@ -1,7 +1,9 @@
 ﻿@model SellCar.Domain.ViewModels.Ad.AdsDetailViewModel;
+
+
 <div class="container my-3">
     <h5 class="mt-1 d-inline ">@Model.ads.title</h5>
-    <h6 class="mt-1 d-inline float-right"><strong>@Model.ads.Price.ToString("c")</strong></h6>
+    <h6 class="mt-1 d-inline float-right"><strong>@Model.ads.Price.ToString("")</strong>$</h6>
     <hr class="my-3">
     <div class="row">
         <div class="col-md-7 ">
@@ -12,13 +14,13 @@
                         @if (i == 0)
                         {
                             <div class="carousel-item active">
-                                <img class="img-fluid" src="~/images/@(Model.ads.PostingPictures[i].Url)"
+                                <img class="img-fluid" src="~/img/@(Model.ads.PostingPictures[i].Url)"
                              alt="@i slide">
                             </div>
                             continue;
                         }
                         <div class="carousel-item">
-                            <img class="img-fluid" src="~/images/@(Model.ads.PostingPictures[i].Url)"
+                            <img class="img-fluid" src="~/img/@(Model.ads.PostingPictures[i].Url)"
                              alt="@i slide">
                         </div>
                     }
@@ -37,12 +39,12 @@
                         @if (i == 0)
                         {
                             <li data-target="#carousel-thumb" data-slide-to="@i" class="active">
-                                <img src="~/images/@(Model.ads.PostingPictures[i].Url)" class="img-fluid">
+                                <img src="~/img/@(Model.ads.PostingPictures[i].Url)" class="img-fluid">
                             </li>
                             continue;
                         }
                         <li data-target="#carousel-thumb" data-slide-to="@i">
-                            <img src="~/images/@(Model.ads.PostingPictures[i].Url)" class="img-fluid">
+                            <img src="~/img/@(Model.ads.PostingPictures[i].Url)" class="img-fluid">
                         </li>
                     }
                 </ol>
@@ -174,7 +176,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <strong>Engine capacity </strong>
+                                    <strong> Engine capacity </strong>
                                 </td>
                                 <td>
                                     @Model.ads.EngineСapacity cc

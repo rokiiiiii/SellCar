@@ -48,7 +48,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Ads\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 

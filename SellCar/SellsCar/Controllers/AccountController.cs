@@ -13,11 +13,12 @@ namespace SellCar.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public IActionResult Login(string ReturnUrl = null)
+
+        public IActionResult Login(string? returnUrl = null)
         {
             return View(new LoginViewModel()
             {
-                ReturnUrl = ReturnUrl,
+                ReturnUrl = returnUrl,
             });
         }
 
@@ -91,7 +92,7 @@ namespace SellCar.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "USER");
+                    await _userManager.AddToRoleAsync(user, "User");
                     return RedirectToAction("Login", "Account");
                 }
                 else
