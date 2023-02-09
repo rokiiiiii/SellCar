@@ -5,28 +5,40 @@ using SellsCar.DAL;
 
 namespace SellCar.DAL.Repositories
 {
-    public class CarRepository : GenericRepository<Car, DbContextSellCar>, ICarRepository
+    public class CarRepository :IBaseRepository<Car>
     {
-        public Car GetByIdWithPosts(int markaId)
+        private readonly DbContextSellCar _db;
+
+
+        public CarRepository(DbContextSellCar db)
         {
-            using (var context = new DbContextSellCar())
-            {
-                return context.Car
-                    .Where(i => i.CarId == markaId)
-                    .Include(i => i.Ads)
-                    .ThenInclude(i => i.Region)
-                    .FirstOrDefault();
-            }
+            _db = db;
+            _db.Dispose();
         }
-        public List<Car> GetCars()
+
+        public async Task Create(Car entity)
         {
-            using (var context = new DbContextSellCar())
-            {
-                return context.Car
-                    .Include(i => i.Ads)
-                    .OrderBy(i => i.Name)
-                    .ToList();
-            }
+            await _db.Car.AddAsync(entity);
+            await _db.SaveChangesAsync();
+        }
+
+        public IQueryable<Car> GetAll()
+        {
+            return _db.Car;
+        }
+
+        public async Task Delete(Car entity)
+        {
+            _db.Car.Remove(entity);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task<Car> Update(Car entity)
+        {
+            _db.Car.Update(entity);
+            await _db.SaveChangesAsync();
+
+            return entity;
         }
     }
 }

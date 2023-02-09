@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellCar.DAL", "SellCar.DAL\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{AC321B6A-09B0-4D0C-80EE-A099CD0EBE3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellCar.Service", "SellCar.Service\SellCar.Service.csproj", "{44554BC7-57B5-4858-84E2-CDD9AC1C1A7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SellCar.Service", "SellCar.Service\SellCar.Service.csproj", "{44554BC7-57B5-4858-84E2-CDD9AC1C1A7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

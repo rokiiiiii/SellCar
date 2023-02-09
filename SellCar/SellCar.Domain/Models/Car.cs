@@ -1,4 +1,4 @@
-﻿
+﻿using SellCar.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 
 namespace SellCar.Domain.Models
@@ -6,11 +6,12 @@ namespace SellCar.Domain.Models
     public class Car
     {
         [Key]
-        public int CarId { get; set; }
-        public string? Name { get; set; }
-        public string? Url { get; set; }
-
-        public List<Ads> Ads { get; set; }
-
+        public int Id { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public DateTime YearCreate { get; set; }
+        public TypeCar TypeCar { get; set; }
+        public int HoursPower { get; set; }
+        
     }
 }

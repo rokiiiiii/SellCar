@@ -1,96 +1,100 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SellCar.Domain.Identity;
-using SellCar.Domain.ViewModels.Ad;
-using SellCar.Domain.ViewModels.Users;
+using SellCar.Domain.Extensions;
+using SellCar.Domain.ViewModels.Car;
 using SellCar.Service.Intrefaces;
 
 namespace SellsCar.Web.Controllers
 {
     public class CarController : Controller
     {
-        private IAdsService _adsService;
-        private IRegionService _regionService;
-        private IFavoriteService _favoriteService;
-        private UserManager<User> _user;
+        private readonly ICarService _carService;
 
-        public CarController(IAdsService adsService, IRegionService regionService, IFavoriteService favoriteService, UserManager<User> user)
+        public CarController(ICarService carService)
         {
-            _adsService = adsService;
-            _regionService = regionService;
-            _favoriteService = favoriteService;
-            _user = user;
+            _carService = carService;
         }
+        [HttpGet]
+        public IActionResult GetCars()
+        {
+            var response = _carService.GetCars();
+            if (response.StatusCode == SellCar.Domain.Enum.StatusCode.OK)
+            {
+                return View(response.Data);
+            }
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var response = await _carService.DeleteCar(id);
+            if (response.StatusCode == SellCar.Domain.Enum.StatusCode.OK)
+            {
+                return RedirectToAction("GetCars");
+            }
+            return View("Error", $"{response.Description}");
+        }
+
+        public IActionResult Compare() => PartialView();
 
         [HttpGet]
-        public IActionResult List(string url)
+        public async Task<IActionResult> Save(int id)
         {
-            var model = new AdsListViewModel()
-            {
-                Ads = _adsService.GetPost(url),
-            };
-            ViewBag.CarUrl = (RouteData.Values["url"] == null) ? "" : RouteData.Values["url"];
-            ViewBag.Region = _regionService.GetRegion();
-            return View(model);
-        }
-        [HttpPost]
-        public IActionResult List(string url, string min_price, string max_price, string min_kilometers, string max_kilometers, string min_year, string max_year, string[] fuel_type, string[] gear_type, string[] body_type, string min_horse, string max_horse, string[] traction, string[] color, string from_who, string status, string swap, string[] region)
-        {
-            var model = new AdsListViewModel()
-            {
-                Ads = _adsService.Filter(url, min_price, max_price, min_kilometers, max_kilometers, min_year, max_year, fuel_type, gear_type, body_type, min_horse, max_horse, traction, color, from_who, status, swap, region),
-                fuel_type = fuel_type,
-                gear_type = gear_type,
-                body_type = body_type,
-                traction = traction,
-                color = color,
-                min_price = min_price,
-                max_price = max_price,
-                min_kilometers = min_kilometers,
-                max_kilometers = max_kilometers,
-                min_year = min_year,
-                max_year = max_year,
-                min_horse = min_kilometers,
-                max_horse = min_kilometers,
-                from_who = min_kilometers,
-                status = status,
-                swap = swap,
-                region = region,
-            };
-            ViewBag.CarUrl = RouteData.Values["url"];
-            ViewBag.Region = _regionService.GetRegion();
+            if (id == 0)
+                return PartialView();
 
-            return View(model);
-        }
-        public async Task<IActionResult> Details(int id)
-        {
-            var ads = _adsService.GetAdDetail((int)id);
-            var user = await _user.FindByIdAsync(ads.UserId);
-
-            var favorite = _favoriteService.GetFavByUserId(_user.GetUserId(User));
-            if (id == null)
+            var response = await _carService.GetCar(id);
+            if (response.StatusCode == SellCar.Domain.Enum.StatusCode.OK)
             {
-                return NotFound();
+                return PartialView(response.Data);
             }
-            var model = new AdsDetailViewModel()
-            {
-                ads = ads,
-                user = user,
-                AdPicture = ads.PostingPictures,
-                AddFavorites = favorite.Any(i => i.AdsId == id)
-            };
-            return View(model);
+            ModelState.AddModelError("", response.Description);
+            return PartialView();
         }
-        public async Task<IActionResult> UserAds(string id)
+
+        [HttpPost]
+        public async Task<IActionResult> Save(CarViewModel model)
         {
-            var ads = _adsService.GetPost("").Where(i => i.UserId == id).ToList();
-            var user = await _user.FindByIdAsync(id);
-            var model = new UserAdsListViewModel()
+
+            ModelState.Remove("Id");
+            ModelState.Remove("YearCreate");
+            if (ModelState.IsValid)
             {
-                Ads = ads,
-                User = user,
-            };
-            return View(model);
+
+                await _carService.Edit(model.Id, model);
+
+                return RedirectToAction("GetCars");
+            }
+            var errorMessage = ModelState.Values
+                .SelectMany(v => v.Errors.Select(x => x.ErrorMessage)).ToList().Join();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { errorMessage });
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> GetCar(int id, bool isJson)
+        {
+            var response = await _carService.GetCar(id);
+            if (isJson)
+            {
+                return Json(response.Data);
+            }
+            return PartialView();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetCar(string term)
+        {
+            var response = await _carService.GetCar(term);
+            return Json(response.Data);
+        }
+
+        [HttpPost]
+        public JsonResult GetTypes()
+        {
+            var types = _carService.GetTypes();
+            return Json(types.Data);
         }
     }
 }

@@ -1,65 +1,162 @@
-﻿@model SellCar.Domain.ViewModels.Ad.AdsListViewModel
-<div class="container-fluid my-2">
-    <div class="row ">
-        @if (TempData["message"] != null)
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div style="padding: 10px;"></div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="card col-md-12">
+        <div class="card-body">
+            <h5 class="card-title text-center">Welcome to the SellCar website</h5>
+            <p class="card-text">
+                Welcome to the site for the sale of cars Here you can sell your car
+            </p>
+            
+        </div>
+    </div>
+
+    <div style="padding: 10px;"></div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @if (User.IsInRole("Admin"))
         {
-            <div class="alert alert-success box w-100" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong><i class="fas fa-check mr-2"></i></strong>@TempData["message"]
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://images.wallpaperscraft.ru/image/single/mashina_noch_dozhd_143166_1280x720.jpg" class="card-img-top card-image" />
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Mercedes</h5>
+                        <p class="card-text">Mercedes-Benz — trademark and company of the same name - a manufacturer of premium cars, trucks, buses and other vehicles</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a asp-controller="Car" asp-action="GetCars" class="card-link">List of cars</a>
+                    </div>
+                </div>
             </div>
         }
-        <div class="col-lg-3 mb-2 ">
-            @await Component.InvokeAsync("Car")
-        </div>
-        <div class="col-lg-9 ">
-            @await Html.PartialAsync("_ads")
-        </div>
-    </div>
-</div>
-<div class="container">
-    <h4 class="text-center my-4">Recommended for you</h4>
-    <div class="row" id="car">
-        @foreach (var ads in Model.Ads)
-        {
-            <div class="col-lg-3 col-md-4 col-sm-6 d-flex align-items-stretch">
-                @await Html.PartialAsync("_recommendedCar", ads)
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://images.wallpaperscraft.ru/image/single/bmw_fary_avtomobil_124112_1280x720.jpg" class="card-img-top card-image" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">BMW</h5>
+                    <p class="card-text">
+                        BMW AG — German manufacturer of cars, motorcycles, engines and bicycles
+                    </p>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-controller="Car" asp-action="GetCars" class="card-link">List of cars</a>
+                </div>
             </div>
-        }
-    </div>
-    <h4 class="text-center my-4">Popular Car Brands</h4>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <a href="/cars/alfa-romeo"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-alfa.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow "></a>
-            <a href="/cars/audi"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-audi.jpg " style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/bmw"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-bmw.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/bugatti"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-bugatti.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/ferrari"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-ferrari.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/ford"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-ford.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/hyundai"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-hyundai.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/jaguar"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-jaguar.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/lada"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-lada.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/lamborghini"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-lamborghini.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/mazda"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-mazda.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/mercedes-benz"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-mercedes.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/nissan"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-nissan.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/porsche"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-porsche.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/suzuki"><img src="https://365cars.ru/wp-content/uploads/2014/01/Suzuki_logo.png" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/volkswagen"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-volkswagen.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/renault"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-renault.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mr-2 mb-3 shadow"></a>
-            <a href="/cars/kia"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-kia.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/fiat"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-fiat.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
-            <a href="/cars/toyota"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-toyota.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://images.wallpaperscraft.ru/image/single/audi_avtomobil_vid_speredi_130942_1280x720.jpg" class="card-img-top card-image" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">Audi</h5>
+                    <p class="card-text">Audi — is a German automotive company within the Volkswagen Group, specializing in the production of cars under the Audi brand.</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-controller="Car" asp-action="GetCars" class="card-link">List of cars</a>
+                </div>
+            </div>
         </div>
     </div>
-    @await Html.PartialAsync("_footer")
-</div>
-@section Scripts
+
+    <div style="padding: 10px;"></div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Main types of bodies</h5>
+            <p class="card-text">
+                The type of body structure is easily determined by the appearance of the car. Each class has distinctive features,
+                which are easy to spot even with little experience. In addition, the way the luggage compartment is implemented also plays a role in the classification,
+                which can be combined with the passenger compartment or separated from it
+            </p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+
+    <div style="padding: 10px;"></div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Passenger cars with the following body types are in the greatest demand</h5>
+        </div>
+        <ul class="list-group list-group-flush" id="ulListId">
+            <li class="list-group-item">Sedan - the most common option</li>
+            <li class="list-group-item">Station wagon - a family car with great features</li>
+            <li class="list-group-item">Hatchback - a shortened version of the station wagon</li>
+            <li class="list-group-item">Liftback - a combination of station wagon and sedan</li>
+            <li class="list-group-item">Coupe - a car for connoisseurs of personal space</li>
+            <li class="list-group-item">Limousine - ostentatious luxury</li>
+            <li class="list-group-item">Convertible always attracts the eye</li>
+            <li class="list-group-item">SUV - increased strength and reliability</li>
+        </ul>
+        <div class="card-body">
+            <button class="btn btn-danger" id="btnHideId">Hide</button>
+            <button class="btn btn-primary" id="btnShowId">Show</button>
+        </div>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            You are not logged in
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>You must be logged in to view content.</p>
+            </blockquote>
+        </div>
+    </div>
+
+    <div style="padding: 10px;"></div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="~/img/Bmw_I8.jpg" class="card-img-top" alt="BMW i8">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Not available</h5>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">BMW i8</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="~/img/Mustang.jpg" class="card-img-top" alt="Mustang">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Not available</h5>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Mustang</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="~/img/Bmw.jpg" class="card-img-top" alt="BMW">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Not available</h5>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">BMW</small>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section pageScripts
     {
     <script>
-        window.setTimeout(function () {
-            $(".box").fadeTo(500, 0).slideUp(500, function () {
-                $(this).remove();
-            });
-        }, 1250);
+
+        $('#btnHideId').click(function () {
+            $('#ulListId').hide(2000);
+        });
+
+        $('#btnShowId').click(function () {
+            $('#ulListId').show(2000);
+        });
     </script>
-} 
+}

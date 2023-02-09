@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SellsCar.DAL;
 
@@ -15,236 +16,157 @@ namespace SellCar.DAL.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("SellCar.Domain.Models.Ads", b =>
                 {
-                    b.Property<int>("AdsId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
-                    b.Property<double>("Acceleration")
-                        .HasColumnType("REAL");
-
-                    b.Property<double>("AverageConsumption")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("BodyType")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Brand")
-                        .HasColumnType("TEXT");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<int>("CarId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("ConsumptionСity")
-                        .HasColumnType("REAL");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Detail")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EngineСapacity")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("FromWho")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("price")
+                        .HasColumnType("int");
 
-                    b.Property<int>("FuelTankVolume")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("FuelType")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("GearType")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("HomePage")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MaxSpeed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Mileage")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Model")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("MotorPower")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("NumberOfDoors")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("NumberOfGear")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("OutofCityConsumption")
-                        .HasColumnType("REAL");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("RegionId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Swap")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TractionType")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("title")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("year")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AdsId");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("RegionId");
+                    b.HasKey("Id");
 
                     b.ToTable("Ads");
                 });
 
             modelBuilder.Entity("SellCar.Domain.Models.Car", b =>
                 {
-                    b.Property<int>("CarId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("CarId");
-
-                    b.ToTable("Car");
-                });
-
-            modelBuilder.Entity("SellCar.Domain.Models.Favorite", b =>
-                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<int>("AdsId")
-                        .HasColumnType("INTEGER");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HoursPower")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TypeCar")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("YearCreate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdsId");
+                    b.ToTable("Car", (string)null);
 
-                    b.ToTable("Favorite");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Brand = "Toyota",
+                            HoursPower = 200,
+                            Model = "Gt 86",
+                            TypeCar = 1,
+                            YearCreate = new DateTime(2023, 1, 15, 18, 23, 9, 560, DateTimeKind.Local).AddTicks(1816)
+                        });
                 });
 
-            modelBuilder.Entity("SellCar.Domain.Models.Picture", b =>
+            modelBuilder.Entity("SellCar.Domain.Models.Profile", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("AdsId")
-                        .HasColumnType("INTEGER");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Url")
-                        .HasColumnType("TEXT");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdsId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
-                    b.ToTable("Picture");
+                    b.ToTable("Profiles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            UserId = 1L
+                        });
                 });
 
-            modelBuilder.Entity("SellCar.Domain.Models.Region", b =>
+            modelBuilder.Entity("SellCar.Domain.Models.User", b =>
                 {
-                    b.Property<int>("RegionId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("RegionId");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Region");
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Name = "rokimile",
+                            Password = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                            Role = 2
+                        });
                 });
 
-            modelBuilder.Entity("SellCar.Domain.Models.Ads", b =>
+            modelBuilder.Entity("SellCar.Domain.Models.Profile", b =>
                 {
-                    b.HasOne("SellCar.Domain.Models.Car", "Car")
-                        .WithMany("Ads")
-                        .HasForeignKey("CarId")
+                    b.HasOne("SellCar.Domain.Models.User", "User")
+                        .WithOne("Profile")
+                        .HasForeignKey("SellCar.Domain.Models.Profile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SellCar.Domain.Models.Region", "Region")
-                        .WithMany("Ads")
-                        .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SellCar.Domain.Models.User", b =>
+                {
+                    b.Navigation("Profile")
                         .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("Region");
-                });
-
-            modelBuilder.Entity("SellCar.Domain.Models.Favorite", b =>
-                {
-                    b.HasOne("SellCar.Domain.Models.Ads", "Ads")
-                        .WithMany()
-                        .HasForeignKey("AdsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ads");
-                });
-
-            modelBuilder.Entity("SellCar.Domain.Models.Picture", b =>
-                {
-                    b.HasOne("SellCar.Domain.Models.Ads", "Ads")
-                        .WithMany("PostingPictures")
-                        .HasForeignKey("AdsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ads");
-                });
-
-            modelBuilder.Entity("SellCar.Domain.Models.Ads", b =>
-                {
-                    b.Navigation("PostingPictures");
-                });
-
-            modelBuilder.Entity("SellCar.Domain.Models.Car", b =>
-                {
-                    b.Navigation("Ads");
-                });
-
-            modelBuilder.Entity("SellCar.Domain.Models.Region", b =>
-                {
-                    b.Navigation("Ads");
                 });
 #pragma warning restore 612, 618
         }

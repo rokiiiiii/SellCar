@@ -1,95 +1,44 @@
 ﻿@model SellCar.Domain.ViewModels.Account.RegisterViewModel
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-7">
-            <div class="card shadow-lg border-0 rounded-lg my-5">
-                <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Membership</h3></div>
-                <div class="card-body">
-                    <form asp-controller="Account" asp-action="Register" method="POST">
-                        <div class="form-row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="small mb-1">Name</label>
-                                    <input class="form-control py-4" asp-for="FirstName" />
-                                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="small mb-1">Surname</label>
-                                    <input class="form-control py-4" asp-for="LastName" />
-                                    <span asp-validation-for="LastName" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="small mb-1">User name</label>
-                                    <input class="form-control py-4" asp-for="UserName" />
-                                    <span asp-validation-for="UserName" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="small mb-1">Address</label>
-                            <input class="form-control py-4" asp-for="Address" />
-                            <span asp-validation-for="Address" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label class="small mb-1">E-mail</label>
-                            <input class="form-control py-4" asp-for="Email" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="small mb-1">Password</label>
-                                    <input class="form-control py-4" asp-for="Password" />
-                                    <span asp-validation-for="Password" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="small mb-1">Password(Again)</label>
-                                    <input class="form-control py-4" asp-for="RePassword" />
-                                    <span asp-validation-for="RePassword" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="small mb-1">Phone</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">+375</div>
-                                        </div>
-                                        <input class="form-control py-4" asp-for="PhoneNumber" id="phone" />
 
-                                    </div>
-                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                                </div>
-                            </div>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Registration";
+}
+
+<div style="padding: 20px;"></div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <span class="anchor"></span>
+                    <div class="card card-account card-outline-secondary border border-white">
+                        <div class="card-header">
+                            <h3 class="mb-0 text-center paragraphHome text-black">Register</h3>
                         </div>
-                        <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit">Sign up</button></div>
-                    </form>
-                </div>
-                <div class="card-footer text-center">
-                    <div class="small"><a href="/account/login">Do you have an account? Login</a></div>
+                        <div class="card-body">
+                            <form asp-controller="Account" asp-action="Register">
+                                <div asp-validation-summary="All" style="font-size:23px; font-family:Impact" class="text-danger text-center"></div>
+                                <div class="form-group">
+                                    <input asp-for="Name" class="form-control textbox-dg font-weight-bold text-center" placeholder="Name" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input autocomplete="new-password" asp-for="Password" placeholder="Password" class="form-control textbox-dg font-weight-bold text-center" type="password">
+                                </div>
+                                <span class="text-black" style="font-size: small; font-family:'Comic Sans MS'">Password must be longer than 6 characters</span>
+                                <div class="form-group">
+                                    <input autocomplete="new-password" asp-for="PasswordConfirm" placeholder="Confirm the password" class="form-control textbox-dg font-weight-bold text-center" type="password">
+                                </div>
+                                <div>
+                                    <h2 class="paragraphHome text-center"><a asp-controller="Account" target="_blank" asp-action="Login" style="color:deepskyblue;">Login</a></h2>
+                                </div>
+                                <button class="btn btn-success btn-lg float-right" type="submit">Register</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    @await Html.PartialAsync("_footer")
-</div>
-@section Scripts
-{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.5/jquery.inputmask.min.js" integrity="sha512-sR3EKGp4SG8zs7B0MEUxDeq8rw9wsuGVYNfbbO/GLCJ59LBE4baEfQBVsP2Y/h2n8M19YV1mujFANO1yA3ko7Q==" crossorigin="anonymous"></script>
-    <script>
-        $(":input").inputmask();
-        $("#phone").inputmask({ "mask": "(99) 99-99-999" });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
-}
