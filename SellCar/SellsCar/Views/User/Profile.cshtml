@@ -1,4 +1,4 @@
-﻿@model SellCar.Domain.ViewModels.Users.UserViewModel;
+﻿@model SellCar.Domain.ViewModels.Profile.UserProfileViewModel;
 <div class="container">
     <h3 class="mt-1">Profile</h3>
     <hr class="my-3">
@@ -10,9 +10,10 @@
                 <i>@Model.MembershipDate You became a member on</i>
             </div>
             <div class="list-group my-3">
-                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Ad Management</a>
-                <a href="/user/" class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center">My Published Ads</a>
-                <a href="/user/" class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center">my favorite ads</a>
+                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Profile</a>
+                <a href="/user/Stats" class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center">My Stats</a>
+                <a href="/user/Ads" class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center">My Published Ads</a>
+                <a href="/user/Favs" class="list-group-item list-group-item-action  d-flex justify-content-between align-items-center">My Favorite Ads</a>
             </div>
         </div>
         <div class="col-md-9">
@@ -55,9 +56,6 @@
                             <p>
                                 @(Model.PhoneNumber == null ? "-" : Model.PhoneNumber)
                             </p>
-                            <hr>
-                            <span class="badge badge-primary"><i class="far fa-newspaper "></i> @ViewBag.NumAds Advertisement on the air</span>
-                            <span class="badge badge-success"><i class="far fa-thumbs-up "></i> @ViewBag.favs Favorite listing</span>
                         </div>
                     </div>
                 </div>

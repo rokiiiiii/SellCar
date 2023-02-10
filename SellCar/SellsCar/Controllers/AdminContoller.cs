@@ -334,7 +334,7 @@ namespace SellsCar.Web.Controllers
                         _pictureService.Create(pic);
 
                         var filepath =
-                        new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images")).Root + $@"\{newFileName}";
+                        new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img")).Root + $@"\{newFileName}";
                         using (FileStream fs = System.IO.File.Create(filepath))
                         {
                             file.CopyTo(fs);

@@ -12,7 +12,7 @@ using static SellCar.Domain.ViewModels.Favorites.FavoriteViewModel;
 
 namespace SellsCar.Web.Controllers
 {
-    [Authorize(Roles = "user")]
+    [Authorize(Roles = "User")]
     public class UserController : Controller
     {
         Random rnd;
@@ -80,7 +80,7 @@ namespace SellsCar.Web.Controllers
         }
 
 
-        public IActionResult CreatePost()
+        public IActionResult CreateAds()
         {
             ViewBag.Car = _carService.GetCars();
             ViewBag.Region = _regionService.GetRegion();
@@ -145,7 +145,7 @@ namespace SellsCar.Web.Controllers
                         _picService.Create(picture);
 
                         var filepath =
-                        new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images")).Root + $@"\{newFileName}";
+                        new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img")).Root + $@"\{newFileName}";
                         using (FileStream fs = System.IO.File.Create(filepath))
                         {
                             file.CopyTo(fs);
@@ -203,7 +203,7 @@ namespace SellsCar.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult PostEdit(EditAdsViewModel Ads, List<IFormFile> files)
+        public IActionResult AdsEdit(EditAdsViewModel Ads, List<IFormFile> files)
         {
             if (!ModelState.IsValid)
             {
@@ -262,7 +262,7 @@ namespace SellsCar.Web.Controllers
                         _picService.Create(pic);
 
                         var filepath =
-                        new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images")).Root + $@"\{newFileName}";
+                        new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img")).Root + $@"\{newFileName}";
                         using (FileStream fs = System.IO.File.Create(filepath))
                         {
                             file.CopyTo(fs);
@@ -337,7 +337,7 @@ namespace SellsCar.Web.Controllers
             TempData["alert-type"] = "alert-danger";
             return Redirect("/user/MyFavorites");
         }
-        public IActionResult overview()
+        public IActionResult Stats()
         {
             var userId = _user.GetUserId(User);
             var ads = _adsService.GetPost("").Where(i => i.UserId == userId).ToList();

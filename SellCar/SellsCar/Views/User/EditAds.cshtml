@@ -1,0 +1,385 @@
+﻿
+<style>
+    .del {
+        position: absolute;
+        top: 0px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        background-color: rgba(255,255,255,0.6);
+        cursor: pointer;
+    }
+
+    .imgAdd {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        color: black;
+        box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.2);
+        text-align: center;
+        line-height: 30px;
+        margin-top: 0px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+</style>
+@model SellCar.Domain.ViewModels.Ad.EditAdsViewModel
+
+<form asp-controller="User" asp-action="AdsEdit" method="post" enctype="multipart/form-data">
+    <div class="col-md-10 offset-md-1">
+        <h3 class="mt-2">Ads</h3>
+        <hr class="my-3">
+        <div class="form-row mt-4">
+            <div class="col-sm-6 pb-3">
+                <label>Title</label>
+                <input class="form-control" asp-for="Title">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Region</label>
+                <select class="form-control" id="exampleSt" name="RegionId">
+                    <option value="">Select region</option>
+                    @foreach (var item in ViewBag.Region)
+                    {
+                        <option value="@item.RegionId">@item.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="RegionId" class="text-danger"></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Price</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                    <input type="number" class="form-control" asp-for="Price">
+                </div>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Car</label>
+                <select class="form-control" name="markaId">
+                    <option value="">Marka Seçiniz</option>
+                    @foreach (var item in ViewBag.Car)
+                    {
+                        <option value="@item.CarId">@item.Name</option>
+
+                    }
+                </select>
+                <span asp-validation-for="CarId" class="text-danger"></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Brand</label>
+                <input class="form-control" asp-for="Brand">
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="col-sm-4 pb-3">
+                <label>Model</label>
+                <input class="form-control" asp-for="Model">
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="col-sm-2 pb-3">
+                <label>year</label>
+                <input type="number" class="form-control" asp-for="year">
+                <span asp-validation-for="year" class="text-danger"></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Mileage</label>
+                <input type="number" min="0" class="form-control" asp-for="Mileage">
+                <span asp-validation-for="Mileage" class="text-danger"></span>
+            </div>
+
+            <div class="col-sm-3 pb-3">
+                <label>Geat</label>
+                <select class="form-control" asp-for="GearType">
+                    <option value="">Select gear type</option>
+                    <option value="Automatic">Automatic</option>
+                    <option value="Manual">Manual</option>
+                    <option value="Semiautomatic">Semiautomatic</option>
+                </select>
+                <span asp-validation-for="GearType" class="text-danger "></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Body Type</label>
+                <select class="form-control" asp-for="BodyType">
+                    <option value="">Choose your body type</option>
+                    <option value="Cabrio">Cabrio</option>
+                    <option value="Coupe">Coupe</option>
+                    <option value="Hatchback 3 doors">Hatchback 3 doors</option>
+                    <option value="Hatchback 5 doors">Hatchback 5 doors</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="Station Wagon">Station Wagon</option>
+                    <option value="Crossover">Crossover</option>
+                    <option value="MPV">MPV</option>
+                    <option value="Roadster">Roadster</option>
+                </select>
+                <span asp-validation-for="BodyType" class="text-danger "></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Traction Type</label>
+                <select class="form-control" asp-for="TractionType">
+                    <option value="">Select traction type</option>
+                    <option value="Front-wheel drive">Front-wheel drive</option>
+                    <option value="Rear drive">Rear drive</option>
+                    <option value="4WD (Continuous)">4WD (Continuous)</option>
+                    <option value="AWD (Eleсtronik)">AWD (Eleсtronik)</option>
+                </select>
+                <span asp-validation-for="TractionType" class="text-danger "></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Fuel type</label>
+                <select class="form-control" asp-for="FuelType">
+                    <option value="">Select fuel type</option>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Gas">Gas</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Electric">Electric</option>
+                </select>
+                <span asp-validation-for="FuelType" class="text-danger "></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Inner City Consumption</label>
+                <input type="number" min="0" class="form-control" asp-for="InnerCityConsumption">
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Out of CityConsumption</label>
+                <input type="number" min="0" class="form-control" asp-for="OutOfCityConsumption">
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Motor power</label>
+                <input type="number" min="0" class="form-control" asp-for="MotorPower">
+                <span asp-validation-for="MotorPower" class="text-danger "></span>
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Engine capacity</label>
+                <input type="number" min="0" class="form-control" asp-for="EngineCapacity">
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Acceleration 0-100(sec)</label>
+                <input type="number" min="0" class="form-control" asp-for="Acceleration">
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Max Speed(km/h)</label>
+                <input type="number" min="0" class="form-control" asp-for="MaxSpeed">
+            </div>
+            <div class="col-sm-3 pb-3">
+                <label>Swap</label>
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Swap" value="Yes" />Yes
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Swap" value="No" />No
+                        </label>
+                    </div>
+                </div>
+                <span asp-validation-for="Swap" class="text-danger"></span>
+            </div>
+            <div class="col-sm-4 pb-3">
+                <label>From who</label>
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="FromWho" value="Owner" />Owner
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="FromWho" value="From car dealership" />From car dealership
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="FromWho" value="From auto show" />From auto show
+                        </label>
+                    </div>
+                </div>
+                <span asp-validation-for="FromWho" class="text-danger"></span>
+            </div>
+            <div class="col-sm-8 pb-3">
+                <label>Status</label>
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Status" value="None" />None
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Status" value="First hand" />First owner
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Status" value="Second owner" />Second owner
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Status" value="Third or more owner" />Third or more owner
+                        </label>
+                    </div>
+                </div>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="col-md-12 pb-3">
+                <label>Color</label>
+                <div class="form-group small">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="White" />White
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Black" />Black
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline ">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Yellow" />Yellow
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Burgundy" />Burgundy
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Dark blue" />Dark blue
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Silver grey" />Silver grey
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Red" />Red
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline ">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Navy blue" />Navy blue
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Blue" />Blue
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Purple" />Purple
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Pink" />Pink
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Orange" />Orange
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Black silver grey" />Black silver grey
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Turquoise" />Turquoise
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Brown" />Brown
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Green" />Green
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" asp-for="Color" value="Other color" />Other color
+                        </label>
+                    </div>
+                </div>
+                <span asp-validation-for="Color" class="text-danger "></span>
+            </div>
+            <div class="col-md-12 pb-3">
+                <label>Ad Description</label>
+                <textarea class="form-control" id="editor" asp-for="Detail"></textarea>
+                <small class="text-info">
+                    Add description
+                </small>
+            </div>
+        </div>
+        <h3 class="mb-3">Ad Pictures </h3>
+        <div class="row">
+            <div class="col-sm-3 mb-3">
+                <div class="card">
+                    <img class="card-img-top uploadImage" />
+                    <div class="card-body">
+                        <label class="btn btn-success d-block ">
+                            <i class="fas fa-upload"></i><input name="files" type="file" class="uploadFile d-block" style="width: 0px;height: 0px;overflow: hidden;">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <i class="fa fa-plus imgAdd"></i>
+        </div>
+        <div class="alert alert-danger" role="alert" id="alert">
+            Upload at least one image
+        </div>
+        <button type="submit" class="btn btn-success btn-lg btn-block mb-2">Post Ad</button>
+    </div>
+</form>
+
+@section Scripts
+    {
+    <script>
+        $(".imgAdd").click(function () {
+            $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-3 mb-3"><div class="card"><img class="card-img-top uploadImage" "/><div class="card-body"><label class="btn btn-success d-block "><i class="fas fa-upload"></i><input name="files" type="file" class="uploadFile d-block" style="width: 0px;height: 0px;overflow: hidden;"></label></div></div><i class="fa fa-trash-alt del"></i></div>');
+        });
+        $(document).on("click", "i.del", function () {
+            $(this).parent().remove();
+        });
+        $(function () {
+            $(document).on("change", ".uploadFile", function () {
+                var uploadFile = $(this);
+                var files = !!this.files ? this.files : [];
+                if (!files.length || !window.FileReader) return;
+
+                if (/^image/.test(files[0].type)) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(files[0]);
+
+                    reader.onloadend = function () {
+
+                        uploadFile.parents(".card").find(".uploadImage").attr("src", this.result);
+                        $("#alert").hide();
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor')
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
+}

@@ -1,0 +1,48 @@
+﻿@model SellCar.Domain.ViewModels.Users.UserAdsListViewModel
+<div class="container my-3">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card" style="width: 100%">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.User.FirstName @Model.User.LastName<i class="fas fa-check-square ml-2" style="color: #4caf50;" data-toggle="tooltip" data-placement="right" title="Verified Member"></i></h5>
+                    <h6 class="card-subtitle my-3 text-muted"><i class="fas fa-User mr-2"></i>@Model.User.MembershipDate.ToString().TrimEnd('0', ':') member since</h6>
+                    <h6 class="card-subtitle my-3 text-muted"><i class="fas fa-mobile-alt mr-2"></i>@Model.User.PhoneNumber</h6>
+                    <h6 class="card-subtitle my-3 text-muted"><i class="fas fa-map-marker-alt mr-2"></i>@Model.User.Address</h6>
+                    <p class="card-text"><strong>Number of Ads: </strong>@Model.Ads.Count()</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Picture</th>
+                        <th>Car</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                        <th>Km</th>
+                        <th>Color</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Ads)
+                    {
+                        <tr>
+                            <td><a href="/car/details/@item.AdsId"><img src="~/img/@item.PostingPictures[0].Url" width=90></a> </td>
+                            <td>@item.Car.Name</td>
+                            <td>@item.Brand</td>
+                            <td>@item.Model</td>
+                            <td>@item.year</td>
+                            <td>@item.Mileage</td>
+                            <td>@item.Color</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    @await Html.PartialAsync("_footer")
+</div>
