@@ -77,7 +77,7 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text ">
-                                <a href="/Car/UserIlans/@Model.user.Id" class="text-decoration-none">
+                                <a href="/Car/UserAds/@Model.user.Id" class="text-decoration-none">
                                     vehicle owner
                                     other postings
                                 </a>
@@ -334,15 +334,15 @@
                     <hr>
                 </div>
                 <div class="col-md-6 col-4 ">
-                    <h6>Price</h6><strong>@Model.ads.Price.ToString("c")</strong>
+                    <h6>Price</h6><strong>@Model.ads.Price $</strong>
                     <hr>
                 </div>
                 <div class="col-md-6 col-4 ">
-                    <a asp-controller="cart" asp-action="add" asp-route-id="@Model.ads.AdsId">
+                   @* <a asp-controller="cart" asp-action="add" asp-route-id="@Model.ads.AdsId">
 
                         <i class="fas fa-plus-circle mr-2"></i>with another car
                         compare
-                    </a>
+                    </a>*@
                 </div>
                 <div class="col-md-6 col-4 ">
                     @if (User.Identity.IsAuthenticated && Model.AddFavorites == false)

@@ -274,7 +274,7 @@ namespace SellsCar.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult IlanEdit(EditAdsViewModel adsmodel, List<IFormFile> files)
+        public IActionResult AdsEdit(EditAdsViewModel adsmodel, List<IFormFile> files)
         {
             if (!ModelState.IsValid)
             {
@@ -334,7 +334,7 @@ namespace SellsCar.Web.Controllers
                         _pictureService.Create(pic);
 
                         var filepath =
-                        new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images")).Root + $@"\{newFileName}";
+                        new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img")).Root + $@"\{newFileName}";
                         using (FileStream fs = System.IO.File.Create(filepath))
                         {
                             file.CopyTo(fs);

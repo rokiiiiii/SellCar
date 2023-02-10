@@ -8,7 +8,8 @@
     <div class="row">
         <div class="col-md-3">
             <div class="list-group list-group-flush sticky-top shadow mb-3">
-                <a href="/user/summary" onclick="myFunction()" class="list-group-item list-group-item-action "><i class="fas fa-angle-double-right mx-1"></i>Ad Management</a>
+                <a href="/user/profile" class="list-group-item list-group-item-action "><i class="fas fa-angle-double-right mx-1"></i>My Profile</a>
+                <a href="/user/stats" onclick="myFunction()" class="list-group-item list-group-item-action "><i class="fas fa-angle-double-right mx-1"></i>Stats</a>
                 <a href="/user/ads" class="list-group-item list-group-item-action active"><i class="fas fa-angle-double-right mx-1 "></i>My Published Ads</a>
                 <a href="/user/FavAds" class="list-group-item list-group-item-action "><i class="fas fa-angle-double-right mx-1"></i>My Favorite Ads</a>
             </div>
@@ -32,27 +33,57 @@
                 }
                 @foreach (var item in Model.Ads)
                 {
-                    <div class="card mb-3 w-100">
-                        <div class="card-body">
-                            <div class="row no-gutters h-100">
-                                <div class="col-md-4">
-                                    <a href="/car/details/@item.AdsId"><img src="~/img/@item.PostingPictures[0].Url" class="card-img" alt="..."></a>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5>@item.title</h5>
-                                        <p>@item.Car.Name @item.Brand @item.Model</p>
-                                        <h6 class=" text-right">@item.Price.ToString("c")</h6>
-                                        <p class="text-right">
-                                            <a href="/user/ads/@item.AdsId" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                            <a asp-controller="User" asp-action="IlanDelete" asp-route-id="@item.AdsId" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                                        </p>
+                    if (item.PostingPictures.Count > 0)
+                    {
+                        <div class="card mb-3 w-100">
+                            <div class="card-body">
+                                <div class="row no-gutters h-100">
+                                    <div class="col-md-4">
+                                        <a href="/car/details/@item.AdsId"><img src="~/img/@item.PostingPictures[0].Url" class="card-img" alt="..."></a>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5>@item.title</h5>
+                                            <p>@item.Car.Name @item.Brand @item.Model</p>
+                                            <h6 class=" text-right">@item.Price $</h6>
+                                            <p class="text-right">
+                                                <a asp-controller="User" asp-action="AdsEdit" asp-route-id="@item.AdsId" class="btn btn-success btn-sm"><i class="fas fa-car-alt"></i></a>
+                                                @*<a href="/User/Ads/@item.AdsId" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>*@
+                                                <a asp-controller="User" asp-action="AdsDelete" asp-route-id="@item.AdsId" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+
+                        <div class="card mb-3 w-100">
+                            <div class="card-body">
+                                <div class="row no-gutters h-100">
+                                    <div class="col-md-4">
+                                        <a href="/car/details/@item.AdsId"><img src="~/img/NoImg.jpg" class="card-img" alt="..."></a>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5>@item.title</h5>
+                                            <p>@item.Car.Name @item.Brand @item.Model</p>
+                                            <h6 class=" text-right">@item.Price $</h6>
+                                            <p class="text-right">
+                                                <a asp-controller="User" asp-action="AdsEdit" asp-route-id="@item.AdsId" class="btn btn-success btn-sm"><i class="fas fa-car-alt"></i></a>
+                                                @*<a href="/User/Ads/@item.AdsId" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>*@
+                                                <a asp-controller="User" asp-action="AdsDelete" asp-route-id="@item.AdsId" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
                 }
             </div>
         </div>

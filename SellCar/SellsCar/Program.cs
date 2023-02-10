@@ -91,7 +91,28 @@ app.UseAuthorization();
 
 
 app.MapControllerRoute(
+    
 name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+
+app.MapControllerRoute(
+    name: "UserAdsEdit",
+        pattern: "{controller=User}/{action=EditAds}/{id?}");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "userads",
+        pattern: "user/ad",
+        defaults: new { controller = "User", action = "Ads" }
+    );
+    endpoints.MapControllerRoute(
+        name: "search",
+        pattern: "search",
+        defaults: new { controller = "Home", action = "Search" }
+    );
+
+});
 
 app.Run();
