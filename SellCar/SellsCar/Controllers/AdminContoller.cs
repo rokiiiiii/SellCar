@@ -274,7 +274,7 @@ namespace SellsCar.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult IlanEdit(EditAdsViewModel adsmodel, List<IFormFile> files)
+        public IActionResult AdsEdit(EditAdsViewModel adsmodel, List<IFormFile> files)
         {
             if (!ModelState.IsValid)
             {

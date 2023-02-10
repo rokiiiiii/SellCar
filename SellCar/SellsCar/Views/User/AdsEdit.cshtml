@@ -1,4 +1,4 @@
-﻿
+﻿@model SellCar.Domain.ViewModels.Ad.EditAdsViewModel
 <style>
     .del {
         position: absolute;
@@ -25,13 +25,19 @@
         font-size: 15px;
     }
 </style>
-@model SellCar.Domain.ViewModels.Ad.EditAdsViewModel
-
 <form asp-controller="User" asp-action="AdsEdit" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="AdsId" value="@Model.AdsId" />
     <div class="col-md-10 offset-md-1">
-        <h3 class="mt-2">Ads</h3>
+        <h3 class="mt-2">Ad</h3>
         <hr class="my-3">
         <div class="form-row mt-4">
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-danger box w-100" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong><i class="fas fa-check mr-2"></i></strong>@TempData["message"]
+                </div>
+            }
             <div class="col-sm-6 pb-3">
                 <label>Title</label>
                 <input class="form-control" asp-for="Title">
@@ -40,16 +46,20 @@
             <div class="col-sm-3 pb-3">
                 <label>Region</label>
                 <select class="form-control" id="exampleSt" name="RegionId">
-                    <option value="">Select region</option>
+                    <option value="">RegionId</option>
                     @foreach (var item in ViewBag.Region)
                     {
+                        if (item.RegionId == Convert.ToInt32(Model.RegionId))
+                        {
+                            <option selected value="@item.RegionId">@item.Name</option>
+                        }
                         <option value="@item.RegionId">@item.Name</option>
                     }
                 </select>
                 <span asp-validation-for="RegionId" class="text-danger"></span>
             </div>
             <div class="col-sm-3 pb-3">
-                <label>Price</label>
+                <label>Enter your price</label>
                 <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text">$</span></div>
                     <input type="number" class="form-control" asp-for="Price">
@@ -57,13 +67,16 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="col-sm-3 pb-3">
-                <label>Car</label>
-                <select class="form-control" name="markaId">
-                    <option value="">Marka Seçiniz</option>
+                <label>Brand</label>
+                <select class="form-control" name="CarId">
+                    <option value="">Brand</option>
                     @foreach (var item in ViewBag.Car)
                     {
+                        if (item.CarId == Convert.ToInt32(Model.CarId))
+                        {
+                            <option selected value="@item.CarId">@item.Name</option>
+                        }
                         <option value="@item.CarId">@item.Name</option>
-
                     }
                 </select>
                 <span asp-validation-for="CarId" class="text-danger"></span>
@@ -79,7 +92,7 @@
                 <span asp-validation-for="Model" class="text-danger"></span>
             </div>
             <div class="col-sm-2 pb-3">
-                <label>year</label>
+                <label>Year</label>
                 <input type="number" class="form-control" asp-for="year">
                 <span asp-validation-for="year" class="text-danger"></span>
             </div>
@@ -90,7 +103,7 @@
             </div>
 
             <div class="col-sm-3 pb-3">
-                <label>Geat</label>
+                <label>Gear</label>
                 <select class="form-control" asp-for="GearType">
                     <option value="">Select gear type</option>
                     <option value="Automatic">Automatic</option>
@@ -316,37 +329,46 @@
                         </label>
                     </div>
                 </div>
-                <span asp-validation-for="Color" class="text-danger "></span>
-            </div>
-            <div class="col-md-12 pb-3">
-                <label>Ad Description</label>
-                <textarea class="form-control" id="editor" asp-for="Detail"></textarea>
-                <small class="text-info">
-                    Add description
-                </small>
-            </div>
-        </div>
-        <h3 class="mb-3">Ad Pictures </h3>
-        <div class="row">
-            <div class="col-sm-3 mb-3">
-                <div class="card">
-                    <img class="card-img-top uploadImage" />
-                    <div class="card-body">
-                        <label class="btn btn-success d-block ">
-                            <i class="fas fa-upload"></i><input name="files" type="file" class="uploadFile d-block" style="width: 0px;height: 0px;overflow: hidden;">
-                        </label>
-                    </div>
+                <div class="col-md-12 pb-3">
+                    <label>Ad Description</label>
+                    <textarea class="form-control" id="editor" asp-for="Detail"></textarea>
+                    <small class="text-info">
+                        Add description
+                    </small>
                 </div>
             </div>
-            <i class="fa fa-plus imgAdd"></i>
         </div>
-        <div class="alert alert-danger" role="alert" id="alert">
-            Upload at least one image
+        <h3 class="mt-2">Posting picture</h3>
+        <hr class="my-3">
+        <div class="row">
+            @foreach (var item in Model.PostingPictures)
+            {
+                <div class="col-sm-3 mb-3 ">
+                    <div class="card">
+                        <img class="card-img-top a" src="~/img/@item.Url" alt="Alternate Text" />
+                        <div class="card-body">
+                            <label class="btn btn-success d-block">
+                                <i class="fas fa-upload"></i>
+                                <input name="files" type="file" class="uploadFile d-block" style="width: 0px;height: 0px;overflow: hidden;">
+                            </label>
+                        </div>
+                    </div>
+                    <a asp-controller="User" asp-action="AdsPicDelete" asp-route-id="@item.Url" class="text-dark">
+                        <i class="fa fa-trash-alt del"></i>
+                    </a>
+                </div>
+            }
+            <i class="fa fa-plus imgAdd ml-3 mb-3"></i>
         </div>
-        <button type="submit" class="btn btn-success btn-lg btn-block mb-2">Post Ad</button>
+        @if (Model.PostingPictures.Count == 0)
+        {
+            <div class="alert alert-danger" role="alert" id="alert">
+                You don't have picture
+            </div>
+        }
+        <button type="submit" class="btn btn-success btn-lg btn-block mb-2">Update ad</button>
     </div>
 </form>
-
 @section Scripts
     {
     <script>
@@ -375,11 +397,19 @@
             });
         });
     </script>
-
     <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor')
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha512-EanukVTZc4W9tUCLnDl069Izidg49PcNRKO1upLzKt9ajq66i+bXOtlzXcIbRhb6vVEGF6BCc8wQi5T1ztCpTQ==" crossorigin="anonymous"></script>
+
+    <script>
+        window.setTimeout(function () {
+            $(".box").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
 }
+

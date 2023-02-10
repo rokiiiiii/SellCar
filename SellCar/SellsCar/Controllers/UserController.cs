@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Net;
+using System.Web.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
@@ -9,10 +10,11 @@ using SellCar.Domain.ViewModels.Favorites;
 using SellCar.Domain.ViewModels.Profile;
 using SellCar.Service.Intrefaces;
 using static SellCar.Domain.ViewModels.Favorites.FavoriteViewModel;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace SellsCar.Web.Controllers
 {
-    [Authorize(Roles = "User")]
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "User")]
     public class UserController : Controller
     {
         Random rnd;
@@ -53,7 +55,7 @@ namespace SellsCar.Web.Controllers
             };
             return View(model);
         }
-        [HttpPost]
+        [Microsoft.AspNetCore.Mvc.HttpPost]
         public async Task<IActionResult> UserProfileEdit(UserProfileViewModel model)
         {
             var user = await _user.GetUserAsync(User);
@@ -86,7 +88,7 @@ namespace SellsCar.Web.Controllers
             ViewBag.Region = _regionService.GetRegion();
             return View(new CreateAdsViewModel());
         }
-        [HttpPost]
+        [Microsoft.AspNetCore.Mvc.HttpPost]
         public IActionResult CreateAds(CreateAdsViewModel Ads, List<IFormFile> files)
         {
             if (!ModelState.IsValid)
@@ -157,7 +159,7 @@ namespace SellsCar.Web.Controllers
             TempData["message"] = $"The tool with the title {entity.title} and the ad number {entity.AdsId} is online.";
             return Redirect("/cars");
         }
-        [HttpGet]
+        [Microsoft.AspNetCore.Mvc.HttpGet]
         public IActionResult AdsEdit(int? id)
         {
             if (id == null)
@@ -202,45 +204,49 @@ namespace SellsCar.Web.Controllers
             ViewBag.Region = _regionService.GetRegion();
             return View(model);
         }
-        [HttpPost]
-        public IActionResult AdsEdit(EditAdsViewModel Ads, List<IFormFile> files)
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        public IActionResult AdsEdit(EditAdsViewModel AdsModel, List<IFormFile> files)
         {
             if (!ModelState.IsValid)
             {
-                var ads = _adsService.GetAdDetail(Ads.AdsId);
-                Ads.PostingPictures = ads.PostingPictures;
+                var errors = ModelState.Select(x => x.Value.Errors)
+                    .Where(y => y.Count > 0)
+                    .ToList();
+                var ads = _adsService.GetAdDetail(AdsModel.AdsId);
+                AdsModel.PostingPictures = ads.PostingPictures;
                 ViewBag.Car = _carService.GetCars();
                 ViewBag.Region = _regionService.GetRegion();
-                return View(Ads);
+
+                return View(AdsModel);
             }
-            var entity = _adsService.GetById(Ads.AdsId);
+            var entity = _adsService.GetById(AdsModel.AdsId);
             if (entity == null)
             {
                 return NotFound();
             }
-            entity.title = Ads.Title;
-            entity.Detail = Ads.Detail;
-            entity.RegionId = Convert.ToInt32(Ads.RegionId);
-            entity.Brand = Ads.Brand;
-            entity.Model = Ads.Model;
-            entity.year = Ads.year;
-            entity.FuelType = Ads.FuelType;
-            entity.GearType = Ads.GearType;
-            entity.Mileage = Ads.Mileage;
-            entity.BodyType = Ads.BodyType;
-            entity.MotorPower = Ads.MotorPower;
-            entity.EngineСapacity = Ads.EngineCapacity;
-            entity.MaxSpeed = Ads.MaxSpeed;
-            entity.Acceleration = Ads.Acceleration;
-            entity.TractionType = Ads.TractionType;
-            entity.ConsumptionСity = Ads.InnerCityConsumption;
-            entity.OutofCityConsumption = Ads.OutOfCityConsumption;
-            entity.Color = Ads.Color;
-            entity.FromWho = Ads.FromWho;
-            entity.Swap = Ads.Swap;
-            entity.Status = Ads.Status;
-            entity.Price = Ads.Price;
-            entity.CarId = Convert.ToInt32(Ads.CarId);
+            entity.title = AdsModel.Title;
+            entity.Detail = AdsModel.Detail;
+            entity.RegionId = Convert.ToInt32(AdsModel.RegionId);
+            entity.Brand = AdsModel.Brand;
+            entity.Model = AdsModel.Model;
+            entity.year = AdsModel.year;
+            entity.FuelType = AdsModel.FuelType;
+            entity.GearType = AdsModel.GearType;
+            entity.Mileage = AdsModel.Mileage;
+            entity.BodyType = AdsModel.BodyType;
+            entity.MotorPower = AdsModel.MotorPower;
+            entity.EngineСapacity = AdsModel.EngineCapacity;
+            entity.MaxSpeed = AdsModel.MaxSpeed;
+            entity.Acceleration = AdsModel.Acceleration;
+            entity.TractionType = AdsModel.TractionType;
+            entity.ConsumptionСity = AdsModel.InnerCityConsumption;
+            entity.OutofCityConsumption = AdsModel.OutOfCityConsumption;
+            entity.Color = AdsModel.Color;
+            entity.FromWho = AdsModel.FromWho;
+            entity.Swap = AdsModel.Swap;
+            entity.Status = AdsModel.Status;
+            entity.Price = AdsModel.Price;
+            entity.CarId = Convert.ToInt32(AdsModel.CarId);
             _adsService.Update(entity);
 
             if (files != null)
@@ -257,7 +263,7 @@ namespace SellsCar.Web.Controllers
                         var pic = new Picture()
                         {
                             Url = newFileName,
-                            AdsId = Ads.AdsId,
+                            AdsId = AdsModel.AdsId,
                         };
                         _picService.Create(pic);
 
@@ -273,7 +279,7 @@ namespace SellsCar.Web.Controllers
             }
             TempData["message"] = $"The tool with the title {entity.title} and the ad number {entity.AdsId} is online.";
             TempData["alert-type"] = "alert-warning";
-            return Redirect("/user/Ads");
+            return Redirect("/user/ad");
         }
         public IActionResult AdsDelete(int? id)
         {
@@ -284,7 +290,7 @@ namespace SellsCar.Web.Controllers
             }
             TempData["message"] = $"The tool {entity.AdsId} with the title {entity.title} has been taken down.";
             TempData["alert-type"] = "alert-danger";
-            return Redirect("/user/Ads");
+            return Redirect("/user/ad");
         }
         public IActionResult AdsPicDelete(string id)
         {
