@@ -66,7 +66,7 @@ namespace SellCar.Domain.ViewModels.Ad
         [Required(ErrorMessage = "Select the brand of your vehicle.")]
         public string? CarId { get; set; }
         public bool HomePage { get; set; }
-        public List<IFormFile> Files { get; set; }
-        public List<Picture> PostingPictures { get; set; }
+        public List<IFormFile>? Files { get; set; }
+        public List<Picture>? PostingPictures { get; set; }
     }
 }
