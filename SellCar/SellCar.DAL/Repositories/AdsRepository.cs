@@ -8,7 +8,7 @@ namespace SellCar.DAL.Repositories
     public class AdsRepository : GenericRepository<Ads, DbContextSellCar>, IAdsRepository
     {
 
-        public List<Ads> Filter(string url, string min_price, string max_price, string min_kregionometers, string max_kregionometers, string min_year, string max_year, string[] fuel_type, string[] gear_type, string[] body_type, string min_horse, string max_horse, string[] traction, string[] color, string from_who, string status, string swap, string[] region)
+        public List<Ads> Filter(string url, string MinPrice, string MaxPrice, string MinMileage, string MaxMileage, string MinYear, string MaxYear, string[] FuelType, string[] GearType, string[] BodyType, string MinHorse, string MaxHorse, string[] Traction, string[] Color, string FromWho, string Status, string Swap, string[] Region)
         {
             using (var context = new DbContextSellCar())
             {
@@ -25,78 +25,78 @@ namespace SellCar.DAL.Repositories
                         .Include(i => i.PostingPictures)
                         .Where(i => i.Car.Url == url);
                 }
-                if (!string.IsNullOrEmpty(min_price))
+                if (!string.IsNullOrEmpty(MinPrice))
                 {
-                    ads = ads.Where(i => i.Price > Convert.ToDouble(min_price));
+                    ads = ads.Where(i => i.Price > Convert.ToDouble(MinPrice));
                 }
-                if (!string.IsNullOrEmpty(max_price))
+                if (!string.IsNullOrEmpty(MaxPrice))
                 {
-                    ads = ads.Where(i => i.Price < Convert.ToDouble(max_price));
+                    ads = ads.Where(i => i.Price < Convert.ToDouble(MaxPrice));
                 }
-                if (!string.IsNullOrEmpty(min_kregionometers))
+                if (!string.IsNullOrEmpty(MinMileage))
                 {
-                    ads = ads.Where(i => i.Mileage > Convert.ToInt32(min_kregionometers));
+                    ads = ads.Where(i => i.Mileage > Convert.ToInt32(MinMileage));
                 }
-                if (!string.IsNullOrEmpty(max_kregionometers))
+                if (!string.IsNullOrEmpty(MaxMileage))
                 {
-                    ads = ads.Where(i => i.Mileage < Convert.ToInt32(max_kregionometers));
+                    ads = ads.Where(i => i.Mileage < Convert.ToInt32(MaxMileage));
                 }
-                if (!string.IsNullOrEmpty(min_year))
+                if (!string.IsNullOrEmpty(MinYear))
                 {
-                    ads = ads.Where(i => i.year > Convert.ToInt32(min_year));
+                    ads = ads.Where(i => i.year > Convert.ToInt32(MinYear));
                 }
-                if (!string.IsNullOrEmpty(max_year))
+                if (!string.IsNullOrEmpty(MaxYear))
                 {
-                    ads = ads.Where(i => i.year < Convert.ToInt32(max_year));
+                    ads = ads.Where(i => i.year < Convert.ToInt32(MaxYear));
                 }
-                if (!string.IsNullOrEmpty(min_horse))
+                if (!string.IsNullOrEmpty(MinHorse))
                 {
-                    ads = ads.Where(i => i.MotorPower > Convert.ToInt32(min_horse));
+                    ads = ads.Where(i => i.MotorPower > Convert.ToInt32(MinHorse));
                 }
-                if (!string.IsNullOrEmpty(max_horse))
+                if (!string.IsNullOrEmpty(MaxHorse))
                 {
-                    ads = ads.Where(i => i.MotorPower < Convert.ToInt32(max_horse));
+                    ads = ads.Where(i => i.MotorPower < Convert.ToInt32(MaxHorse));
                 }
-                if (region.Length != 0)
+                if (Region.Length != 0)
                 {
-                    ads = ads.Where(i => region.Contains(i.Region.Name));
+                    ads = ads.Where(i => Region.Contains(i.Region.Name));
                 }
-                if (color.Length != 0)
+                if (Color.Length != 0)
                 {
-                    ads = ads.Where(i => color.Contains(i.Color));
+                    ads = ads.Where(i => Color.Contains(i.Color));
 
                 }
-                if (traction.Length != 0)
+                if (Traction.Length != 0)
                 {
-                    ads = ads.Where(i => traction.Contains(i.TractionType));
+                    ads = ads.Where(i => Traction.Contains(i.TractionType));
 
                 }
-                if (fuel_type.Length != 0)
+                if (FuelType.Length != 0)
                 {
-                    ads = ads.Where(i => fuel_type.Contains(i.FuelType));
+                    ads = ads.Where(i => FuelType.Contains(i.FuelType));
 
                 }
-                if (gear_type.Length != 0)
+                if (GearType.Length != 0)
                 {
-                    ads = ads.Where(i => gear_type.Contains(i.GearType));
+                    ads = ads.Where(i => GearType.Contains(i.GearType));
 
                 }
-                if (body_type.Length != 0)
+                if (BodyType.Length != 0)
                 {
-                    ads = ads.Where(i => body_type.Contains(i.BodyType));
+                    ads = ads.Where(i => BodyType.Contains(i.BodyType));
 
                 }
-                if (!string.IsNullOrEmpty(swap))
+                if (!string.IsNullOrEmpty(Swap))
                 {
-                    ads = ads.Where(i => i.Swap == swap);
+                    ads = ads.Where(i => i.Swap == Swap);
                 }
-                if (!string.IsNullOrEmpty(from_who))
+                if (!string.IsNullOrEmpty(FromWho))
                 {
-                    ads = ads.Where(i => i.FromWho == from_who);
+                    ads = ads.Where(i => i.FromWho == FromWho);
                 }
-                if (!string.IsNullOrEmpty(status))
+                if (!string.IsNullOrEmpty(Status))
                 {
-                    ads = ads.Where(i => i.Status == status);
+                    ads = ads.Where(i => i.Status == Status);
                 }
 
                 return ads.ToList();

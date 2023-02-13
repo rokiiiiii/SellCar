@@ -17,32 +17,129 @@
             <div class="col-lg-3 col-md-4">
                 <form action="/car/@ViewBag.CarUrl" method="post">
                     <div class="py-3">
-                        @if (Model.min_price!= null || Model.max_price!=null)
+
+                        @if (Model.MinPrice == null)
                         {
-                            @if(Model.min_price==null)
-                            {
-                                <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
-                                    <h6 class="d-inline"><small><b>Price</b>@Model.max_price and below </small></h6>
-                                    <i class="fas fa-window-close ml-1"></i>
-                                </button>
-                            }
-                            else if(Model.max_price==null)
-                            {
-                                <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
-                                    <h6 class="d-inline"><small><b>Price</b>@Model.max_price and over</small></h6>
-                                    <i class="fas fa-window-close ml-1"></i>
-                                </button>
-                            }
-                            else
-                            {
-                                <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
-                                    <h6 class="d-inline"><small><b>Price</b>@Model.max_price-@Model.min_price</small></h6>
-                                    <i class="fas fa-window-close ml-1"></i>
-                                </button>
-                            }
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxPrice and below </small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
                         }
+                        else if (Model.MaxPrice == null)
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxPrice and over</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxPrice-@Model.MinPrice</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+
+
+                        <div class="bg-light border-right Car">
+                            @await Component.InvokeAsync("Car")
+                        </div>
+                        <button class="btn btn-success btn-block mt-3" type="submit">Search</button>
+                        <p class="mt-3">
+                            <a class="btn filterbtn" data-toggle="collapse" href="#_1" role="button" aria-expended="false" aria-controls="collapseExample">
+                                <strong style="float: left;">Region</strong>
+                            </a>
+                        </p>
+                        <div class="collapse" id="_1">
+                            <div class="card card-body" style="height: 200px; overflow-y: scroll;">
+                                @foreach (var item in ViewBag.Region)
+                                {
+                                    <div class="form-check">
+                                        <input class="form-check-input" name="region" type="checkbox" value="@item.Name" id="@item.Name"
+                                           @if (Model.Region != null)
+                                           {
+                                           @(Model.Region.Any(i=>i==item.Name)?"checked":"")
+                                           } />
+                                        <label>
+                                            @item.Name
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <p class="mt-3">
+                            <a class="btn filterbtn" data-toggle="collapse" href="#_2" role="button" aria-expanded="false"
+                               aria-controls="collapseExample">
+                                <strong style="float: left;">Price</strong>
+                            </a>
+                        </p>
+                        <div class="collapse" id="_2">
+                            <div class="card card-body">
+                                <input class="form-control" asp-for="MinPrice" placeholder="Min $" step="500" min="0" />
+                                <strong style="text-align: center;" class="my-auto">↓</strong>
+                                <input class="form-control" asp-for="MaxPrice" placeholder="Max $" step="500" />
+                            </div>
+                        </div>
+                        <p class="mt-3">
+                            <a class="btn filterbtn" data-toggle="collapse" href="#_3" role="button" aria-expanded="false"
+                               aria-controls="collapseExample">
+                                <strong style="float: left;">Year</strong>
+                            </a>
+                        </p>
+                        <div class="collapse" id="_3">
+                            <div class="card card-body">
+                                <input class="form-control" asp-for="MinYear" placeholder="Min year" step="1" type="number" />
+                                <strong style="text-align: center;" class="my-auto">↓</strong>
+                                <input class="form-control" asp-for="MaxYear" placeholder="Max year" step="1" type="number" max="@DateTime.Now.Year" />
+                            </div>
+                        </div>
+                        <p class="mt-3">
+                            <a class="btn filterbtn" data-toggle="collapse" href="#_4" role="button" aria-expanded="false"
+                               aria-controls="collapseExample">
+                                <strong style="float: left;">Fuel type</strong>
+                            </a>
+                        </p>
+                        <div class="collapse" id="_4">
+                            <div class="card card-body">
+                                @foreach (var item in FuelTypes)
+                                {
+                                    <div class="form-check">
+                                        <input class="form-check-input" name="FuelType" type="checkbox" value="@item" id="@item.Replace(" ", "_").Replace("&","_")" @if (Model.FuelType != null)
+                                           {
+                                           @(Model.FuelType.Any(i => i == item) ? "checked" : "")
+                                           } />
+                                        <label class="form-check-label">
+                                            @item
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <p class="mt-3">
+                            <a class="btn filterbtn" data-toggle="collapse" href="#_5" role="button" aria-expanded="false"
+                               aria-controls="collapseExample">
+                                <strong style="float: left;">Gear type</strong>
+                            </a>
+                        </p>
+                        <div class="collapse" id="_5">
+                            <div class="card card-body">
+                                @foreach (var item in GearTypes)
+                                {
+                                    <div class="form-check">
+                                        <input class="form-check-input" name="GearType" type="checkbox" value="@item" id="@item.Replace(" ", "_").Replace("&","_")" @if (Model.GearType != null)
+                                           {
+                                           @(Model.GearType.Any(i => i == item) ? "checked" : "")
+                                           } />
+                                        <label class="form-check-label">
+                                            @item
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
