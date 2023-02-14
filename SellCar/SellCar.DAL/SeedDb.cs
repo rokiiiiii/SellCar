@@ -25,9 +25,9 @@ namespace SellCar.DAL
                     for (int i = 0; i < cars.Length; i++)
                     {
                         context.Car.Add(cars[i]);
-                        context.SaveChanges();
+                        
                     }
-
+                    context.SaveChanges();
                 }
                 if (context.Ads.Count() == 0)
                 {
@@ -130,7 +130,7 @@ namespace SellCar.DAL
         };
         private static Ads[] ads =
          {
-            new Ads(){title="Tesla Plaid",Detail="Model X PLAID 1020.",DateCreate=DateTime.Now,Brand="Tesla",Model="Plaid",year=2022,FuelType="Electro",GearType="automatic",NumberOfGear=3,Mileage=168368,BodyType="Coupe",NumberOfDoors=5,MotorPower=1020,EngineСapacity=2198 ,MaxSpeed=222 ,Acceleration=8.6,TractionType="Rear Drive",ConsumptionСity=13,OutofCityConsumption=7.3,AverageConsumption=9.4,FuelTankVolume=70,Color="Red",FromWho="Сar showroom",Swap="No",Status="Second owner",HomePage=false,CarId=61,AdsId=1,RegionId=6,Price=50000,UserId="1"},
+            new Ads(){title="Tesla Plaid",Detail="Model X PLAID 1020.",DateCreate=DateTime.Now,Brand="Tesla",Model="Plaid",year=2022,FuelType="Electronik",GearType="automatic",NumberOfGear=3,Mileage=168368,BodyType="Coupe",NumberOfDoors=5,MotorPower=1020,EngineСapacity=2198 ,MaxSpeed=222 ,Acceleration=8.6,TractionType="Rear Drive",ConsumptionСity=13,OutofCityConsumption=7.3,AverageConsumption=9.4,FuelTankVolume=70,Color="Red",FromWho="Сar showroom",Swap="No",Status="Second owner",HomePage=false,CarId=61,AdsId=1,RegionId=6,Price=50000,UserId="1"},
             new Ads(){title="2003 BMW Z4",Detail="Selling Stance-project based on BMW Z4.Candy red color (repainted 5000km ago);",DateCreate=DateTime.Now,RegionId=1,Brand="BMW",Model="Z4 ",year=2003,FuelType="Gas",GearType="automatic",NumberOfGear=3,Mileage=77250,BodyType="Cabrio",NumberOfDoors=2,MotorPower=184,EngineСapacity=1997 ,MaxSpeed=232 ,Acceleration=7.2,TractionType="Rear Drive",ConsumptionСity=9.1,OutofCityConsumption=5.5,AverageConsumption=6.8,FuelTankVolume=55,Color="Red",FromWho="Dealer",Swap="Yes",Status="First owner",HomePage=true,CarId=7,AdsId=2,Price=20000,UserId="1"},
             new Ads(){title="Toyota GT 86",Detail="The car is in excellent condition. No problem, no run across the CIS.",DateCreate=DateTime.Now,RegionId=5,Brand="Toyota",Model="GT",year=2018,FuelType="Gas",GearType="Mechanical",NumberOfGear=5,Mileage=149,BodyType="Coupe",NumberOfDoors=3,MotorPower=200,EngineСapacity=3982 ,MaxSpeed=318 ,Acceleration=3.6,TractionType="Rear Drive",ConsumptionСity=15.1,OutofCityConsumption=9.0,AverageConsumption=11.4,FuelTankVolume=65,Color="Grey",FromWho="Person",Swap="Yes",Status="Third owner",HomePage=true,CarId=62,AdsId=3,Price=25000,UserId="1"},
             new Ads(){title="AUDI 2019 A7",Detail="50 TDI 3.0 diesel 286 hp Trouble-free!",DateCreate=DateTime.Now,RegionId=7,Brand="Audi",Model="3.0 TDI",year=2019,FuelType="Dizel",GearType="Mechanical",NumberOfGear=6,Mileage=16747,BodyType="Sedan",NumberOfDoors=5,MotorPower=400,EngineСapacity=3001 ,MaxSpeed=256 ,Acceleration=7.2,TractionType="Rear Drive",ConsumptionСity=9.1,OutofCityConsumption=5.5,AverageConsumption=6.8,FuelTankVolume=65,Color="Purple",FromWho="Person",Swap="No",Status="First owner",HomePage=true,CarId=5,AdsId=4,Price=30000,UserId="1"},

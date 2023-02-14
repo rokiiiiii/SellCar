@@ -1,6 +1,7 @@
 ﻿@model SellCar.Domain.ViewModels.Ad.AdsListViewModel
 
 @await Html.PartialAsync("_header")
+
 <main class="my-3">
     <div class="container-fluid">
         <div class="row">
@@ -13,16 +14,16 @@
                 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Picture</th>
+                            <th>Ad picture</th>
                             <th>Price</th>
                             <th>Title</th>
+                            <th>Car</th>
                             <th>Brand</th>
-                            <th>Seri</th>
                             <th>Model</th>
                             <th>Year</th>
                             <th>Km</th>
                             <th>Color</th>
-                            <th>Date Create</th>
+                            <th>Date create</th>
                             <th>Region</th>
                         </tr>
                     </thead>
@@ -34,16 +35,14 @@
                                 <td><i class="fas fa-lira-sign mr-1"></i>@Model.Ads[i].Price</td>
                                 <td>@Model.Ads[i].title</td>
                                 <td>@Model.Ads[i].Car.Name</td>
-                                <td>@Model.Ads[i].Car</td>
+                                <td>@Model.Ads[i].Brand</td>
                                 <td>@Model.Ads[i].Model</td>
                                 <td>@Model.Ads[i].year</td>
                                 <td>@Model.Ads[i].Mileage</td>
                                 <td>@Model.Ads[i].Color</td>
                                 <td>@Model.Ads[i].DateCreate</td>
-                                <td>@*@Model.Ads[i].Region*@</td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
             </div>

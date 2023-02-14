@@ -1,10 +1,10 @@
 ﻿@model List<SellCar.Domain.Models.Car>
-<div class="bg-light border-right Car  ">
+<div class="bg-light border-right Car">
     <div class="sidebar-heading"><strong><a href="" class="text-decoration-none">Brands</a></strong></div>
     <div class="list-group list-group-flush overflow-auto ">
         @foreach (var car in Model)
         {
-            <a href="" class="list-group-item list-group-item-action bg-light">@car.Name<span class="text-muted"> (@car.Ads.Count)</span></a>
+            <a href="/cars/@car.Url" class="list-group-item list-group-item-action bg-light">@car.Name<span class="text-muted"> (@car.Ads.Count)</span></a>
         }
     </div>
 </div>
