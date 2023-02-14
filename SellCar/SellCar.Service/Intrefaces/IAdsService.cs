@@ -1,4 +1,6 @@
 ﻿using SellCar.Domain.Models;
+using System;
+using System.Drawing;
 
 namespace SellCar.Service.Intrefaces
 {
@@ -11,7 +13,8 @@ namespace SellCar.Service.Intrefaces
         List<Ads> GetHomePosts();
         List<Ads> GetPost(string url);
         Ads GetAdDetail(int id);
-        List<Ads> Filter(string url, string MinPrice, string MaxPrice, string MinMileage, string MaxMileage, string min_year, string MaxYear, string[] FuelType, string[] GearType, string[] BodyType, string MinHorse, string MaxHorse, string[] Traction, string[] Color, string FromWho, string Status, string Swap, string[] Region);
+        List<Ads> Filter(string url, string minPrice, string maxPrice, string minMileage, string maxMileage, string minYear, string maxYear, string[] FuelType, string[] GearType, string[] BodyType, string minHorse, string maxHorse, string[] Traction, string[] Color, string FromWho, string Status, string Swap, string[] Region);
         List<Ads> GetSearchResult(string searchString);
+        
     }
 }

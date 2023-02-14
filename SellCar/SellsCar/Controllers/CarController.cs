@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using SellCar.Domain.Identity;
+using SellCar.Domain.Models;
 using SellCar.Domain.ViewModels.Ad;
 using SellCar.Domain.ViewModels.Users;
 using SellCar.Service.Intrefaces;
+using SellsCar.DAL;
 
 namespace SellsCar.Web.Controllers
 {
@@ -34,25 +37,25 @@ namespace SellsCar.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult List(string url, string MinPrice, string MaxPrice, string MinMileage, string MaxMileage, string min_year, string MaxYear, string[] FuelType, string[] GearType, string[] BodyType, string MinHorse, string MaxHorse, string[] Traction, string[] Color, string FromWho, string Status, string Swap, string[] Region)
+        public IActionResult List(string url, string minPrice, string maxPrice, string minMileage, string maxMileage, string minYear, string maxYear, string[] fuelType, string[] gearType, string[] bodyType, string minHorse, string maxHorse, string[] Traction, string[] Color, string fromWho, string Status, string Swap, string[] Region)
         {
             var model = new AdsListViewModel()
             {
-                Ads = _adsService.Filter(url, MinPrice, MaxPrice, MinMileage, MaxMileage, min_year, MaxYear, FuelType, GearType, BodyType, MinHorse, MaxHorse, Traction, Color, FromWho, Status, Swap, Region),
-                FuelType = FuelType,
-                GearType = GearType,
-                BodyType = BodyType,
-                Traction = Traction,
+                Ads = _adsService.Filter(url, minPrice, maxPrice, minMileage, maxMileage, minYear, maxYear, fuelType, gearType, bodyType, minHorse, maxHorse, Traction, Color, fromWho, Status, Swap, Region),
+                fuelType = fuelType,
+                gearType = gearType,
+                bodyType = bodyType,
+                TractionType = Traction,
                 Color = Color,
-                MinPrice = MinPrice,
-                MaxPrice = MaxPrice,
-                MinMileage = MinMileage,
-                MaxMileage = MaxMileage,
-                MinYear= min_year,
-                MaxYear = MaxYear,
-                MinHorse = MinMileage,
-                MaxHorse = MinMileage,
-                FromWho = MinMileage,
+                minPrice = minPrice,
+                maxPrice = maxPrice,
+                minMileage = minMileage,
+                maxMileage = maxMileage,
+                minYear = minYear,
+                maxYear = maxYear,
+                minHorse = minMileage,
+                maxHorse = minMileage,
+                FromWho = minMileage,
                 Status = Status,
                 Swap = Swap,
                 Region = Region,

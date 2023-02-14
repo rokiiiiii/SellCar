@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Web.Mvc;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 using SellCar.Domain.Identity;
