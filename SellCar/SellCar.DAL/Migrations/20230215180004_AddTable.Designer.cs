@@ -12,8 +12,8 @@ using SellsCar.DAL;
 namespace SellCar.DAL.Migrations
 {
     [DbContext(typeof(DbContextSellCar))]
-    [Migration("20230214215553_UpdateDb")]
-    partial class UpdateDb
+    [Migration("20230215180004_AddTable")]
+    partial class AddTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

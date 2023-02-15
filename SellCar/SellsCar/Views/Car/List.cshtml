@@ -16,56 +16,56 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-md-4">
-                <form action="/car/@ViewBag.CarUrl" method="post">
+                <form action="/cars/@ViewBag.CarUrl" method="post">
                     <div class="py-3">
 
-                        @if (Model.minPrice == null)
+                        @if (Model.MinPrice == null)
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.maxPrice and below </small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxPrice and below </small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
-                        else if (Model.maxPrice == null)
+                        else if (Model.MaxPrice == null)
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.minPrice and over</small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MinPrice and over</small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
                         else
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.maxPrice-@Model.minPrice</small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxPrice-@Model.MinPrice</small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
 
-                        @if (Model.minYear == null)
+                        @if (Model.MinYear == null)
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.maxYear and below </small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxYear and below </small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
-                        else if (Model.maxYear == null)
+                        else if (Model.MaxYear == null)
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.minYear and over</small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MinYear and over</small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
                         else
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.maxYear-@Model.minYear</small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxYear-@Model.MinYear</small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
 
-                        @if (Model.fuelType != null)
+                        @if (Model.FuelType != null)
                         {
-                            foreach (var item in Model.fuelType)
+                            foreach (var item in Model.FuelType)
                             {
                                 string a = item.Replace(" ", "_").Replace("&", "_") + "x";
                                 <button class="btn btn-xs bg-dark  text-white mb-3 " id="@a">
@@ -75,9 +75,9 @@
                                 a = null;
                             }
                         }
-                        @if (Model.gearType != null)
+                        @if (Model.GearType != null)
                         {
-                            foreach (var item in Model.gearType)
+                            foreach (var item in Model.GearType)
                             {
                                 string a = item.Replace(" ", "_").Replace("&", "_") + "x";
                                 <button class="btn btn-xs bg-dark  text-white mb-3 " id="@a">
@@ -87,9 +87,9 @@
                                 a = null;
                             }
                         }
-                        @if (Model.bodyType != null)
+                        @if (Model.BodyType != null)
                         {
-                            foreach (var item in Model.bodyType)
+                            foreach (var item in Model.BodyType)
                             {
                                 string a = item.Replace(" ", "_").Replace("&", "_") + "x";
                                 <button class="btn btn-xs bg-dark  text-white mb-3 " id="@a">
@@ -138,46 +138,46 @@
                             </button>
                         }
 
-                        @if (Model.minHorse == null)
+                        @if (Model.MinHorse == null)
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.maxHorse and below </small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxHorse and below </small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
-                        else if (Model.maxHorse == null)
+                        else if (Model.MaxHorse == null)
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.minHorse over</small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MinHorse over</small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
                         else
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.maxHorse-@Model.minHorse</small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxHorse-@Model.MinHorse</small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
 
-                        @if (Model.minMileage == null)
+                        @if (Model.MinMileage == null)
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.maxMileage and below </small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxMileage and below </small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
-                        else if (Model.maxMileage == null)
+                        else if (Model.MaxMileage == null)
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.minMileage over</small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MinMileage over</small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
                         else
                         {
                             <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
-                                <h6 class="d-inline"><small><b>Price</b>@Model.maxMileage-@Model.minMileage</small></h6>
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxMileage-@Model.MinMileage</small></h6>
                                 <i class="fas fa-window-close ml-1"></i>
                             </button>
                         }
@@ -217,9 +217,9 @@
                     </p>
                     <div class="collapse" id="_2">
                         <div class="card card-body">
-                            <input class="form-control" asp-for="minPrice" placeholder="min $" step="500" min="0" />
+                            <input class="form-control" asp-for="MinPrice" placeholder="Min $" step="500" Min="0" />
                             <strong style="text-align: center;" class="my-auto">↓</strong>
-                            <input class="form-control" asp-for="maxPrice" placeholder="max $" step="500" />
+                            <input class="form-control" asp-for="MaxPrice" placeholder="Max $" step="500" />
                         </div>
                     </div>
                     <p class="mt-3">
@@ -230,9 +230,9 @@
                     </p>
                     <div class="collapse" id="_3">
                         <div class="card card-body">
-                            <input class="form-control" asp-for="minYear" placeholder="min year" step="1" type="number" />
+                            <input class="form-control" asp-for="MinYear" placeholder="Min year" step="1" type="number" />
                             <strong style="text-align: center;" class="my-auto">↓</strong>
-                            <input class="form-control" asp-for="maxYear" placeholder="max year" step="1" type="number" max="@DateTime.Now.Year" />
+                            <input class="form-control" asp-for="MaxYear" placeholder="Max year" step="1" type="number" Max="@DateTime.Now.Year" />
                         </div>
                     </div>
                     <p class="mt-3">
@@ -246,9 +246,9 @@
                             @foreach (var item in FuelTypes)
                             {
                                 <div class="form-check">
-                                    <input class="form-check-input" name="FuelType" type="checkbox" value="@item" id="@item" @if (Model.fuelType != null)
+                                    <input class="form-check-input" name="FuelType" type="checkbox" value="@item" id="@item" @if (Model.FuelType != null)
                                        {
-                                       @(Model.fuelType.Any(i => i == item) ? "checked" : "")
+                                       @(Model.FuelType.Any(i => i == item) ? "checked" : "")
                                        } />
                                     <label class="form-check-label">
                                         @item
@@ -268,9 +268,9 @@
                             @foreach (var item in GearTypes)
                             {
                                 <div class="form-check">
-                                    <input class="form-check-input" name="GearType" type="checkbox" value="@item" id="@item" @if (Model.gearType != null)
+                                    <input class="form-check-input" name="GearType" type="checkbox" value="@item" id="@item" @if (Model.GearType != null)
                                        {
-                                       @(Model.gearType.Any(i => i == item) ? "checked" : "")
+                                       @(Model.GearType.Any(i => i == item) ? "checked" : "")
                                        } />
                                     <label class="form-check-label">
                                         @item
@@ -287,9 +287,9 @@
                     </p>
                     <div class="collapse" id="_6">
                         <div class="card card-body">
-                            <input class="form-control" asp-for="minMileage" placeholder="Min KM" type="number" step="500 " min="0">
+                            <input class="form-control" asp-for="MinMileage" placeholder="Min KM" type="number" step="500 " Min="0">
                             <strong style="text-align: center;" class="my-auto">↓</strong>
-                            <input class="form-control " asp-for="maxMileage" placeholder="Max KM" type="number" step="500 ">
+                            <input class="form-control " asp-for="MaxMileage" placeholder="Max KM" type="number" step="500 ">
                         </div>
                     </div>
                     <p class="mt-3">
@@ -303,9 +303,9 @@
                             @foreach (var item in BodyTypes)
                             {
                                 <div class="form-check">
-                                    <input class="form-check-input" name="Body" type="checkbox" value="@item" id="@item" @if (Model.bodyType != null)
+                                    <input class="form-check-input" name="Body" type="checkbox" value="@item" id="@item" @if (Model.BodyType != null)
                                        {
-                                       @(Model.bodyType.Any(i => i == item) ? "checked" : "")
+                                       @(Model.BodyType.Any(i => i == item) ? "checked" : "")
                                        } />
                                     <label class="form-check-label">
                                         @item
@@ -322,9 +322,9 @@
                     </p>
                     <div class="collapse" id="_8">
                         <div class="card card-body">
-                            <input class="form-control" asp-for="minHorse" placeholder="Min HP" type="number" step="500 " min="0">
+                            <input class="form-control" asp-for="MinHorse" placeholder="Min HP" type="number" step="500 " Min="0">
                             <strong style="text-align: center;" class="my-auto">↓</strong>
-                            <input class="form-control " asp-for="maxHorse" placeholder="Max HP" type="number" step="500 ">
+                            <input class="form-control " asp-for="MaxHorse" placeholder="Max HP" type="number" step="500 ">
                         </div>
                     </div>
                     <p class="mt-3">
@@ -497,11 +497,11 @@
                                     <td><a href="/car/details/@Model.Ads[i].AdsId"><img src="~/img/NoImg.jpg" width=90 height="67"></a> </td>
                                 }
                                 <td>@Model.Ads[i].Price $</td>
-                                <td>@Model.Ads[i].title</td>
+                                <td>@Model.Ads[i].Title</td>
                                 <td>@Model.Ads[i].Car.Name</td>
                                 <td>@Model.Ads[i].Brand</td>
                                 <td>@Model.Ads[i].Model</td>
-                                <td>@Model.Ads[i].year</td>
+                                <td>@Model.Ads[i].Year</td>
                                 <td>@Model.Ads[i].Mileage</td>
                                 <td>@Model.Ads[i].Color</td>
                                 <td>@Model.Ads[i].DateCreate</td>

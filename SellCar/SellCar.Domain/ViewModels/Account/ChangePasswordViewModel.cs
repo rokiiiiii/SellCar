@@ -6,7 +6,6 @@ namespace SellCar.Domain.ViewModels.Account
     {
         [Required(ErrorMessage = "Enter email")]
         public string Email { get; set; }
-
         [Required(ErrorMessage = "Enter password")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

@@ -242,12 +242,12 @@ namespace SellsCar.Web.Controllers
             var model = new EditAdsViewModel()
             {
                 AdsId = entity.AdsId,
-                Title = entity.title,
+                Title = entity.Title,
                 Detail = entity.Detail,
                 RegionId = Convert.ToString(entity.RegionId),
                 Brand = entity.Brand,
                 Model = entity.Model,
-                year = entity.year,
+                year = entity.Year,
                 FuelType = entity.FuelType,
                 GearType = entity.GearType,
                 Mileage = entity.Mileage,
@@ -289,12 +289,12 @@ namespace SellsCar.Web.Controllers
             {
                 return NotFound();
             }
-            entity.title = adsmodel.Title;
+            entity.Title = adsmodel.Title;
             entity.Detail = adsmodel.Detail;
             entity.RegionId = Convert.ToInt32(adsmodel.RegionId);
             entity.Brand = adsmodel.Brand;
             entity.Model = adsmodel.Model;
-            entity.year = adsmodel.year;
+            entity.Year = adsmodel.year;
             entity.FuelType = adsmodel.FuelType;
             entity.GearType = adsmodel.GearType;
             entity.Mileage = adsmodel.Mileage;
@@ -394,6 +394,8 @@ namespace SellsCar.Web.Controllers
             {
                 return NotFound();
             }
+ 
+ 
             var model = new CarViewModel()
             {
                 CarId = entity.CarId,
@@ -401,6 +403,8 @@ namespace SellsCar.Web.Controllers
                 Url = entity.Url,
                 Ads = entity.Ads.ToList()
             };
+ 
+ 
 
             return View(model);
         }
@@ -465,12 +469,14 @@ namespace SellsCar.Web.Controllers
             {
                 return NotFound();
             }
+ 
             var model = new RegionViewModel()
             {
                 RegionId = entity.RegionId,
                 Name = entity.Name,
                 Ads = entity.Ads.ToList()
             };
+ 
 
             return View(model);
         }

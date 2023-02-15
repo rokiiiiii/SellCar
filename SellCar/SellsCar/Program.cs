@@ -18,8 +18,6 @@ builder.Services.AddSession();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-//builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite("Data Source=Db"));
-//builder.Services.AddDbContext<DbContextSellCar>(options => options.UseSqlite("Data Source=Db"));
 builder.Services.AddDbContext<DbContextSellCar>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarWebContext") ?? throw new InvalidOperationException("Connection string 'SellsCarWebContext' not found.")));
 builder.Services.AddDbContext<ApplicationContext>(options =>
