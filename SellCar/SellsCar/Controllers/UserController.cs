@@ -329,7 +329,7 @@ namespace SellsCar.Web.Controllers
             });
             TempData["message"] = "The ad has been added to favourites.";
             TempData["alert-type"] = "alert-success";
-            return Redirect("/user/MyFavorites");
+            return Redirect("/user/favorites");
         }
         public IActionResult DeleteFavAds(int? id)
         {
@@ -341,7 +341,7 @@ namespace SellsCar.Web.Controllers
             TempData["message"] = $"The tool titled {entity.Ads.Title} has been removed from the favourite.";
 
             TempData["alert-type"] = "alert-danger";
-            return Redirect("/user/MyFavorites");
+            return Redirect("/user/favorites");
         }
         public IActionResult Stats()
         {

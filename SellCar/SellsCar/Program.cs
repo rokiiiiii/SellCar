@@ -119,6 +119,11 @@ app.UseEndpoints(endpoints =>
         pattern: "cars/{url?}",
         defaults: new { controller = "Car", action = "List" }
     );
+    endpoints.MapControllerRoute(
+        name: "userfavorite",
+        pattern: "user/favorites",
+        defaults: new { controller = "User", action = "FavoriteAds" }
+    );
 
 });
 
