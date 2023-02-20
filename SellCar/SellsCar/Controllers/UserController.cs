@@ -99,12 +99,12 @@ namespace SellsCar.Web.Controllers
             var entity = new Ads
             {
                 AdsId = randomnum,
-                title = Ads.Title,
+                Title = Ads.Title,
                 Detail = Ads.Detail,
                 RegionId = Convert.ToInt32(Ads.RegionId),
                 Brand = Ads.Brand,
                 Model = Ads.Model,
-                year = Ads.year,
+                Year = Ads.year,
                 FuelType = Ads.FuelType,
                 GearType = Ads.GearType,
                 Mileage = Ads.Mileage,
@@ -154,7 +154,7 @@ namespace SellsCar.Web.Controllers
                     }
                 }
             }
-            TempData["message"] = $"The tool with the title {entity.title} and the ad number {entity.AdsId} is online.";
+            TempData["message"] = $"The tool with the title {entity.Title} and the ad number {entity.AdsId} is online.";
             return Redirect("/cars");
         }
         [Microsoft.AspNetCore.Mvc.HttpGet]
@@ -172,12 +172,12 @@ namespace SellsCar.Web.Controllers
             var model = new EditAdsViewModel()
             {
                 AdsId = entity.AdsId,
-                Title = entity.title,
+                Title = entity.Title,
                 Detail = entity.Detail,
                 RegionId = Convert.ToString(entity.RegionId),
                 Brand = entity.Brand,
                 Model = entity.Model,
-                year = entity.year,
+                year = entity.Year,
                 FuelType = entity.FuelType,
                 GearType = entity.GearType,
                 Mileage = entity.Mileage,
@@ -222,12 +222,12 @@ namespace SellsCar.Web.Controllers
             {
                 return NotFound();
             }
-            entity.title = AdsModel.Title;
+            entity.Title = AdsModel.Title;
             entity.Detail = AdsModel.Detail;
             entity.RegionId = Convert.ToInt32(AdsModel.RegionId);
             entity.Brand = AdsModel.Brand;
             entity.Model = AdsModel.Model;
-            entity.year = AdsModel.year;
+            entity.Year = AdsModel.year;
             entity.FuelType = AdsModel.FuelType;
             entity.GearType = AdsModel.GearType;
             entity.Mileage = AdsModel.Mileage;
@@ -275,7 +275,7 @@ namespace SellsCar.Web.Controllers
                     }
                 }
             }
-            TempData["message"] = $"The tool with the title {entity.title} and the ad number {entity.AdsId} is online.";
+            TempData["message"] = $"The tool with the title {entity.Title} and the ad number {entity.AdsId} is online.";
             TempData["alert-type"] = "alert-warning";
             return Redirect("/user/ad");
         }
@@ -286,7 +286,7 @@ namespace SellsCar.Web.Controllers
             {
                 _adsService.Delete(entity);
             }
-            TempData["message"] = $"The tool {entity.AdsId} with the title {entity.title} has been taken down.";
+            TempData["message"] = $"The tool {entity.AdsId} with the title {entity.Title} has been taken down.";
             TempData["alert-type"] = "alert-danger";
             return Redirect("/user/ad");
         }
@@ -299,6 +299,7 @@ namespace SellsCar.Web.Controllers
             }
             TempData["message"] = "Picture deleted";
             return Redirect("/user/Ads/" + Pic.Ads);
+
         }
         public IActionResult FavoriteAds()
         {
@@ -309,7 +310,7 @@ namespace SellsCar.Web.Controllers
                 {
                     AdsId = i.AdsId,
                     PicUrl = i.Ads.PostingPictures[0].Url,
-                    Title = i.Ads.title,
+                    Title = i.Ads.Title,
                     Name = i.Ads.Car.Name,
                     Brand = i.Ads.Brand,
                     Model = i.Ads.Model,
@@ -328,7 +329,7 @@ namespace SellsCar.Web.Controllers
             });
             TempData["message"] = "The ad has been added to favourites.";
             TempData["alert-type"] = "alert-success";
-            return Redirect("/user/MyFavorites");
+            return Redirect("/user/favorites");
         }
         public IActionResult DeleteFavAds(int? id)
         {
@@ -337,9 +338,10 @@ namespace SellsCar.Web.Controllers
             {
                 _FavoriteService.Delete(entity);
             }
-            TempData["message"] = $"The tool titled {entity.Ads.title} has been removed from the favourite.";
+            TempData["message"] = $"The tool titled {entity.Ads.Title} has been removed from the favourite.";
+
             TempData["alert-type"] = "alert-danger";
-            return Redirect("/user/MyFavorites");
+            return Redirect("/user/favorites");
         }
         public IActionResult Stats()
         {

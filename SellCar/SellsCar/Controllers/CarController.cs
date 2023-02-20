@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using SellCar.Domain.Identity;
-using SellCar.Domain.Models;
 using SellCar.Domain.ViewModels.Ad;
 using SellCar.Domain.ViewModels.Users;
 using SellCar.Service.Intrefaces;
-using SellsCar.DAL;
 
 namespace SellsCar.Web.Controllers
 {
@@ -42,19 +39,19 @@ namespace SellsCar.Web.Controllers
             var model = new AdsListViewModel()
             {
                 Ads = _adsService.Filter(url, minPrice, maxPrice, minMileage, maxMileage, minYear, maxYear, fuelType, gearType, bodyType, minHorse, maxHorse, Traction, Color, fromWho, Status, Swap, Region),
-                fuelType = fuelType,
-                gearType = gearType,
-                bodyType = bodyType,
+                FuelType = fuelType,
+                GearType = gearType,
+                BodyType = bodyType,
                 TractionType = Traction,
                 Color = Color,
-                minPrice = minPrice,
-                maxPrice = maxPrice,
-                minMileage = minMileage,
-                maxMileage = maxMileage,
-                minYear = minYear,
-                maxYear = maxYear,
-                minHorse = minMileage,
-                maxHorse = minMileage,
+                MinPrice = minPrice,
+                MaxPrice = maxPrice,
+                MinMileage = minMileage,
+                MaxMileage = maxMileage,
+                MinYear = minYear,
+                MaxYear = maxYear,
+                MinHorse = minMileage,
+                MaxHorse = minMileage,
                 FromWho = minMileage,
                 Status = Status,
                 Swap = Swap,
@@ -77,8 +74,8 @@ namespace SellsCar.Web.Controllers
             }
             var model = new AdsDetailViewModel()
             {
-                ads = ads,
-                user = user,
+                Ads = ads,
+                User = user,
                 AdPicture = ads.PostingPictures,
                 AddFavorites = favorite.Any(i => i.AdsId == id)
             };

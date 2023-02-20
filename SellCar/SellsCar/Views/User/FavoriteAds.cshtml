@@ -1,0 +1,67 @@
+﻿@model SellCar.Domain.ViewModels.Favorites.FavoriteViewModel
+<div class="container">
+    <h3 class="mt-1">Favorite ads</h3>
+    <hr class="my-3">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group list-group-flush sticky-top shadow mb-3">
+                <a href="/user/profile" class="list-group-item list-group-item-action "><i class="fas fa-angle-double-right mx-1"></i>My Profile</a>
+                <a href="/user/stats" onclick="myFunction()" class="list-group-item list-group-item-action "><i class="fas fa-angle-double-right mx-1"></i>Stats</a>
+                <a href="/user/ads" class="list-group-item list-group-item-action"><i class="fas fa-angle-double-right mx-1 "></i>My Published Ads</a>
+                <a href="/user/favorites" class="list-group-item list-group-item-action active "><i class="fas fa-angle-double-right mx-1"></i>My Favorite Ads</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                @if (Model.Favs.Count == 0)
+                {
+                    <div class="col-md-12">
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>You don't have any favourites.
+                        </div>
+                    </div>
+                }
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert box @TempData["alert-type"] w-100" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong><i class="fas fa-check mr-2"></i></strong>@TempData["message"]
+                    </div>
+                }
+                @foreach (var item in Model.Favs)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row no-gutters">
+                                <div class="col-md-4 ">
+                                    <a href="/car/details/@item.AdsId"><img src="~/img/@item.PicUrl" class="card-img"></a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5>@item.Title</h5>
+                                        <p>@item.Name @item.Brand @item.Model</p>
+                                        <h6 class=" text-right">@item.Price.ToString("")</h6>
+                                        <p class="text-right">
+                                            <a asp-controller="User" asp-action="DeleteFavAds" asp-route-id="@item.AdsId" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        window.setTimeout(function () {
+            $(".box").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+}

@@ -5,7 +5,7 @@
 namespace SellCar.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateDb : Migration
+    public partial class AddTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,10 +14,10 @@ namespace SellCar.DAL.Migrations
                 name: "Car",
                 columns: table => new
                 {
-                    CarId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Url = table.Column<string>(type: "TEXT", nullable: true)
+                    CarId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,9 +28,9 @@ namespace SellCar.DAL.Migrations
                 name: "Region",
                 columns: table => new
                 {
-                    RegionId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true)
+                    RegionId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,38 +41,37 @@ namespace SellCar.DAL.Migrations
                 name: "Ads",
                 columns: table => new
                 {
-                    AdsId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    title = table.Column<string>(type: "TEXT", nullable: true),
-                    Detail = table.Column<string>(type: "TEXT", nullable: true),
-                    DateCreate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Brand = table.Column<string>(type: "TEXT", nullable: true),
-                    Model = table.Column<string>(type: "TEXT", nullable: true),
-                    year = table.Column<int>(type: "INTEGER", nullable: false),
-                    FuelType = table.Column<string>(type: "TEXT", nullable: true),
-                    GearType = table.Column<string>(type: "TEXT", nullable: true),
-                    NumberOfGear = table.Column<int>(type: "INTEGER", nullable: false),
-                    Mileage = table.Column<int>(type: "INTEGER", nullable: false),
-                    BodyType = table.Column<string>(type: "TEXT", nullable: true),
-                    NumberOfDoors = table.Column<int>(type: "INTEGER", nullable: false),
-                    MotorPower = table.Column<int>(type: "INTEGER", nullable: false),
-                    EngineСapacity = table.Column<int>(type: "INTEGER", nullable: false),
-                    MaxSpeed = table.Column<int>(type: "INTEGER", nullable: false),
-                    Acceleration = table.Column<double>(type: "REAL", nullable: false),
-                    TractionType = table.Column<string>(type: "TEXT", nullable: true),
-                    ConsumptionСity = table.Column<double>(type: "REAL", nullable: false),
-                    OutofCityConsumption = table.Column<double>(type: "REAL", nullable: false),
-                    AverageConsumption = table.Column<double>(type: "REAL", nullable: false),
-                    FuelTankVolume = table.Column<int>(type: "INTEGER", nullable: false),
-                    Color = table.Column<string>(type: "TEXT", nullable: true),
-                    FromWho = table.Column<string>(type: "TEXT", nullable: true),
-                    Swap = table.Column<string>(type: "TEXT", nullable: true),
-                    Status = table.Column<string>(type: "TEXT", nullable: true),
-                    HomePage = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Price = table.Column<double>(type: "REAL", nullable: false),
-                    UserId = table.Column<string>(type: "TEXT", nullable: true),
-                    RegionId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CarId = table.Column<int>(type: "INTEGER", nullable: false)
+                    AdsId = table.Column<int>(type: "int", nullable: false),
+                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Detail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    year = table.Column<int>(type: "int", nullable: false),
+                    FuelType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GearType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumberOfGear = table.Column<int>(type: "int", nullable: false),
+                    Mileage = table.Column<int>(type: "int", nullable: false),
+                    BodyType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumberOfDoors = table.Column<int>(type: "int", nullable: false),
+                    MotorPower = table.Column<int>(type: "int", nullable: false),
+                    EngineСapacity = table.Column<int>(type: "int", nullable: false),
+                    MaxSpeed = table.Column<int>(type: "int", nullable: false),
+                    Acceleration = table.Column<double>(type: "float", nullable: false),
+                    TractionType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConsumptionСity = table.Column<double>(type: "float", nullable: false),
+                    OutofCityConsumption = table.Column<double>(type: "float", nullable: false),
+                    AverageConsumption = table.Column<double>(type: "float", nullable: false),
+                    FuelTankVolume = table.Column<int>(type: "int", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FromWho = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Swap = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HomePage = table.Column<bool>(type: "bit", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RegionId = table.Column<int>(type: "int", nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,10 +94,10 @@ namespace SellCar.DAL.Migrations
                 name: "Favorite",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<string>(type: "TEXT", nullable: true),
-                    AdsId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,10 +114,10 @@ namespace SellCar.DAL.Migrations
                 name: "Picture",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(type: "TEXT", nullable: true),
-                    AdsId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
