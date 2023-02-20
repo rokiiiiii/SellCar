@@ -1,6 +1,7 @@
 ﻿using SellCar.DAL.Interfaces;
 using SellCar.Domain.Models;
 using SellCar.Service.Intrefaces;
+using System;
 
 namespace SellCar.Service.Implementations
 {
@@ -25,9 +26,9 @@ namespace SellCar.Service.Implementations
         {
             _adsRepository.Delete(entity);
         }
-        public List<Ads> Filter(string url, string min_price, string max_price, string min_kilometers, string max_kilometers, string min_year, string max_year, string[] fuel_type, string[] gear_type, string[] body_type, string min_horse, string max_horse, string[] traction, string[] color, string from_who, string status, string trade_in, string[] region)
+        public List<Ads> Filter(string url, string MinPrice, string MaxPrice, string MinMileage, string MaxMileage, string min_year, string MaxYear, string[] FuelType, string[] GearType, string[] BodyType, string MinHorse, string MaxHorse, string[] Traction, string[] Color, string FromWho, string Status, string Swap, string[] Region)
         {
-            return _adsRepository.Filter(url, min_price, max_price, min_kilometers, max_kilometers, min_year, max_year, fuel_type, gear_type, body_type, min_horse, max_horse, traction, color, from_who, status, trade_in, region);
+            return _adsRepository.Filter(url, MinPrice, MaxPrice, MinMileage, MaxMileage, min_year, MaxYear, FuelType, GearType, BodyType, MinHorse, MaxHorse, Traction, Color, FromWho, Status, Swap, Region);
         }
 
         public List<Ads> GetHomePosts()

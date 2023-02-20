@@ -20,7 +20,7 @@ namespace SellCar.DAL.Repositories
         {
             using (var context = new TContext())
             {
-                context.Entry(entity).State = EntityState.Modified; ;
+                context.Entry(entity).State = EntityState.Modified;
                 context.SaveChanges();
             }
         }

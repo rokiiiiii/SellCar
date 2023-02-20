@@ -4,23 +4,24 @@ namespace SellCar.Domain.ViewModels.Ad
 {
     public class AdsListViewModel
     {
-        public List<Ads> Ads { get; set; }
-        public string min_price { get; set; }
-        public string max_price { get; set; }
-        public string min_kilometers { get; set; }
-        public string max_kilometers { get; set; }
-        public string min_year { get; set; }
-        public string max_year { get; set; }
-        public string[] fuel_type { get; set; }
-        public string[] gear_type { get; set; }
-        public string[] body_type { get; set; }
-        public string min_horse { get; set; }
-        public string max_horse { get; set; }
-        public string[] traction { get; set; }
-        public string[] color { get; set; }
-        public string from_who { get; set; }
-        public string status { get; set; }
-        public string swap { get; set; }
-        public string[] region { get; set; }
+        public List<Ads>? Ads { get; set; }
+        public string? minPrice { get; set; }
+        public string? maxPrice { get; set; }
+        public string? minMileage { get; set; }
+        public string? maxMileage { get; set; }
+        public string? minYear { get; set; }
+        public string? maxYear { get; set; }
+        public string[]? fuelType { get; set; }
+        public string[]? gearType { get; set; }
+        public string[]? bodyType { get; set; }
+        public string? minHorse { get; set; }
+        public string? maxHorse { get; set; }
+        public string[]? TractionType { get; set; }
+        public string[]? Color { get; set; }
+        public string? FromWho { get; set; }
+        public string? Status { get; set; }
+        public string? Swap { get; set; }
+        public string[]? Region { get; set; }
+
     }
 }
