@@ -105,6 +105,31 @@ app.MapControllerRoute(
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
+        name: "adminrole",
+        pattern: "admin/role/list",
+        defaults: new { controller = "Admin", action = "RoleList" }
+    );
+    endpoints.MapControllerRoute(
+        name: "adminuser",
+        pattern: "admin/user/list",
+        defaults: new { controller = "Admin", action = "UserList" }
+    );
+    endpoints.MapControllerRoute(
+        name: "admincar",
+        pattern: "admin/car/list",
+        defaults: new { controller = "Admin", action = "CarList" }
+    );
+    endpoints.MapControllerRoute(
+        name: "adminregion", 
+        pattern: "admin/region/list",
+        defaults: new { controller = "Admin", action = "RegionList" }
+    );
+    endpoints.MapControllerRoute(
+        name: "adminads",
+        pattern: "admin/ads/list",
+        defaults: new { controller = "Admin", action = "AdList" }
+    );
+    endpoints.MapControllerRoute(
         name: "userads",
         pattern: "user/ad",
         defaults: new { controller = "User", action = "Ads" }
