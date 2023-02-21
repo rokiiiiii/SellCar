@@ -1,18 +1,20 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SellCar.Domain.Models
 {
     public class Ads
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int AdsId { get; set; }
-        public string? title { get; set; }
+        public string? Title { get; set; }
         public string? Detail { get; set; }
         public DateTime DateCreate { get; set; }
         public string? Brand { get; set; }
         public string? Model { get; set; }
-        public int year { get; set; }
+        public int Year { get; set; }
         public string? FuelType { get; set; }
         public string? GearType { get; set; }
         public int NumberOfGear { get; set; }

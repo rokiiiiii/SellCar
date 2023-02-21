@@ -1,0 +1,517 @@
+﻿@model SellCar.Domain.ViewModels.Ad.AdsListViewModel
+
+@{
+    var FuelTypes = new string[] { "Petol", "Gas", "Diesel", "Hybrid", "Electric" };
+    var GearTypes = new string[] { "Manual", "Automatic", "Semiautomatic" };
+    var BodyTypes = new string[] { "Cabrio", "Coupe", "Hatchback 3 doors", "Hatchback 5 doors",
+    "Sedan", "Station Wagon", "Crossover","MPV","Roadster" };
+    var TractionTypes = new string[] { "Front-wheel drive", "Rear drive", "4WD (Continuous)", "AWD (Eleсtronik)" };
+    var Colors = new string[] { "White", "Black", "Yellow", "Burgundy","Dark blue","Silver grey","Red","Navy blue","Blue",
+    "Purple","Pink","Orange","Black silver grey","Turquoise","Brown","Green","Other color"};
+}
+
+@await Html.PartialAsync("_header")
+
+<div class="my-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <form action="/cars/@ViewBag.CarUrl" method="post">
+                    <div class="py-3">
+
+                        @if (Model.MinPrice == null)
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxPrice and below </small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                        else if (Model.MaxPrice == null)
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MinPrice and over</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxPrice-@Model.MinPrice</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+
+                        @if (Model.MinYear == null)
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxYear and below </small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                        else if (Model.MaxYear == null)
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MinYear and over</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxYear-@Model.MinYear</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+
+                        @if (Model.FuelType != null)
+                        {
+                            foreach (var item in Model.FuelType)
+                            {
+                                string a = item.Replace(" ", "_").Replace("&", "_") + "x";
+                                <button class="btn btn-xs bg-dark  text-white mb-3 " id="@a">
+                                    <h6 class="d-inline"> <small>@item</small></h6>
+                                    <i class="fas fa-window-close ml-1"></i>
+                                </button>
+                                a = null;
+                            }
+                        }
+                        @if (Model.GearType != null)
+                        {
+                            foreach (var item in Model.GearType)
+                            {
+                                string a = item.Replace(" ", "_").Replace("&", "_") + "x";
+                                <button class="btn btn-xs bg-dark  text-white mb-3 " id="@a">
+                                    <h6 class="d-inline"> <small>@item</small></h6>
+                                    <i class="fas fa-window-close ml-1"></i>
+                                </button>
+                                a = null;
+                            }
+                        }
+                        @if (Model.BodyType != null)
+                        {
+                            foreach (var item in Model.BodyType)
+                            {
+                                string a = item.Replace(" ", "_").Replace("&", "_") + "x";
+                                <button class="btn btn-xs bg-dark  text-white mb-3 " id="@a">
+                                    <h6 class="d-inline"> <small>@item</small></h6>
+                                    <i class="fas fa-window-close ml-1"></i>
+                                </button>
+                                a = null;
+                            }
+                        }
+
+                        @if (Model.Color != null)
+                        {
+                            foreach (var item in Model.Color)
+                            {
+                                string a = item.Replace(" ", "_").Replace("&", "_") + "x";
+                                <button class="btn btn-xs bg-dark  text-white mb-3 " id="@a">
+                                    <h6 class="d-inline"> <small>@item</small></h6>
+                                    <i class="fas fa-window-close ml-1"></i>
+                                </button>
+                                a = null;
+                            }
+                        }
+
+                        @if (Model.FromWho != null)
+                        {
+
+                            <button class="btn btn-xs bg-dark  text-white mb-3" id="FromWho1">
+                                <h6 class="d-inline"> <small>@Model.FromWho</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+
+                        @if (Model.Status != null)
+                        {
+                            <button class="btn btn-xs bg-dark  text-white mb-3" id="Status1">
+                                <h6 class="d-inline"> <small>@Model.Status</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+
+                        @if (Model.Swap != null)
+                        {
+                            <button class="btn btn-xs bg-dark  text-white mb-3" id="Swap1">
+                                <h6 class="d-inline"> <small>@Model.Swap</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+
+                        @if (Model.MinHorse == null)
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxHorse and below </small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                        else if (Model.MaxHorse == null)
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MinHorse over</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxHorse-@Model.MinHorse</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+
+                        @if (Model.MinMileage == null)
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price1">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxMileage and below </small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                        else if (Model.MaxMileage == null)
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price2">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MinMileage over</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-xs bd-dark text-white mb-3" id="price3">
+                                <h6 class="d-inline"><small><b>Price</b>@Model.MaxMileage-@Model.MinMileage</small></h6>
+                                <i class="fas fa-window-close ml-1"></i>
+                            </button>
+                        }
+                    </div>
+
+                    <div class="bg-light border-right Car">
+                        @await Component.InvokeAsync("Car")
+                    </div>
+                    <button class="btn btn-success btn-block mt-3" type="submit">Search</button>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_1" role="button" aria-expended="false" aria-controls="collapseExample">
+                            <strong style="float: left;">Region</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_1">
+                        <div class="card card-body" style="height: 200px; overflow-y: scroll;">
+                            @foreach (var item in ViewBag.Region)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" name="region" type="checkbox" value="@item.Name" id="@item.Name"
+                                       @if (Model.Region != null)
+                                       {
+                                       @(Model.Region.Any(i=>i==item.Name)?"checked":"")
+                                       } />
+                                    <label>
+                                        @item.Name
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_2" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Price</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_2">
+                        <div class="card card-body">
+                            <input class="form-control" asp-for="MinPrice" placeholder="Min $" step="500" Min="0" />
+                            <strong style="text-align: center;" class="my-auto">↓</strong>
+                            <input class="form-control" asp-for="MaxPrice" placeholder="Max $" step="500" />
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_3" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Year</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_3">
+                        <div class="card card-body">
+                            <input class="form-control" asp-for="MinYear" placeholder="Min year" step="1" type="number" />
+                            <strong style="text-align: center;" class="my-auto">↓</strong>
+                            <input class="form-control" asp-for="MaxYear" placeholder="Max year" step="1" type="number" Max="@DateTime.Now.Year" />
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_4" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Fuel type</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_4">
+                        <div class="card card-body">
+                            @foreach (var item in FuelTypes)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" name="FuelType" type="checkbox" value="@item" id="@item" @if (Model.FuelType != null)
+                                       {
+                                       @(Model.FuelType.Any(i => i == item) ? "checked" : "")
+                                       } />
+                                    <label class="form-check-label">
+                                        @item
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_5" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Gear type</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_5">
+                        <div class="card card-body">
+                            @foreach (var item in GearTypes)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" name="GearType" type="checkbox" value="@item" id="@item" @if (Model.GearType != null)
+                                       {
+                                       @(Model.GearType.Any(i => i == item) ? "checked" : "")
+                                       } />
+                                    <label class="form-check-label">
+                                        @item
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_6" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Mileage</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_6">
+                        <div class="card card-body">
+                            <input class="form-control" asp-for="MinMileage" placeholder="Min KM" type="number" step="500 " Min="0">
+                            <strong style="text-align: center;" class="my-auto">↓</strong>
+                            <input class="form-control " asp-for="MaxMileage" placeholder="Max KM" type="number" step="500 ">
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_7" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Body type</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_7">
+                        <div class="card card-body">
+                            @foreach (var item in BodyTypes)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" name="Body" type="checkbox" value="@item" id="@item" @if (Model.BodyType != null)
+                                       {
+                                       @(Model.BodyType.Any(i => i == item) ? "checked" : "")
+                                       } />
+                                    <label class="form-check-label">
+                                        @item
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_8" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Horse power</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_8">
+                        <div class="card card-body">
+                            <input class="form-control" asp-for="MinHorse" placeholder="Min HP" type="number" step="500 " Min="0">
+                            <strong style="text-align: center;" class="my-auto">↓</strong>
+                            <input class="form-control " asp-for="MaxHorse" placeholder="Max HP" type="number" step="500 ">
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_9" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Traction type</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_9">
+                        <div class="card card-body">
+                            @foreach (var item in TractionTypes)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" name="Body" type="checkbox" value="@item" id="@item" @if (Model.TractionType != null)
+                                       {
+                                       @(Model.TractionType.Any(i => i == item) ? "checked" : "")
+                                       } />
+                                    <label class="form-check-label">
+                                        @item
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_10" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Colors</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_10">
+                        <div class="card card-body">
+                            @foreach (var item in Colors)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" name="Body" type="checkbox" value="@item" id="@item" @if (Model.Color != null)
+                                       {
+                                       @(Model.Color.Any(i => i == item) ? "checked" : "")
+                                       } />
+                                    <label class="form-check-label">
+                                        @item
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_11" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">From who</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_11">
+                        <div class="card card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FromWho" id="Owner"
+                                       value="Owner">
+                                <label class="form-check-label">
+                                    Owner
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FromWho" id="Fromcardealership"
+                                       value="From car dealership">
+                                <label class="form-check-label">
+                                    From car dealership
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="FromWho" id="Fromautoshow"
+                                       value="From auto show">
+                                <label class="form-check-label">
+                                    From auto show
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_12" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Status</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_12">
+                        <div class="card card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Status" id="None"
+                                       value="None">
+                                <label class="form-check-label">
+                                    None
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Status" id="FirstOwner"
+                                       value="First Owner">
+                                <label class="form-check-label">
+                                    First Owner
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Status" id="Secondowner"
+                                       value="Second owner">
+                                <label class="form-check-label">
+                                    Second owner
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Status" id="Thirdormoreowner"
+                                       value="Third or more owner">
+                                <label class="form-check-label">
+                                    Third or more owner
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3">
+                        <a class="btn filterbtn" data-toggle="collapse" href="#_13" role="button" aria-expanded="false"
+                           aria-controls="collapseExample">
+                            <strong style="float: left;">Swap</strong>
+                        </a>
+                    </p>
+                    <div class="collapse" id="_13">
+                        <div class="card card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Swap" id="Yes"
+                                       value="Yes">
+                                <label class="form-check-label" for="exampleRadios6">
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="Swap" id="No"
+                                       value="No">
+                                <label class="form-check-label" for="exampleRadios7">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-block " type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <table id="example" class="table table-striped table-bordered dt-responsive " style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Ad picture</th>
+                            <th>Price</th>
+                            <th>Title</th>
+                            <th>Car</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                            <th>Km</th>
+                            <th>Color</th>
+                            <th>Date added</th>
+                            <th>Region</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Ads.Count; i++)
+                        {
+                            <tr>
+                                @if(Model.Ads[i].PostingPictures.Count>0)
+                                {
+                                <td><a href="/car/details/@Model.Ads[i].AdsId"><img src="~/img/@(Model.Ads[i].PostingPictures[0].Url)" width=90 height="67"></a> </td>
+                                }
+                                else
+                                {
+                                    <td><a href="/car/details/@Model.Ads[i].AdsId"><img src="~/img/NoImg.jpg" width=90 height="67"></a> </td>
+                                }
+                                <td>@Model.Ads[i].Price $</td>
+                                <td>@Model.Ads[i].Title</td>
+                                <td>@Model.Ads[i].Car.Name</td>
+                                <td>@Model.Ads[i].Brand</td>
+                                <td>@Model.Ads[i].Model</td>
+                                <td>@Model.Ads[i].Year</td>
+                                <td>@Model.Ads[i].Mileage</td>
+                                <td>@Model.Ads[i].Color</td>
+                                <td>@Model.Ads[i].DateCreate</td>
+                                <td>@Model.Ads[i].Region.Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

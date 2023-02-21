@@ -34,28 +34,28 @@ namespace SellsCar.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult List(string url, string min_price, string max_price, string min_kilometers, string max_kilometers, string min_year, string max_year, string[] fuel_type, string[] gear_type, string[] body_type, string min_horse, string max_horse, string[] traction, string[] color, string from_who, string status, string swap, string[] region)
+        public IActionResult List(string url, string minPrice, string maxPrice, string minMileage, string maxMileage, string minYear, string maxYear, string[] fuelType, string[] gearType, string[] bodyType, string minHorse, string maxHorse, string[] Traction, string[] Color, string fromWho, string Status, string Swap, string[] Region)
         {
             var model = new AdsListViewModel()
             {
-                Ads = _adsService.Filter(url, min_price, max_price, min_kilometers, max_kilometers, min_year, max_year, fuel_type, gear_type, body_type, min_horse, max_horse, traction, color, from_who, status, swap, region),
-                fuel_type = fuel_type,
-                gear_type = gear_type,
-                body_type = body_type,
-                traction = traction,
-                color = color,
-                min_price = min_price,
-                max_price = max_price,
-                min_kilometers = min_kilometers,
-                max_kilometers = max_kilometers,
-                min_year = min_year,
-                max_year = max_year,
-                min_horse = min_kilometers,
-                max_horse = min_kilometers,
-                from_who = min_kilometers,
-                status = status,
-                swap = swap,
-                region = region,
+                Ads = _adsService.Filter(url, minPrice, maxPrice, minMileage, maxMileage, minYear, maxYear, fuelType, gearType, bodyType, minHorse, maxHorse, Traction, Color, fromWho, Status, Swap, Region),
+                FuelType = fuelType,
+                GearType = gearType,
+                BodyType = bodyType,
+                TractionType = Traction,
+                Color = Color,
+                MinPrice = minPrice,
+                MaxPrice = maxPrice,
+                MinMileage = minMileage,
+                MaxMileage = maxMileage,
+                MinYear = minYear,
+                MaxYear = maxYear,
+                MinHorse = minMileage,
+                MaxHorse = minMileage,
+                FromWho = minMileage,
+                Status = Status,
+                Swap = Swap,
+                Region = Region,
             };
             ViewBag.CarUrl = RouteData.Values["url"];
             ViewBag.Region = _regionService.GetRegion();
@@ -74,8 +74,8 @@ namespace SellsCar.Web.Controllers
             }
             var model = new AdsDetailViewModel()
             {
-                ads = ads,
-                user = user,
+                Ads = ads,
+                User = user,
                 AdPicture = ads.PostingPictures,
                 AddFavorites = favorite.Any(i => i.AdsId == id)
             };

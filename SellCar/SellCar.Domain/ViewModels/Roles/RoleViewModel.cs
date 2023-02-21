@@ -8,8 +8,6 @@ namespace SellCar.Domain.ViewModels.Roles
     {
         [Required]
         public string Name { get; set; }
-
-
         public class RoleDetails
         {
             public IdentityRole Role { get; set; }

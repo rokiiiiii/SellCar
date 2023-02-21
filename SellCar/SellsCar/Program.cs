@@ -18,8 +18,10 @@ builder.Services.AddSession();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite("Data Source=Db"));
-builder.Services.AddDbContext<DbContextSellCar>(options => options.UseSqlite("Data Source=Db"));
+builder.Services.AddDbContext<DbContextSellCar>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarWebContext") ?? throw new InvalidOperationException("Connection string 'SellsCarWebContext' not found.")));
+builder.Services.AddDbContext<ApplicationContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarWebContext") ?? throw new InvalidOperationException("Connection string 'SellsCarWebContext' not found.")));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -91,7 +93,7 @@ app.UseAuthorization();
 
 
 app.MapControllerRoute(
-    
+
 name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
     );
@@ -103,6 +105,31 @@ app.MapControllerRoute(
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
+        name: "adminrole",
+        pattern: "admin/role/list",
+        defaults: new { controller = "Admin", action = "RoleList" }
+    );
+    endpoints.MapControllerRoute(
+        name: "adminuser",
+        pattern: "admin/user/list",
+        defaults: new { controller = "Admin", action = "UserList" }
+    );
+    endpoints.MapControllerRoute(
+        name: "admincar",
+        pattern: "admin/car/list",
+        defaults: new { controller = "Admin", action = "CarList" }
+    );
+    endpoints.MapControllerRoute(
+        name: "adminregion", 
+        pattern: "admin/region/list",
+        defaults: new { controller = "Admin", action = "RegionList" }
+    );
+    endpoints.MapControllerRoute(
+        name: "adminads",
+        pattern: "admin/ads/list",
+        defaults: new { controller = "Admin", action = "AdList" }
+    );
+    endpoints.MapControllerRoute(
         name: "userads",
         pattern: "user/ad",
         defaults: new { controller = "User", action = "Ads" }
@@ -111,6 +138,16 @@ app.UseEndpoints(endpoints =>
         name: "search",
         pattern: "search",
         defaults: new { controller = "Home", action = "Search" }
+    );
+    endpoints.MapControllerRoute(
+        name: "cars",
+        pattern: "cars/{url?}",
+        defaults: new { controller = "Car", action = "List" }
+    );
+    endpoints.MapControllerRoute(
+        name: "userfavorite",
+        pattern: "user/favorites",
+        defaults: new { controller = "User", action = "FavoriteAds" }
     );
 
 });
