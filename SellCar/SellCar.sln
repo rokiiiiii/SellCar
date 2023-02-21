@@ -5,8 +5,6 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{BA07E20D-D4F3-424D-8CF2-3C311F84C9DD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{19A881DD-6AD2-478B-AF28-29A5C38B358C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SellsCar.Web", "SellsCar\SellsCar.Web.csproj", "{8E0A0B45-D88B-4D78-A089-800E832807F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{F2B35618-3C57-4DEF-9661-00A6198ECA40}"
