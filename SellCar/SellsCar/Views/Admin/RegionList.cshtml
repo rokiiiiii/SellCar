@@ -14,7 +14,16 @@
             </p>
             <div class="collapse" id="collapseExample">
                 <div class="card card-body">
-                   
+                    <form asp-controller="Admin" asp-action="RegionCreate" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 pb-3">
+                                <label>Region name</label>
+                                <input class="form-control" name="Name" />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
                 </div>
             </div>
             <table id="example" class="table table-striped table-bordered dt-responsive " style="width:100%">
