@@ -12,7 +12,7 @@ using SellsCar.DAL;
 namespace SellCar.DAL.Migrations
 {
     [DbContext(typeof(DbContextSellCar))]
-    [Migration("20230215180004_AddTable")]
+    [Migration("20230301132757_AddTable")]
     partial class AddTable
     {
         /// <inheritdoc />
@@ -111,16 +111,16 @@ namespace SellCar.DAL.Migrations
                     b.Property<string>("Swap")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TractionType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("year")
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("AdsId");

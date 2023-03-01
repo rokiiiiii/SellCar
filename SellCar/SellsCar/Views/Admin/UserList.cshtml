@@ -31,7 +31,7 @@
                                 <td>@item.EmailConfirmed</td>
                                 <td>
                                     <a href="/admin/user/@item.Id" class="btn btn-primary btn-sm mr-2"><i class="fas fa-user-edit"></i></a>
-                                    <form action="/admin/user/delete" method="post" style="display:inline">
+                                    <form action="/admin/users/delete" method="post" style="display:inline">
                                         <input type="hidden" name="UserId" value="@item.Id" />
                                         <button type="submit" class="btn btn-danger btn-sm "><i class="fas fa-user-minus"></i></button>
                                     </form>

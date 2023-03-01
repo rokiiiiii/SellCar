@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -42,12 +43,12 @@ namespace SellCar.DAL.Migrations
                 columns: table => new
                 {
                     AdsId = table.Column<int>(type: "int", nullable: false),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Detail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    year = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
                     FuelType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GearType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NumberOfGear = table.Column<int>(type: "int", nullable: false),

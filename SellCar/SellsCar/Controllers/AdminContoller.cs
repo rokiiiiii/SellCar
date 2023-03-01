@@ -58,7 +58,7 @@ namespace SellsCar.Web.Controllers
                 var selectedRoles = await _userManager.GetRolesAsync(user);
                 var roles = _roleManager.Roles.Select(i => i.Name);
 
-                ViewBag.Roles = roles;
+                ViewBag.roles = roles;
                 return View(new UserDetailViewModel()
                 {
                     UserId = user.Id,
@@ -111,10 +111,10 @@ namespace SellsCar.Web.Controllers
         {
             var user = await _userManager.FindByIdAsync(userId);
             await _userManager.DeleteAsync(user);
-            var ilanlar = _adsService.GetPost("").Where(i => i.UserId == userId).ToList();
-            foreach (var ilan in ilanlar)
+            var Ads = _adsService.GetPost("").Where(i => i.UserId == userId).ToList();
+            foreach (var ads in Ads)
             {
-                _adsService.Delete(ilan);
+                _adsService.Delete(ads);
             }
             return Redirect("/admin/user/list");
         }
@@ -349,10 +349,10 @@ namespace SellsCar.Web.Controllers
         }
         public IActionResult AdsDelete(int AdsId)
         {
-            var ılan = _adsService.GetById(AdsId);
-            if (ılan != null)
+            var ads = _adsService.GetById(AdsId);
+            if (ads != null)
             {
-                _adsService.Delete(ılan);
+                _adsService.Delete(ads);
             }
             return Redirect("/admin/ads/list");
         }
@@ -423,9 +423,9 @@ namespace SellsCar.Web.Controllers
 
             return Redirect("/admin/car/list");
         }
-        public IActionResult CarDelete(int markaid)
+        public IActionResult CarDelete(int CarId)
         {
-            var entity = _carService.GetById(markaid);
+            var entity = _carService.GetById(CarId);
             if (entity != null)
             {
                 _carService.Delete(entity);
@@ -481,7 +481,7 @@ namespace SellsCar.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult IlEdit(RegionViewModel region)
+        public IActionResult RegionEdit(RegionViewModel region)
         {
             var entity = _regionService.GetById(region.RegionId);
             if (entity == null)
@@ -494,9 +494,9 @@ namespace SellsCar.Web.Controllers
             return Redirect("/admin/region/list");
         }
 
-        public IActionResult IlDelete(int ilId)
+        public IActionResult RegionDelete(int regionId)
         {
-            var entity = _regionService.GetById(ilId);
+            var entity = _regionService.GetById(regionId);
             if (entity != null)
             {
                 _regionService.Delete(entity);

@@ -12,7 +12,7 @@
         </ul>
         <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-                <form class="form-inline">
+                <form asp-controller="Home" asp-action="Search" method="post" href="/search" class="form-inline">
                     <input name="q" class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" style="width:275px">
                     <button class="btn btn-success my-2 my-0" type="submit">Search</button>
                 </form>
