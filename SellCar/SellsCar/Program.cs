@@ -12,8 +12,10 @@ var provider = builder.Services.BuildServiceProvider();
 
 builder.Logging.ClearProviders();
 builder.Logging.SetMinimumLevel(LogLevel.Trace);
+builder.Host.UseNLog();
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddSession();
+
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
