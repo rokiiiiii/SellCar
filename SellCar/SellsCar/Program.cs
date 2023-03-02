@@ -79,11 +79,11 @@ using (var scope = scopeFactory.CreateScope())
 }
 
 
-if (!app.Environment.IsDevelopment())
-{
+//if (!app.Environment.IsDevelopment())
+//{
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
-}
+//}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -160,7 +160,7 @@ app.UseEndpoints(endpoints =>
     );
     endpoints.MapControllerRoute(
         name: "admincardelete",
-        pattern: "admin/car/delete",
+        pattern: "admin/cars/delete",
         defaults: new { controller = "Admin", action = "CarDelete" }
     );
     //region

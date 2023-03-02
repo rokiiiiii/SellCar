@@ -423,9 +423,9 @@ namespace SellsCar.Web.Controllers
 
             return Redirect("/admin/car/list");
         }
-        public IActionResult CarDelete(int CarId)
+        public IActionResult CarDelete(int carId)
         {
-            var entity = _carService.GetById(CarId);
+            var entity = _carService.GetById(carId);
             if (entity != null)
             {
                 _carService.Delete(entity);
