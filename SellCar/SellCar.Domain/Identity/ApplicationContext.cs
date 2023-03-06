@@ -9,7 +9,7 @@ namespace SellCar.Domain.Identity
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-
+            Database.EnsureCreated();
         }
     }
 }
