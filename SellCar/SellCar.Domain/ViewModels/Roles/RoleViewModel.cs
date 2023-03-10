@@ -21,6 +21,7 @@ namespace SellCar.Domain.ViewModels.Roles
         public string RoleName { get; set; }
         public string[]? IdsToAdd { get; set; }
         public string[]? IdsToDelete { get; set; }
+
     }
 
 }
