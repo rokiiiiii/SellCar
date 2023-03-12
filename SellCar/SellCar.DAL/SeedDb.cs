@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 using SellCar.Domain.Models;
 using SellsCar.DAL;
 
@@ -10,8 +11,8 @@ namespace SellCar.DAL
         {
             var context = new DbContextSellCar();
 
-            if (context.Database.GetPendingMigrations().Count() == 0)
-            {
+            //if (context.Database.GetPendingMigrations().Count() == 0)
+            //{
                 if (context.Region.Count() == 0)
                 {
                     for (int i = 0; i < region.Length; i++)
@@ -46,7 +47,7 @@ namespace SellCar.DAL
                     }
                     context.SaveChanges();
                 }
-            }
+            //}
         }
         private static Region[] region =
         {
@@ -123,7 +124,7 @@ namespace SellCar.DAL
             new Car(){Name="Subaru",Url="subaru"},
             new Car(){Name="Suzuki",Url="suzuki"},
             new Car(){Name="Tesla",Url="tesla"},
-            new Car(){Name="Toyota",Url="toyota"},
+            new Car(){Name="Toyota",Url="toyota"},  
             new Car(){Name="Volkswagen",Url="volkswagen"},
             new Car(){Name="Volvo",Url="volvo"},
 

@@ -31,8 +31,15 @@
                         @for (int i = 0; i < Model.Ads.Count; i++)
                         {
                             <tr>
-                                <td><a href="/car/details/@Model.Ads[i].AdsId"><img src="@Model.Ads[i].PostingPictures[0].Url" width=90></a> </td>
-                                <td><i class="fas fa-lira-sign mr-1"></i>@Model.Ads[i].Price</td>
+                                @if (Model.Ads[i].PostingPictures.Count > 0)
+                                {
+                                    <td><a href="/car/details/@Model.Ads[i].AdsId"><img src="~/img/@(Model.Ads[i].PostingPictures[0].Url)" width=90 height="67"></a> </td>
+                                }
+                                else
+                                {
+                                    <td><a href="/car/details/@Model.Ads[i].AdsId"><img src="~/img/NoImg.jpg" width=90 height="67"></a> </td>
+                                }
+                                <td>@Model.Ads[i].Price $</td>
                                 <td>@Model.Ads[i].Title</td>
                                 <td>@Model.Ads[i].Car.Name</td>
                                 <td>@Model.Ads[i].Brand</td>
@@ -41,6 +48,7 @@
                                 <td>@Model.Ads[i].Mileage</td>
                                 <td>@Model.Ads[i].Color</td>
                                 <td>@Model.Ads[i].DateCreate</td>
+                                <td>@Model.Ads[i].Region</td>
                             </tr>
                         }
                     </tbody>

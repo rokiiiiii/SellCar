@@ -1,4 +1,5 @@
-﻿using SellCar.DAL.Interfaces;
+﻿using Microsoft.Extensions.Logging;
+using SellCar.DAL.Interfaces;
 using SellCar.Domain.Models;
 using SellCar.Service.Intrefaces;
 
@@ -7,10 +8,12 @@ namespace SellCar.Service.Implementations
     public class AdsService : IAdsService
     {
         private IAdsRepository _adsRepository;
+        private readonly ILogger<AdsService> _logger;
 
-        public AdsService(IAdsRepository adsRepository)
+        public AdsService(IAdsRepository adsRepository, ILogger<AdsService> logger)
         {
             _adsRepository = adsRepository;
+            _logger = logger;
         }
 
         public void Create(Ads entity)

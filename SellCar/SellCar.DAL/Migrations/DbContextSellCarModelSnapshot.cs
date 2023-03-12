@@ -108,16 +108,16 @@ namespace SellCar.DAL.Migrations
                     b.Property<string>("Swap")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TractionType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("year")
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("AdsId");

@@ -29,14 +29,14 @@ namespace SellCar.DAL.Repositories
             }
         }
 
-        public Region GetByIdWithPosts(int ilId)
+        public Region GetByIdWithPosts(int regionId)
         {
             using (var context = new DbContextSellCar())
             {
                 return context.Region
-                    .Where(i => i.RegionId == ilId)
+                    .Where(i => i.RegionId == regionId)
                     .Include(i => i.Ads)
-                    .ThenInclude(i => i.Brand)
+                    .ThenInclude(i => i.Car)
                     .FirstOrDefault();
             }
         }

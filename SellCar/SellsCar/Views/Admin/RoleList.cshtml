@@ -3,7 +3,7 @@
     Layout = "_LayoutAdmin";
 }
 <div class="container-fluid my-2">
-    <h3 class="mt-1">Roller</h3>
+    <h3 class="mt-1">Rolls</h3>
     <hr class="my-3">
     <div class="row">
         <div class="col-md-12">
@@ -44,8 +44,8 @@
                                 <td>@item.Name</td>
 
                                 <td>
-                                    <a href="/admin/role/@item.Id" class="btn btn-primary btn-sm mr-2"><i class="fas fa-edit"></i></a>
-                                    <form action="/admin/role/delete" method="post" style="display:inline">
+                                    <a href="/admin/role/@item.Id" class="btn btn-primary btn-sm mr-2"><i class="fas fa-user-edit"></i></a>
+                                    <form action="/admin/roles/delete" method="post" style="display:inline">
                                         <input type="hidden" name="roleId" value="@item.Id" />
                                         <button type="submit" class="btn btn-danger btn-sm "><i class="fas fa-trash-alt"></i></button>
                                     </form>

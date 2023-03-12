@@ -67,9 +67,11 @@
                                 }
                             </td>
                             <td>
-                                <a href="/admin/ads/@Model.Ads[i].AdsId" class="btn btn-primary btn-sm mr-2"><i class="fas fa-edit"></i></a>
-                                <form action="/admin/DeleteAds" method="post" style="display:inline">
-                                    <input type="hidden" name="AdsId" value="@Model.Ads[i].AdsId" />
+
+                                <a href="/admin/car/@Model.Ads[i].AdsId" class="btn btn-primary btn-sm mr-2"><i class="fas fa-edit"></i></a>
+                                <form action="/admin/cars/delete" method="post" style="display:inline">
+                                    <input type="hidden" name="CarId" value="@Model.Ads[i].AdsId" />
+
                                     <button type="submit" class="btn btn-danger btn-sm "><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>

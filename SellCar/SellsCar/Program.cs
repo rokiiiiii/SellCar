@@ -13,15 +13,16 @@ var provider = builder.Services.BuildServiceProvider();
 builder.Logging.ClearProviders();
 builder.Logging.SetMinimumLevel(LogLevel.Trace);
 builder.Host.UseNLog();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); 
 builder.Services.AddSession();
+
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddDbContext<DbContextSellCar>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarWebContext") ?? throw new InvalidOperationException("Connection string 'SellsCarWebContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarContext") ?? throw new InvalidOperationException("Connection string 'SellsCarContext' not found.")));
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarWebContext") ?? throw new InvalidOperationException("Connection string 'SellsCarWebContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarContext") ?? throw new InvalidOperationException("Connection string 'SellsCarContext' not found.")));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -78,11 +79,11 @@ using (var scope = scopeFactory.CreateScope())
 }
 
 
-if (!app.Environment.IsDevelopment())
-{
+//if (!app.Environment.IsDevelopment())
+//{
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
-}
+//}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -105,6 +106,7 @@ app.MapControllerRoute(
 app.UseEndpoints(endpoints =>
 {
 
+    //user
     endpoints.MapControllerRoute(
         name: "adminuser",
         pattern: "admin/user/list",
@@ -117,6 +119,11 @@ app.UseEndpoints(endpoints =>
     );
     endpoints.MapControllerRoute(
         name: "adminuserdelete",
+
+        pattern: "admin/users/delete",
+        defaults: new { controller = "Admin", action = "UserDelete" }
+    );
+    //role
         pattern: "admin/user/delete",
         defaults: new { controller = "Admin", action = "UserDelete" }
     );
@@ -129,19 +136,30 @@ app.UseEndpoints(endpoints =>
 
     endpoints.MapControllerRoute(
         name: "adminrolecreate",
+        pattern: "admin/role/create",
+
         pattern: "admin/role/list",
+
         defaults: new { controller = "Admin", action = "RoleCreate" }
     );
     endpoints.MapControllerRoute(
         name: "adminroleedit",
         pattern: "admin/role/{id?}",
         defaults: new { controller = "Admin", action = "RoleEdit" }
+
     );
     endpoints.MapControllerRoute(
         name: "adminroledelete",
         pattern: "admin/role/list",
         defaults: new { controller = "Admin", action = "RoleDelete" }
+
     );
+    endpoints.MapControllerRoute(
+        name: "adminroledelete",
+        pattern: "admin/roles/delete",
+        defaults: new { controller = "Admin", action = "RoleDelete" }
+    );
+    //car
     endpoints.MapControllerRoute(
         name: "admincar",
         pattern: "admin/car/list",
@@ -159,14 +177,37 @@ app.UseEndpoints(endpoints =>
     );
     endpoints.MapControllerRoute(
         name: "admincardelete",
+
+        pattern: "admin/cars/delete",
+        defaults: new { controller = "Admin", action = "CarDelete" }
+    );
+    //region
+
         pattern: "admin/car/delete",
         defaults: new { controller = "Admin", action = "CarDelete" }
     );
+
     endpoints.MapControllerRoute(
         name: "adminregion", 
         pattern: "admin/region/list",
         defaults: new { controller = "Admin", action = "RegionList" }
     );
+    endpoints.MapControllerRoute(
+        name: "adminregioncreate",
+        pattern: "admin/region/create",
+        defaults: new { controller = "Admin", action = "RegionCreate" }
+    );
+    //endpoints.MapControllerRoute(
+    //    name: "adminiledit",
+    //    pattern: "admin/region/{id?}",
+    //    defaults: new { controller = "Admin", action = "RegionEdit" }
+    //);
+    endpoints.MapControllerRoute(
+        name: "adminildelete",
+        pattern: "admin/region/delete",
+        defaults: new { controller = "Admin", action = "RegionDelete" }
+    );
+    //ads
     endpoints.MapControllerRoute(
         name: "adminads",
         pattern: "admin/ads/list",
@@ -183,6 +224,18 @@ app.UseEndpoints(endpoints =>
     //    defaults: new { controller = "Admin", action = "AdsDelete" }
     //);
     endpoints.MapControllerRoute(
+        name: "adminadsdelete",
+        pattern: "admin/ad/delete",
+        defaults: new { controller = "Admin", action = "AdsDelete" }
+    );
+    endpoints.MapControllerRoute(
+        name: "adminadsedit",
+        pattern: "admin/ad/{id?}",
+        defaults: new { controller = "Admin", action = "AdsEdit" }
+    );
+
+    //UserAd
+    endpoints.MapControllerRoute(
         name: "userads",
         pattern: "user/ad",
         defaults: new { controller = "User", action = "Ads" }
@@ -197,6 +250,7 @@ app.UseEndpoints(endpoints =>
         pattern: "cars/{url?}",
         defaults: new { controller = "Car", action = "List" }
     );
+    //UserFavorite
     endpoints.MapControllerRoute(
         name: "userfavorite",
         pattern: "user/favorites",
