@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SellCar.DAL.Interfaces;
 using SellCar.Domain.Models;
 using SellsCar.DAL;
@@ -146,23 +147,37 @@ namespace SellCar.DAL.Repositories
                 return ads.ToList();
             }
         }
-        public List<Ads> GetSearchResult(string searchString)
+
+        public List<Ads> GetSearchResult(string? searchString)
         {
-            using (var context = new DbContextSellCar())
+            if (searchString != null)
             {
+                using (var context = new DbContextSellCar())
+                {
+                    var ads = context
+                        .Ads
+                        .Include(i => i.Car)
+                        .Include(i => i.PostingPictures)
+                        .Where(i => (i.Title.ToLower().Contains(searchString.ToLower())
+                                     || /* i.region.ToLower().Contains(searchString.ToLower()) ||*/
+                                     i.Status.ToLower().Contains(searchString.ToLower())
+                                     || i.Model.ToLower().Contains(searchString.ToLower())
+                                     || i.BodyType.ToLower().Contains(searchString.ToLower())
+                                     || i.Car.Name.ToLower().Contains(searchString.ToLower())
+                                     || i.FromWho.ToLower().Contains(searchString.ToLower())
+                                     || i.Color.ToLower().Contains(searchString.ToLower())
+                                     || i.GearType.ToLower().Contains(searchString.ToLower())
+                                     || i.FuelType.ToLower().Contains(searchString.ToLower())
+                                     || i.TractionType.ToLower().Contains(searchString.ToLower())
+                            ))
+                        .AsQueryable();
+                    return ads.ToList();
+                }
 
-                var ads = context
-                    .Ads
-                    .Include(i => i.Car)
-                    .Include(i => i.PostingPictures)
-                    .Where(i => (i.Title.ToLower().Contains(searchString.ToLower()) ||/* i.region.ToLower().Contains(searchString.ToLower()) ||*/ i.Status.ToLower().Contains(searchString.ToLower()) || i.BodyType.ToLower().Contains(searchString.ToLower())
-                    || i.Car.Name.ToLower().Contains(searchString.ToLower()) || i.FromWho.ToLower().Contains(searchString.ToLower()) || i.Color.ToLower().Contains(searchString.ToLower()) || i.GearType.ToLower().Contains(searchString.ToLower())
-                    || i.FuelType.ToLower().Contains(searchString.ToLower()) || i.TractionType.ToLower().Contains(searchString.ToLower())
-                    ))
-                    .AsQueryable();
-
-
-                return ads.ToList();
+            }
+            else
+            {
+                return new List<Ads>();
             }
         }
 

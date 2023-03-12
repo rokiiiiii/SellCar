@@ -1,4 +1,7 @@
 ﻿@model SellCar.Domain.ViewModels.Ad.AdsListViewModel
+@{
+    ViewData["Title"] = "Home page";
+}
 <div class="container-fluid my-2">
     <div class="row ">
         @if (TempData["message"] != null)
@@ -9,7 +12,7 @@
             </div>
         }
         <div class="col-lg-3 mb-2 ">
-            @await Component.InvokeAsync("Car")
+            @await Component.InvokeAsync("Car") 
         </div>
         <div class="col-lg-9 ">
             @await Html.PartialAsync("_ads")

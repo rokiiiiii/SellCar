@@ -7,6 +7,13 @@
     "mssql2": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:SellsCarWebContext"
+    },
+    "secrets1": {
+      "type": "secrets"
+    },
+    "mssql3": {
+      "type": "mssql",
+      "connectionId": "SellCarString"
     }
   }
 }

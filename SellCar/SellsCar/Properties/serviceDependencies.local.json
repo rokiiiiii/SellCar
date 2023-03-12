@@ -7,6 +7,14 @@
     "mssql2": {
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:SellsCarWebContext"
+    },
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql3": {
+      "secretStore": "LocalSecretsFile",
+      "type": "mssql.onprem",
+      "connectionId": "SellCarString"
     }
   }
 }

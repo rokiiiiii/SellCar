@@ -2,8 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+	  <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AnalysisLevel>6.0</AnalysisLevel>
+    <UserSecretsId>de6ccff4-d1dd-4bdb-8b4d-f69f6a367ee4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ChustaSoft.Tools.SecureConfig" Version="1.5.0" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNet.Authentication.Cookies" Version="1.0.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNet.Http" Version="1.0.0-rc1-final" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
@@ -35,6 +38,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Compilers" Version="4.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="7.0.2" />
@@ -52,6 +56,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Owin.Security.Cookies" Version="4.2.2" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.2.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />

@@ -13,16 +13,14 @@ var provider = builder.Services.BuildServiceProvider();
 builder.Logging.ClearProviders();
 builder.Logging.SetMinimumLevel(LogLevel.Trace);
 builder.Host.UseNLog();
-builder.Services.AddControllersWithViews(); 
+//builder.Services.AddControllersWithViews(); 
 builder.Services.AddSession();
-
-
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddDbContext<DbContextSellCar>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarContext") ?? throw new InvalidOperationException("Connection string 'SellsCarContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SellCarString") ?? throw new InvalidOperationException("Connection string 'SellCarString' not found.")));
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarContext") ?? throw new InvalidOperationException("Connection string 'SellsCarContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SellCarString") ?? throw new InvalidOperationException("Connection string 'SellCarString' not found.")));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -79,11 +77,21 @@ using (var scope = scopeFactory.CreateScope())
 }
 
 
-//if (!app.Environment.IsDevelopment())
-//{
+if (!app.Environment.IsDevelopment())
+{
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
-//}
+}
+if (app.Environment.IsDevelopment())
+    app.UseDeveloperExceptionPage();
+else
+{
+
+    app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+
+
+    app.UseExceptionHandler("/Home/Error");
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -91,6 +99,7 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
+app.MapControllers();
 
 
 app.MapControllerRoute(
@@ -99,9 +108,6 @@ name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 
-app.MapControllerRoute(
-    name: "UserAdsEdit",
-        pattern: "{controller=User}/{action=EditAds}/{id?}");
 
 app.UseEndpoints(endpoints =>
 {
