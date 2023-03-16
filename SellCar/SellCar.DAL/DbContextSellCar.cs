@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SellCar.Domain.Identity;
 using SellCar.Domain.Models;
 
 
@@ -26,7 +25,8 @@ namespace SellsCar.DAL
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("SellCarString");
+            optionsBuilder.UseSqlServer("Data Source=SQL8004.site4now.net;Initial Catalog=db_a95722_sellcardb;User Id=db_a95722_sellcardb_admin;Password=14102003r;MultipleActiveResultSets=true;",
+                builder => builder.EnableRetryOnFailure());
 
         }
         protected override void OnModelCreating(ModelBuilder builder)

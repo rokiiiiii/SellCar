@@ -16,6 +16,7 @@ namespace SellCar.DAL.Repositories
                     .Include(i => i.Ads)
                     .ThenInclude(i => i.Region)
                     .FirstOrDefault();
+
             }
         }
         public List<Car> GetCars()

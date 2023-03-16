@@ -11,8 +11,8 @@ namespace SellCar.DAL
         {
             var context = new DbContextSellCar();
 
-            //if (context.Database.GetPendingMigrations().Count() == 0)
-            //{
+            if (context.Database.GetPendingMigrations().Count() == 0)
+            {
                 if (context.Region.Count() == 0)
                 {
                     for (int i = 0; i < region.Length; i++)
@@ -47,7 +47,7 @@ namespace SellCar.DAL
                     }
                     context.SaveChanges();
                 }
-            //}
+            }
         }
         private static Region[] region =
         {

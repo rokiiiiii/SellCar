@@ -101,7 +101,7 @@ namespace SellCar.DAL.Repositories
                 }
 
                 return ads.ToList();
-
+               
             }
         }
         public List<Ads> GetHomePosts()
