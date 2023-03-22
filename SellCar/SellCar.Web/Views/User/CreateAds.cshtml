@@ -360,10 +360,11 @@
                 var files = !!this.files ? this.files : [];
                 if (!files.length || !window.FileReader) return;
 
-                if (/^image/.test(files[0].type)) {
+                if (/^img/.test(files[0].type)) {
                     var reader = new FileReader();
                     reader.readAsDataURL(files[0]);
-
+                    var re = new RegExp('^http(?::\\/\\/|s:\\/\\/).*?\\.(?:gif|jpg|png)$', 'i');
+                    var m = re.exec(uploadFile);
                     reader.onloadend = function () {
 
                         uploadFile.parents(".card").find(".uploadImage").attr("src", this.result);

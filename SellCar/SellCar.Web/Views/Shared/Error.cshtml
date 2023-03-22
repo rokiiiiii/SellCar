@@ -4,7 +4,6 @@
     switch (Context.Response.StatusCode)
     {
         case 404:
-
             ViewData["Title"] = "404: Resource Not Found.";
             break;
         case 500:
@@ -15,10 +14,15 @@
             break;
     }
 }
-<h2>@ViewData["Title"]</h2>
-
+<div class="text-center text-lg-center">
+    <h2>@ViewData["Title"]</h2>
+    <a id="" class="btn btn-success" href="/" role="button">Back to home</a>
+</div>
 @if (Model.ShowRequestId)
 {
-    <p><strong>Request ID:</strong> <code>@Model.RequestId</code></p>
+    <div class="text-center">
+        <p><strong>Request ID:</strong> <code>@Model.RequestId</code></p>
+    </div>
+
 }
 <pre>@Model.Path</pre>    

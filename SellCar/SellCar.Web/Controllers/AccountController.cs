@@ -59,7 +59,7 @@ namespace SellCar.Controllers
 
             ModelState.AddModelError("", "Incorrect username or password entered");
             return View(model);
-            }
+        }
         [HttpGet]
         public IActionResult Register()
         {

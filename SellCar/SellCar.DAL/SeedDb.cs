@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SellCar.Domain.Models;
 using SellsCar.DAL;
 
@@ -124,7 +123,7 @@ namespace SellCar.DAL
             new Car(){Name="Subaru",Url="subaru"},
             new Car(){Name="Suzuki",Url="suzuki"},
             new Car(){Name="Tesla",Url="tesla"},
-            new Car(){Name="Toyota",Url="toyota"},  
+            new Car(){Name="Toyota",Url="toyota"},
             new Car(){Name="Volkswagen",Url="volkswagen"},
             new Car(){Name="Volvo",Url="volvo"},
 

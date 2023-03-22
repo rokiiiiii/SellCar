@@ -76,7 +76,7 @@ namespace SellsCar.Web.Controllers
             {
                 Ads = ads,
                 User = user,
-                AdPicture = ads.PostingPictures ,
+                AdPicture = ads.PostingPictures,
                 AddFavorites = favorite.Any(i => i.AdsId == id)
             };
             return View(model);

@@ -338,11 +338,11 @@
                     <hr>
                 </div>
                 <div class="col-md-6 col-4 ">
-                   @* <a asp-controller="cart" asp-action="add" asp-route-id="@Model.Ads.AdsId">
+                    <a asp-controller="compare" asp-action="add" asp-route-id="@Model.Ads.AdsId">
 
                         <i class="fas fa-plus-circle mr-2"></i>with another car
                         compare
-                    </a>*@
+                    </a>
                 </div>
                 <div class="col-md-6 col-4 ">
                     @if (User.Identity.IsAuthenticated && Model.AddFavorites == false)

@@ -1,8 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SellCar.Domain.Models
+﻿namespace SellCar.Domain.Models
 {
     public class Ads
     {

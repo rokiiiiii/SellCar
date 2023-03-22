@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SellCar.DAL.Interfaces;
 using SellCar.Domain.Models;
 using SellsCar.DAL;
@@ -101,7 +100,7 @@ namespace SellCar.DAL.Repositories
                 }
 
                 return ads.ToList();
-               
+
             }
         }
         public List<Ads> GetHomePosts()

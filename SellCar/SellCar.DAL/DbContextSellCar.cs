@@ -6,7 +6,7 @@ namespace SellsCar.DAL
 {
     public class DbContextSellCar : DbContext
     {
-    
+
         public DbSet<Car> Car { get; set; }
         public DbSet<Picture> Picture { get; set; }
         public DbSet<Region> Region { get; set; }
@@ -15,7 +15,7 @@ namespace SellsCar.DAL
 
         public DbContextSellCar()
         {
-            
+
         }
 
         public DbContextSellCar(DbContextOptions<DbContextSellCar> options)

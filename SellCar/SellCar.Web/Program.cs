@@ -15,7 +15,7 @@ builder.Logging.SetMinimumLevel(LogLevel.Trace);
 builder.Host.UseNLog();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-
+builder.Services.AddSession();
 
 builder.Services.AddDbContext<DbContextSellCar>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellsCarContext") ?? throw new InvalidOperationException("Connection string 'SellCarString' not found.")));
@@ -76,6 +76,7 @@ using (var scope = scopeFactory.CreateScope())
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
+    app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
@@ -92,6 +93,7 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
+app.UseSession();
 
 app.MapRazorPages();
 app.MapControllerRoute(

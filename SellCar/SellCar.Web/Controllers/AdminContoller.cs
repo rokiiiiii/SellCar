@@ -10,7 +10,6 @@ using SellCar.Domain.ViewModels.Regions;
 using SellCar.Domain.ViewModels.Roles;
 using SellCar.Domain.ViewModels.Users;
 using SellCar.Service.Intrefaces;
-using static SellCar.Domain.ViewModels.Roles.RoleViewModel;
 
 namespace SellsCar.Web.Controllers
 {
@@ -394,8 +393,8 @@ namespace SellsCar.Web.Controllers
             {
                 return NotFound();
             }
- 
- 
+
+
             var model = new CarViewModel()
             {
                 CarId = entity.CarId,
@@ -403,8 +402,8 @@ namespace SellsCar.Web.Controllers
                 Url = entity.Url,
                 Ads = entity.Ads.ToList()
             };
- 
- 
+
+
 
             return View(model);
         }
@@ -469,14 +468,14 @@ namespace SellsCar.Web.Controllers
             {
                 return NotFound();
             }
- 
+
             var model = new RegionViewModel()
             {
                 RegionId = entity.RegionId,
                 Name = entity.Name,
                 Ads = entity.Ads.ToList()
             };
- 
+
 
             return View(model);
         }

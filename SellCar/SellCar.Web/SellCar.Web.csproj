@@ -76,7 +76,7 @@
 
   <ItemGroup>
     <Content Update="nlog.development.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Update="nlog.production.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

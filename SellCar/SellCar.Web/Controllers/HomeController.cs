@@ -3,7 +3,6 @@ using SellCar.Domain.ViewModels.Ad;
 using SellCar.Models;
 using SellCar.Service.Intrefaces;
 using System.Diagnostics;
-using NLog;
 
 namespace SellCar.Controllers
 {
@@ -15,11 +14,11 @@ namespace SellCar.Controllers
         {
             _adsService = adsService;
             _logger = logger;
-           
+
         }
         public IActionResult Index()
         {
-            _logger.LogInformation(1,"Index");
+            _logger.LogInformation(1, "Index");
             var model = new AdsListViewModel()
             {
 
@@ -27,7 +26,7 @@ namespace SellCar.Controllers
             };
             _logger.LogInformation(2, "Index");
             return View(model);
-           
+
         }
         public IActionResult Search(string q)
         {
@@ -37,7 +36,7 @@ namespace SellCar.Controllers
             };
             return View(model);
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)] 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             var ehpf = HttpContext.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>();
@@ -47,7 +46,7 @@ namespace SellCar.Controllers
         }
 
         [Route("Home/Error/{id}")]
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)] 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int id)
         {
             return View(new ErrorViewModel(id));
