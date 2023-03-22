@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Http;
 using SellCar.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 

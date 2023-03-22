@@ -1,0 +1,68 @@
+﻿@model SellCar.Domain.ViewModels.Ad.AdsListViewModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div class="container-fluid my-2">
+    <div class="row ">
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success box w-100" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong><i class="fas fa-check mr-2"></i></strong>@TempData["message"]
+            </div>
+        }
+        <div class="col-lg-3 mb-2 ">
+            @await Component.InvokeAsync("Car")
+        </div>
+        <div class="col-lg-9 ">
+            @await Html.PartialAsync("_ads")
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h4 class="text-center my-4">Recommended for you</h4>
+    <div class="row" id="car">
+        @foreach (var ads in Model.Ads)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 d-flex align-items-stretch">
+                @await Html.PartialAsync("_recommendedCar", ads)
+            </div>
+        }
+    </div>
+    <h4 class="text-center my-4">Popular Car Brands</h4>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a href="/cars/alfa-romeo"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-alfa.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow "></a>
+            <a href="/cars/audi"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-audi.jpg " style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/bmw"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-bmw.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/bugatti"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-bugatti.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/ferrari"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-ferrari.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/ford"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-ford.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/hyundai"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-hyundai.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/jaguar"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-jaguar.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/lada"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-lada.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/lamborghini"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-lamborghini.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/mazda"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-mazda.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/mercedes-benz"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-mercedes.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/nissan"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-nissan.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/porsche"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-porsche.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/suzuki"><img src="https://365cars.ru/wp-content/uploads/2014/01/Suzuki_logo.png" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/volkswagen"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-volkswagen.jpg" style="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/renault"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-renault.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mr-2 mb-3 shadow"></a>
+            <a href="/cars/kia"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-kia.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/fiat"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-fiat.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+            <a href="/cars/toyota"><img src="https://365cars.ru/wp-content/uploads/2014/01/jemblema-avtomobilja-toyota.jpg" style="width: 74px; height: 74px;" alt="width: 74px; height: 74px;" class="img-thumbnail mb-3 mr-2 shadow"></a>
+        </div>
+    </div>
+    @await Html.PartialAsync("_footer")
+</div>
+@section Scripts
+    {
+    <script>
+        window.setTimeout(function () {
+            $(".box").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 1250);
+    </script>
+} 

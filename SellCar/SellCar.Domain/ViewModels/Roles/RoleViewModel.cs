@@ -8,6 +8,7 @@ namespace SellCar.Domain.ViewModels.Roles
     {
         [Required] public string Name { get; set; }
     }
+
     public class RoleDetails
     {
         public IdentityRole Role { get; set; }
@@ -18,8 +19,9 @@ namespace SellCar.Domain.ViewModels.Roles
     {
         public string RoleId { get; set; }
         public string RoleName { get; set; }
-        public string[] IdsToAdd { get; set; }
-        public string[] IdsToDelete { get; set; }
+        public string[]? IdsToAdd { get; set; }
+        public string[]? IdsToDelete { get; set; }
+
     }
 
 }

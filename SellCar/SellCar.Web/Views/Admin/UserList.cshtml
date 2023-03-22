@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SellCar.Domain.Identity.User>
+@{
+    Layout = "_LayoutAdmin";
+}
+<div class="container-fluid my-2">
+    <h3 class="mt-1">Users</h3><small class="mb-3 text-dark">(Users without mail confirmation are painted yellow.)</small>
+    <hr class="my-3">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Last name</td>
+                        <td>User name</td>
+                        <td>Email</td>
+                        <td>Email Confirmation</td>
+                        <td style="width:160px"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr class="@(item.EmailConfirmed?"":"bg-warning")">
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.UserName</td>
+                                <td>@item.Email</td>
+                                <td>@item.EmailConfirmed</td>
+                                <td>
+                                    <a href="/admin/user/@item.Id" class="btn btn-primary btn-sm mr-2"><i class="fas fa-user-edit"></i></a>
+                                    <form action="/admin/users/delete" method="post" style="display:inline">
+                                        <input type="hidden" name="UserId" value="@item.Id" />
+                                        <button type="submit" class="btn btn-danger btn-sm "><i class="fas fa-user-minus"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

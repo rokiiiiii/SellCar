@@ -1,0 +1,218 @@
+﻿@model List<SellCar.Domain.ViewModels.Ad.AdsViewModel>
+<div class="container pb-5 ">
+    <div class="text-right mt-2  ">
+        <a href="/cars" class="btn btn-primary">
+            <i class="fa fa-arrow-circle-left fa-fw"></i>Back to cars
+        </a>
+    </div>
+    <h2 class="text-center   ">
+        <small class="text-muted ">Vehicle Comparison</small>
+    </h2>
+    <div class="row my-4">
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-sm-6">
+                    <div class="comparison-table">
+                        <div class="comparison-item">
+                            <form asp-controller="compare" asp-action="remove" asp-route-id="@item.AdsId" method="post">
+                                <button type="submit" class="btn btn-link">
+                                    <i class="fas fa-trash-alt py-2 remove-item"></i>
+                                </button>
+                            </form>
+
+                            <a class="comparison-item-title" href="shop-single.html">@item.CarId @item.Brand @item.Model</a>
+                        </div>
+                    </div>
+                    <table class="table table-striped mt-2">
+                        <tbody>
+                            <tr>
+                                <td><strong>OVERVIEW<i class="fas fa-car-alt ml-2"></i></strong> </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Case Type / Number of Doors</strong>
+                                </td>
+                                <td>
+                                    @item.BodyType 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Engine Type</strong>
+                                </td>
+                                <td>
+                                    @item.EngineCapacity
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Year of production</strong>
+                                </td>
+                                <td>
+                                    @item.Year
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Fuel Consumption (Urban / Out of town)</strong>
+                                </td>
+                                <td>
+                                    @item.ConsumptiOnCity liter / @item.ConsumptiOnCity liter
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Motor power</strong>
+                                </td>
+                                <td>
+                                    @item.MotorPower hp
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Gear Type</strong>
+                                </td>
+                                <td>
+                                    @item.GearType / @item.NumGear Vites / @item.TractionType
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Acceleration 0-100 km/h</strong>
+                                </td>
+                                <td>
+                                    @item.Acceleration sec
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Speed ​​limit</strong>
+                                </td>
+                                <td>
+                                    @item.MaxSpeed km/h
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>ENGINE AND PERFORMANCE<i class="fas fa-tachometer-alt ml-2"></i></strong> </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Engine capacity </strong>
+                                </td>
+                                <td>
+                                    @item.EngineCapacity 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Maximum Power</strong>
+                                </td>
+                                <td>
+                                    @item.MotorPower hp
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong> Maximum Torque</strong>
+                                </td>
+                                <td>
+                                    250 Nm / 2.000 rpm
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Acceleration 0-100 km/h</strong>
+                                </td>
+                                <td>
+                                    @item.Acceleration sec
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Speed ​​limit</strong>
+                                </td>
+                                <td>
+                                    @item.MaxSpeed km/h
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>FUEL CONSUMPTION<i class="fas fa-gas-pump ml-2"></i></strong> </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Fuel Type</strong>
+                                </td>
+                                <td>
+                                    @item.FuelType
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>In the city (at 100 km) </strong>
+                                </td>
+                                <td>
+                                    @item.ConsumptiOnCity liter
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Out of town (at 100km) </strong>
+                                </td>
+                                <td>
+                                    @item.ExpensesoutsideCity liter
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Average consumption (at 100km)</strong>
+                                </td>
+                                <td>
+                                    @item.AvgConsumption liter
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Fuel Tank Volume</strong>
+                                </td>
+                                <td>
+                                    @item.FuelTankVolume liter
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+            @if (Model.Count < 2)
+            {
+                <div class="col-md-6">
+                    <div class="comparison-table">
+                        <div class="comparison-item ">
+                            <a href="/cars">
+                                <i class="fas fa-plus-circle fa-8x"></i>
+                            </a>
+                            <a class="comparison-item-title mt-2 " href="shop-single.html">Add Vehicle</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-md-6">
+                <div class="comparison-table">
+                    <div class="comparison-item ">
+                        <a href="/cars">
+                            <i class="fas fa-plus-circle fa-8x"></i>
+                        </a>
+                        <a class="comparison-item-title mt-2 " href="shop-single.html">Add Vehicle</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

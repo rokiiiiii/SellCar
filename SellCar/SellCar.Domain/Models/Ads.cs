@@ -1,13 +1,7 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SellCar.Domain.Models
+﻿namespace SellCar.Domain.Models
 {
     public class Ads
     {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int AdsId { get; set; }
         public string? Title { get; set; }
         public string? Detail { get; set; }
